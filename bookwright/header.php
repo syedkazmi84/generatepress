@@ -25,8 +25,8 @@
 	<div class="bw-topbar">
 		<div class="bw-wrap">
 			<div class="bw-topbar__meta">
-				<span><?php bookwright_icon( 'mail' ); ?> <a href="mailto:<?php echo esc_attr( bookwright_option( 'bw_email', 'hello@bookwright.studio' ) ); ?>"><?php echo esc_html( bookwright_option( 'bw_email', 'hello@bookwright.studio' ) ); ?></a></span>
-				<span><?php bookwright_icon( 'clock' ); ?> <?php echo esc_html( bookwright_option( 'bw_hours', 'Mon–Fri · 9am–6pm EST' ) ); ?></span>
+				<span><?php bookwright_icon( 'mail' ); ?> <a href="mailto:<?php echo esc_attr( bookwright_option( 'bw_email', 'hello@yourpublishing.com' ) ); ?>"><?php echo esc_html( bookwright_option( 'bw_email', 'hello@yourpublishing.com' ) ); ?></a></span>
+				<span><?php bookwright_icon( 'clock' ); ?> <?php echo esc_html( bookwright_option( 'bw_hours', 'Mon–Sat · 8:00 AM–6:00 PM' ) ); ?></span>
 			</div>
 			<div class="bw-topbar__social">
 				<a href="<?php echo esc_url( bookwright_option( 'bw_social_tw', '#' ) ); ?>" aria-label="Twitter"><?php bookwright_icon( 'twitter' ); ?></a>
@@ -48,7 +48,7 @@
 						<img src="<?php echo bookwright_img( 'logo.svg' ); ?>" alt="<?php echo esc_attr( get_bloginfo( 'name' ) ); ?>" width="44" height="44" />
 						<span class="bw-brand__text">
 							<span class="bw-brand__name"><?php bloginfo( 'name' ); ?></span>
-							<span class="bw-brand__tag"><?php echo esc_html( bookwright_option( 'bw_tagline', 'Publishing Services' ) ); ?></span>
+							<span class="bw-brand__tag"><?php echo esc_html( bookwright_option( 'bw_tagline', 'Book Publishing Services' ) ); ?></span>
 						</span>
 					</a>
 				<?php endif; ?>

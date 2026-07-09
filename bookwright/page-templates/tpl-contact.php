@@ -28,19 +28,19 @@ get_header();
 				<div class="bw-contact-info" style="margin-top:26px;">
 					<div class="bw-contact-item">
 						<div class="bw-card__icon"><?php bookwright_icon( 'mail' ); ?></div>
-						<div><strong><?php esc_html_e( 'Email', 'bookwright' ); ?></strong><span><a href="mailto:<?php echo esc_attr( bookwright_option( 'bw_email', 'hello@bookwright.studio' ) ); ?>"><?php echo esc_html( bookwright_option( 'bw_email', 'hello@bookwright.studio' ) ); ?></a></span></div>
+						<div><strong><?php esc_html_e( 'Email', 'bookwright' ); ?></strong><span><a href="mailto:<?php echo esc_attr( bookwright_option( 'bw_email', 'hello@yourpublishing.com' ) ); ?>"><?php echo esc_html( bookwright_option( 'bw_email', 'hello@yourpublishing.com' ) ); ?></a></span></div>
 					</div>
 					<div class="bw-contact-item">
 						<div class="bw-card__icon"><?php bookwright_icon( 'phone' ); ?></div>
-						<div><strong><?php esc_html_e( 'Phone', 'bookwright' ); ?></strong><span><a href="tel:<?php echo esc_attr( bookwright_option( 'bw_phone', '' ) ); ?>"><?php echo esc_html( bookwright_option( 'bw_phone', '+1 (212) 555-0139' ) ); ?></a></span></div>
+						<div><strong><?php esc_html_e( 'Phone', 'bookwright' ); ?></strong><span><a href="tel:<?php echo esc_attr( bookwright_option( 'bw_phone', '' ) ); ?>"><?php echo esc_html( bookwright_option( 'bw_phone', '+1 (555) 018-2420' ) ); ?></a></span></div>
 					</div>
 					<div class="bw-contact-item">
 						<div class="bw-card__icon"><?php bookwright_icon( 'pin' ); ?></div>
-						<div><strong><?php esc_html_e( 'Studio', 'bookwright' ); ?></strong><span><?php echo esc_html( bookwright_option( 'bw_address', '48 Gramercy Park, New York, NY 10010' ) ); ?></span></div>
+						<div><strong><?php esc_html_e( 'Studio', 'bookwright' ); ?></strong><span><?php echo esc_html( bookwright_option( 'bw_address', '123 Author Avenue, Suite 200, Your City, ST 00000' ) ); ?></span></div>
 					</div>
 					<div class="bw-contact-item">
 						<div class="bw-card__icon"><?php bookwright_icon( 'clock' ); ?></div>
-						<div><strong><?php esc_html_e( 'Hours', 'bookwright' ); ?></strong><span><?php echo esc_html( bookwright_option( 'bw_hours', 'Mon–Fri · 9am–6pm EST' ) ); ?></span></div>
+						<div><strong><?php esc_html_e( 'Hours', 'bookwright' ); ?></strong><span><?php echo esc_html( bookwright_option( 'bw_hours', 'Mon–Sat · 8:00 AM–6:00 PM' ) ); ?></span></div>
 					</div>
 				</div>
 

@@ -17,7 +17,7 @@
 						<img src="<?php echo bookwright_img( 'logo-white.svg' ); ?>" alt="<?php echo esc_attr( get_bloginfo( 'name' ) ); ?>" width="44" height="44" />
 						<span class="bw-brand__text">
 							<span class="bw-brand__name" style="color:#fff;"><?php bloginfo( 'name' ); ?></span>
-							<span class="bw-brand__tag"><?php echo esc_html( bookwright_option( 'bw_tagline', 'Publishing Services' ) ); ?></span>
+							<span class="bw-brand__tag"><?php echo esc_html( bookwright_option( 'bw_tagline', 'Book Publishing Services' ) ); ?></span>
 						</span>
 					</div>
 					<p><?php echo esc_html( bookwright_option( 'bw_footer_txt', 'Bookwright is a full-service publishing studio helping authors edit, design, publish and market books the world remembers.' ) ); ?></p>
@@ -70,8 +70,8 @@
 					</form>
 					<p class="bw-form__note" style="display:none;font-size:.85rem;color:var(--bw-gold);"></p>
 					<div style="margin-top:18px;font-size:.92rem;">
-						<div><?php bookwright_icon( 'phone' ); ?> <a href="tel:<?php echo esc_attr( bookwright_option( 'bw_phone', '' ) ); ?>"><?php echo esc_html( bookwright_option( 'bw_phone', '+1 (212) 555-0139' ) ); ?></a></div>
-						<div style="margin-top:6px;"><?php bookwright_icon( 'pin' ); ?> <?php echo esc_html( bookwright_option( 'bw_address', '48 Gramercy Park, New York, NY 10010' ) ); ?></div>
+						<div><?php bookwright_icon( 'phone' ); ?> <a href="tel:<?php echo esc_attr( bookwright_option( 'bw_phone', '' ) ); ?>"><?php echo esc_html( bookwright_option( 'bw_phone', '+1 (555) 018-2420' ) ); ?></a></div>
+						<div style="margin-top:6px;"><?php bookwright_icon( 'pin' ); ?> <?php echo esc_html( bookwright_option( 'bw_address', '123 Author Avenue, Suite 200, Your City, ST 00000' ) ); ?></div>
 					</div>
 				</div>
 

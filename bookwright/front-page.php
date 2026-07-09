@@ -69,7 +69,7 @@ get_header();
 			<?php
 			$services_url = esc_url( get_permalink( get_page_by_path( 'services' ) ) );
 			if ( bookwright_has_items( 'bw_service' ) ) :
-				$q = bookwright_get_items( 'bw_service', 6 );
+				$q = bookwright_get_items( 'bw_service' );
 				while ( $q->have_posts() ) :
 					$q->the_post();
 					$icon = get_post_meta( get_the_ID(), '_bw_icon', true );
@@ -246,7 +246,7 @@ get_header();
 		<div class="bw-quotes">
 			<?php
 			if ( bookwright_has_items( 'bw_testimonial' ) ) :
-				$q = bookwright_get_items( 'bw_testimonial', 3 );
+				$q = bookwright_get_items( 'bw_testimonial' );
 				while ( $q->have_posts() ) :
 					$q->the_post();
 					$role   = get_post_meta( get_the_ID(), '_bw_role', true );
