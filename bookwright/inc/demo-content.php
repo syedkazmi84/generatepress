@@ -30,7 +30,8 @@ function bookwright_import_demo() {
 	bookwright_build_menus( $pages );
 
 	update_option( 'bookwright_demo_imported', BOOKWRIGHT_VERSION );
-	// Flush so the /books/ archive and permalinks work immediately.
+	update_option( 'bookwright_content_version', BOOKWRIGHT_CONTENT_VERSION );
+	// Flush so the /portfolio/ archive and permalinks work immediately.
 	flush_rewrite_rules();
 }
 add_action( 'after_switch_theme', 'bookwright_import_demo' );
@@ -149,6 +150,80 @@ function bookwright_maybe_seed_components() {
 	}
 }
 add_action( 'admin_init', 'bookwright_maybe_seed_components' );
+
+/**
+ * Refresh the bundled demo content when it changes.
+ *
+ * The demo seeder only runs once, so sites that activated an earlier version of
+ * the theme keep the old services, testimonials, plans, FAQs, portfolio and the
+ * old "Books" page. When BOOKWRIGHT_CONTENT_VERSION increases we delete that
+ * previously auto-seeded demo content and re-seed the current version, so
+ * existing sites get the new content without a manual database reset.
+ *
+ * Only the theme's own demo items are touched — blog posts and pages you have
+ * built yourself are left alone.
+ */
+function bookwright_maybe_refresh_content() {
+	if ( ! get_option( 'bookwright_demo_imported' ) ) {
+		return;
+	}
+	if ( version_compare( (string) get_option( 'bookwright_content_version', '1' ), BOOKWRIGHT_CONTENT_VERSION, '>=' ) ) {
+		return;
+	}
+
+	// 1) Remove all previously seeded component + portfolio items.
+	foreach ( array( 'bw_service', 'bw_testimonial', 'bw_team', 'bw_plan', 'bw_faq', 'book' ) as $type ) {
+		$ids = get_posts(
+			array(
+				'post_type'      => $type,
+				'post_status'    => 'any',
+				'posts_per_page' => -1,
+				'fields'         => 'ids',
+			)
+		);
+		foreach ( $ids as $id ) {
+			wp_delete_post( $id, true );
+		}
+	}
+
+	// 2) Remove the retired "Books catalog" page.
+	$books_page = get_page_by_path( 'books-catalog' );
+	if ( $books_page ) {
+		wp_delete_post( $books_page->ID, true );
+	}
+
+	// 3) Drop the retired "Books" item from the primary menu.
+	bookwright_remove_menu_item( 'Books' );
+
+	// 4) Reset the per-type flags and re-seed the current content.
+	delete_option( 'bookwright_components_seeded' );
+	delete_option( 'bookwright_books_created' );
+	bookwright_seed_components();
+	bookwright_create_books();
+
+	update_option( 'bookwright_content_version', BOOKWRIGHT_CONTENT_VERSION );
+	flush_rewrite_rules();
+}
+add_action( 'admin_init', 'bookwright_maybe_refresh_content', 20 );
+
+/**
+ * Delete a menu item by its title from the Primary Navigation menu.
+ */
+function bookwright_remove_menu_item( $title ) {
+	$menu = wp_get_nav_menu_object( 'Primary Navigation' );
+	if ( ! $menu ) {
+		return;
+	}
+	$items = wp_get_nav_menu_items( $menu->term_id );
+	if ( ! $items ) {
+		return;
+	}
+	foreach ( $items as $item ) {
+		if ( trim( $item->title ) === $title ) {
+			wp_delete_post( $item->ID, true );
+		}
+	}
+}
 
 /**
  * Create (or find) a page by slug, optionally with a template.

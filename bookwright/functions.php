@@ -9,7 +9,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'BOOKWRIGHT_VERSION', '1.0.0' );
+define( 'BOOKWRIGHT_VERSION', '1.1.0' );
+// Bump this when the bundled demo content changes so existing sites refresh it.
+define( 'BOOKWRIGHT_CONTENT_VERSION', '2' );
 define( 'BOOKWRIGHT_DIR', get_template_directory() );
 define( 'BOOKWRIGHT_URI', get_template_directory_uri() );
 
