@@ -442,6 +442,10 @@ hr { border: 0; border-top: 1px solid var(--bw-line); margin: 2.5rem 0; }
 .bw-cta h2 { color: #fff; }
 .bw-cta p { color: #d3d1cb; max-width: 560px; margin: 0 auto 26px; }
 .bw-cta__actions { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+/* Ghost button on the dark CTA needs light text/border for contrast. */
+.bw-cta .bw-btn--ghost { color: #fff; border-color: rgba(255,255,255,.7); }
+.bw-cta .bw-btn--ghost:hover,
+.bw-cta .bw-btn--ghost:focus { background: #fff; color: var(--bw-ink); border-color: #fff; }
 
 /* Book-a-call consultation band */
 .bw-consult {
