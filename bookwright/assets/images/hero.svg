@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 520" width="560" height="520" fill="none" role="img" >
+<defs>
+  <linearGradient id="hg" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#f2ebdd"/><stop offset="1" stop-color="#faf7f1"/>
+  </linearGradient>
+</defs>
+<circle cx="300" cy="250" r="240" fill="url(#hg)"/>
+<circle cx="300" cy="250" r="240" fill="none" stroke="#c08a3e" stroke-width="2" opacity="0.35" stroke-dasharray="6 10"/>
+<!-- stacked books -->
+<g transform="translate(150 300)">
+  <rect x="0" y="120" width="270" height="40" rx="6" fill="#7c2b3b"/>
+  <rect x="10" y="128" width="250" height="6" fill="#fff" opacity="0.3"/>
+  <rect x="18" y="82" width="240" height="40" rx="6" fill="#1c2438"/>
+  <rect x="28" y="90" width="220" height="6" fill="#fff" opacity="0.25"/>
+  <rect x="6" y="44" width="250" height="40" rx="6" fill="#c08a3e"/>
+  <rect x="16" y="52" width="230" height="6" fill="#fff" opacity="0.4"/>
+</g>
+<!-- open book on top -->
+<g transform="translate(198 150)">
+  <path d="M2 60c30-20 70-22 100-6 30-16 70-14 100 6v90c-30-20-70-22-100-6-30-16-70-14-100 6Z" fill="#fff" stroke="#1c2438" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M102 54v90" stroke="#1c2438" stroke-width="3"/>
+  <path d="M18 74c22-10 46-11 66-2M18 92c22-10 46-11 66-2M120 72c20-9 44-8 66 2M120 90c20-9 44-8 66 2" stroke="#c08a3e" stroke-width="3" stroke-linecap="round"/>
+</g>
+<!-- quill -->
+<g transform="translate(360 90) rotate(20)">
+  <path d="M0 120C40 80 70 30 120 0 96 44 74 92 40 130Z" fill="#c08a3e"/>
+  <path d="M8 116c26-8 52-30 78-70" stroke="#fff" stroke-width="3" opacity="0.6"/>
+  <path d="M2 122l-14 22" stroke="#1c2438" stroke-width="5" stroke-linecap="round"/>
+</g>
+<circle cx="120" cy="140" r="10" fill="#c08a3e"/>
+<circle cx="470" cy="360" r="14" fill="#7c2b3b" opacity="0.8"/>
+<circle cx="90" cy="360" r="7" fill="#1c2438"/>
+</svg>

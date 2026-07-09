@@ -1,0 +1,31 @@
+/* Bookwright — block editor styles (approximate front-end look) */
+.editor-styles-wrapper {
+	font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+	font-size: 17px;
+	line-height: 1.7;
+	color: #2b2a27;
+	background: #faf7f1;
+}
+.editor-styles-wrapper h1,
+.editor-styles-wrapper h2,
+.editor-styles-wrapper h3,
+.editor-styles-wrapper h4 {
+	font-family: "Playfair Display", Georgia, serif;
+	color: #1c2438;
+	line-height: 1.18;
+}
+.editor-styles-wrapper a { color: #9a6a2f; }
+.editor-styles-wrapper blockquote {
+	border-left: 4px solid #c08a3e;
+	background: #f2ebdd;
+	font-family: "Playfair Display", Georgia, serif;
+	font-style: italic;
+	padding: 1em 1.5em;
+	border-radius: 0 8px 8px 0;
+}
+.editor-styles-wrapper .wp-block-button__link {
+	background: #c08a3e;
+	color: #221a0c;
+	border-radius: 999px;
+	font-weight: 600;
+}

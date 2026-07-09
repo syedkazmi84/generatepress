@@ -1,0 +1,105 @@
+# Bookwright — WordPress Theme for Book Publishing Services
+
+Bookwright is a complete, ready-to-use WordPress theme for **book publishing
+services, self-publishing agencies, editorial studios and authors**. Activate
+it and you get a full website immediately — homepage, service pages, pricing,
+portfolio, a books catalog, a blog and a contact page, all pre-filled with
+professional demo content, illustrations and a logo.
+
+![Bookwright screenshot](screenshot.png)
+
+---
+
+## What you get out of the box
+
+- **One-click demo content.** On activation the theme automatically creates
+  every page, a navigation menu, sample blog posts and a full sample book
+  catalog, and sets the homepage — no importer plugin required.
+- **Designed homepage** (`front-page.php`) with hero, services, process,
+  featured books, stats, testimonials, latest journal posts and a call to action.
+- **Custom “Books” catalog** — a `book` post type with a `genre` taxonomy and
+  per-book details (author, price, rating, buy link, cover).
+- **Page templates**: About, Services, Pricing (with FAQ), Portfolio, Books
+  Catalog, Contact (with a styled form + map).
+- **Blog** with sidebar, single post, categories, tags, search and comments.
+- **Bundled artwork** — logo, hero illustration, book covers, avatars and
+  service graphics, all crisp SVG (no external image dependencies).
+- **Customizer options** for contact details, social links, footer text and
+  the homepage hero copy.
+- Responsive, accessible (skip link, ARIA, keyboard nav), translation-ready
+  (`bookwright` text domain) and built on clean HTML5.
+
+---
+
+## Installation
+
+### Option A — Upload the zip (recommended)
+
+1. In WordPress go to **Appearance → Themes → Add New → Upload Theme**.
+2. Choose `bookwright.zip` and click **Install Now**.
+3. Click **Activate**.
+4. Done — visit your site. The homepage, menu, pages and sample catalog are
+   already there.
+
+### Option B — Manual
+
+1. Copy the `bookwright` folder into `wp-content/themes/`.
+2. Go to **Appearance → Themes** and activate **Bookwright**.
+
+> The demo content runs once, the first time the theme is activated. Deleting a
+> demo page or book will not bring it back on re-activation (a flag prevents
+> duplicates). To force a re-import, delete the `bookwright_demo_imported`
+> option from **Tools → (any options plugin)** or the database.
+
+---
+
+## First steps after activating
+
+1. **Appearance → Customize → Bookwright · Contact & Social** — set your real
+   email, phone, address, hours and social URLs.
+2. **Appearance → Customize → Site Identity** — upload your own logo (optional;
+   a default logo is included).
+3. **Appearance → Customize → Bookwright · Homepage Hero** — tweak the hero
+   headline and buttons.
+4. **Contact form** — install a form plugin (Contact Form 7 or WPForms) and
+   paste its shortcode into the **Contact** page. The theme detects the
+   shortcode and renders your real form; otherwise a styled demo form is shown.
+5. **Books** — edit the sample titles under **Books**, or add your own. Set a
+   featured image to use a real cover, or the bundled placeholder is used.
+
+---
+
+## Structure
+
+```
+bookwright/
+├── style.css                Theme header + baseline styles
+├── functions.php            Setup, assets, widgets, includes
+├── front-page.php           Designed homepage
+├── header.php / footer.php  Site chrome
+├── index / single / page / archive / search / 404 / comments / sidebar
+├── single-book.php          Book detail page
+├── archive-book.php         Book catalog archive (with genre filters)
+├── searchform.php
+├── inc/
+│   ├── template-tags.php     Icons, meta, breadcrumbs, helpers
+│   ├── cpt-book.php          "Book" post type + "Genre" taxonomy + meta box
+│   ├── customizer.php        Contact / social / hero options
+│   └── demo-content.php      One-click demo installer
+├── page-templates/           About, Services, Pricing, Portfolio, Books, Contact
+├── template-parts/           book-card, cta
+└── assets/
+    ├── css/theme.css         Full design system
+    ├── css/editor-style.css  Block editor styles
+    ├── js/theme.js           Nav, counters, form feedback
+    └── images/               Logo + SVG illustrations
+```
+
+## Requirements
+
+- WordPress 6.0+
+- PHP 7.4+
+
+## License
+
+GNU General Public License v2 or later.
