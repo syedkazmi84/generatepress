@@ -131,6 +131,13 @@ function bookwright_render_faqs( $args = array() ) {
 
 	$q = new WP_Query( $query_args );
 
+	// If a category was requested but has no FAQs yet, fall back to all FAQs so
+	// the page is never blank (once you assign categories, each page differs).
+	if ( ! $q->have_posts() && ! empty( $args['category'] ) ) {
+		unset( $query_args['tax_query'] );
+		$q = new WP_Query( $query_args );
+	}
+
 	ob_start();
 
 	if ( $args['title'] ) {

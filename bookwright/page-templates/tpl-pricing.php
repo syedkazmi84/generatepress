@@ -82,33 +82,8 @@ get_header();
 			<span class="bw-eyebrow"><?php esc_html_e( 'Questions', 'bookwright' ); ?></span>
 			<h2><?php esc_html_e( 'Frequently asked questions', 'bookwright' ); ?></h2>
 		</div>
-		<div class="bw-faq">
-			<?php
-			if ( bookwright_has_items( 'bw_faq' ) ) :
-				$q = bookwright_get_items( 'bw_faq' );
-				while ( $q->have_posts() ) :
-					$q->the_post();
-					?>
-					<details>
-						<summary><?php the_title(); ?></summary>
-						<div class="bw-entry" style="padding-bottom:8px;"><?php the_content(); ?></div>
-					</details>
-					<?php
-				endwhile;
-				wp_reset_postdata();
-			else :
-				foreach ( bookwright_default_faqs() as $f ) :
-					?>
-					<details>
-						<summary><?php echo esc_html( $f[0] ); ?></summary>
-						<p><?php echo esc_html( $f[1] ); ?></p>
-					</details>
-					<?php
-				endforeach;
-			endif;
-			?>
+		<?php echo bookwright_render_faqs( array( 'category' => 'pricing', 'first_open' => true ) ); ?>
 		</div>
-	</div>
 </section>
 
 <?php

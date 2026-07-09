@@ -112,6 +112,17 @@ get_header();
 	</div>
 </section>
 
+<!-- FAQ -->
+<section class="bw-section">
+	<div class="bw-wrap">
+		<div class="bw-section-head bw-center">
+			<span class="bw-eyebrow"><?php esc_html_e( 'Questions', 'bookwright' ); ?></span>
+			<h2><?php esc_html_e( 'Service questions', 'bookwright' ); ?></h2>
+		</div>
+		<?php echo bookwright_render_faqs( array( 'category' => 'services', 'first_open' => true ) ); ?>
+	</div>
+</section>
+
 <?php
 get_template_part( 'template-parts/cta' );
 get_footer();
