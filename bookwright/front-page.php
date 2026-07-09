@@ -317,6 +317,48 @@ get_header();
 	</div>
 </section>
 
+<!-- ===================== FAQ ===================== -->
+<section class="bw-section bw-section--sand">
+	<div class="bw-wrap">
+		<div class="bw-section-head bw-center">
+			<span class="bw-eyebrow"><?php esc_html_e( 'Good to know', 'bookwright' ); ?></span>
+			<h2><?php esc_html_e( 'Frequently asked questions', 'bookwright' ); ?></h2>
+		</div>
+		<div class="bw-faq">
+			<?php
+			$faq_i = 0;
+			if ( bookwright_has_items( 'bw_faq' ) ) :
+				$fq = bookwright_get_items( 'bw_faq', 6 );
+				while ( $fq->have_posts() ) :
+					$fq->the_post();
+					?>
+					<details<?php echo 0 === $faq_i ? ' open' : ''; ?>>
+						<summary><?php the_title(); ?></summary>
+						<div class="bw-entry" style="padding-bottom:8px;"><?php the_content(); ?></div>
+					</details>
+					<?php
+					$faq_i++;
+				endwhile;
+				wp_reset_postdata();
+			else :
+				foreach ( bookwright_default_faqs() as $f ) :
+					?>
+					<details<?php echo 0 === $faq_i ? ' open' : ''; ?>>
+						<summary><?php echo esc_html( $f[0] ); ?></summary>
+						<p><?php echo esc_html( $f[1] ); ?></p>
+					</details>
+					<?php
+					$faq_i++;
+				endforeach;
+			endif;
+			?>
+		</div>
+		<p class="bw-center" style="margin-top:26px;">
+			<a class="bw-btn bw-btn--ghost" href="<?php echo esc_url( get_permalink( get_page_by_path( 'contact' ) ) ); ?>"><?php esc_html_e( 'Still have questions? Talk to us', 'bookwright' ); ?></a>
+		</p>
+	</div>
+</section>
+
 <!-- ===================== FINAL CTA ===================== -->
 <section class="bw-section bw-section--tight">
 	<div class="bw-wrap">
