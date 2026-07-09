@@ -12,23 +12,23 @@ get_header();
 <section class="bw-hero">
 	<div class="bw-wrap bw-hero__grid">
 		<div class="bw-hero__intro">
-			<span class="bw-eyebrow"><?php echo esc_html( bookwright_option( 'bw_hero_eyebrow', 'Trusted by 900+ authors worldwide' ) ); ?></span>
+			<span class="bw-eyebrow"><?php echo esc_html( bookwright_option( 'bw_hero_eyebrow', 'Ghostwriting · Editing · Publishing · Marketing' ) ); ?></span>
 			<h1><?php
-				$title = bookwright_option( 'bw_hero_title', 'From manuscript to masterpiece' );
+				$title = bookwright_option( 'bw_hero_title', 'Your story, published the right way' );
 				// Emphasise the last word.
 				$words = explode( ' ', $title );
 				$last  = array_pop( $words );
 				echo esc_html( implode( ' ', $words ) ) . ' <span class="bw-accent">' . esc_html( $last ) . '</span>';
 			?></h1>
-			<p class="bw-hero__lead"><?php echo esc_html( bookwright_option( 'bw_hero_lead', 'Editing, cover design, publishing and marketing under one roof. We help you turn your story into a book readers can’t put down.' ) ); ?></p>
+			<p class="bw-hero__lead"><?php echo esc_html( bookwright_option( 'bw_hero_lead', 'From first draft to final launch, our team helps you write, edit, design, publish and market your book — while you keep full ownership every step of the way.' ) ); ?></p>
 			<div class="bw-hero__actions">
-				<a class="bw-btn bw-btn--primary" href="<?php echo esc_url( get_permalink( get_page_by_path( 'contact' ) ) ); ?>"><?php echo esc_html( bookwright_option( 'bw_hero_btn1', 'Start your book' ) ); ?> <?php bookwright_icon( 'arrow' ); ?></a>
-				<a class="bw-btn bw-btn--ghost" href="<?php echo esc_url( get_permalink( get_page_by_path( 'services' ) ) ); ?>"><?php echo esc_html( bookwright_option( 'bw_hero_btn2', 'View our services' ) ); ?></a>
+				<a class="bw-btn bw-btn--primary" href="<?php echo esc_url( get_permalink( get_page_by_path( 'contact' ) ) ); ?>"><?php echo esc_html( bookwright_option( 'bw_hero_btn1', 'Book a free consultation' ) ); ?> <?php bookwright_icon( 'arrow' ); ?></a>
+				<a class="bw-btn bw-btn--ghost" href="<?php echo esc_url( get_permalink( get_page_by_path( 'services' ) ) ); ?>"><?php echo esc_html( bookwright_option( 'bw_hero_btn2', 'Explore our services' ) ); ?></a>
 			</div>
 			<div class="bw-hero__stats">
-				<div class="bw-hero__stat"><strong data-count="1200" data-suffix="+">1200+</strong><span><?php esc_html_e( 'Books published', 'bookwright' ); ?></span></div>
-				<div class="bw-hero__stat"><strong data-count="98" data-suffix="%">98%</strong><span><?php esc_html_e( 'Author satisfaction', 'bookwright' ); ?></span></div>
-				<div class="bw-hero__stat"><strong data-count="35" data-suffix="+">35+</strong><span><?php esc_html_e( 'Bestseller lists', 'bookwright' ); ?></span></div>
+				<div class="bw-hero__stat"><strong>750+</strong><span><?php esc_html_e( 'Books published', 'bookwright' ); ?></span></div>
+				<div class="bw-hero__stat"><strong>900+</strong><span><?php esc_html_e( 'Happy authors', 'bookwright' ); ?></span></div>
+				<div class="bw-hero__stat"><strong>100%</strong><span><?php esc_html_e( 'Ownership you keep', 'bookwright' ); ?></span></div>
 			</div>
 		</div>
 		<div class="bw-hero__art">
@@ -61,8 +61,8 @@ get_header();
 	<div class="bw-wrap">
 		<div class="bw-section-head bw-center">
 			<span class="bw-eyebrow"><?php echo esc_html( bookwright_option( 'bw_services_eyebrow', 'What we do' ) ); ?></span>
-			<h2><?php echo esc_html( bookwright_option( 'bw_services_title', 'Everything your book needs, in one studio' ) ); ?></h2>
-			<p class="bw-lead"><?php echo esc_html( bookwright_option( 'bw_services_lead', 'Pick a single service or hand us the whole journey. Either way you get a dedicated team and a clear plan.' ) ); ?></p>
+			<h2><?php echo esc_html( bookwright_option( 'bw_services_title', 'Everything your book needs, in one place' ) ); ?></h2>
+			<p class="bw-lead"><?php echo esc_html( bookwright_option( 'bw_services_lead', 'From writing to marketing, our team handles the hard parts of publishing so you can focus on your story. Choose a package or build your own.' ) ); ?></p>
 		</div>
 
 		<div class="bw-cards">
@@ -106,15 +106,15 @@ get_header();
 	<div class="bw-wrap">
 		<div class="bw-section-head bw-center">
 			<span class="bw-eyebrow"><?php esc_html_e( 'How it works', 'bookwright' ); ?></span>
-			<h2><?php echo esc_html( bookwright_option( 'bw_process_title', 'A calm, four-step path to publication' ) ); ?></h2>
+			<h2><?php echo esc_html( bookwright_option( 'bw_process_title', 'How we bring your book to life' ) ); ?></h2>
 		</div>
 		<div class="bw-steps">
 			<?php
 			$step_defaults = array(
-				1 => array( 'Discover', 'We read your manuscript and map the fastest route to a finished book.' ),
-				2 => array( 'Refine', 'Editing and design shape the words and the look until both sing.' ),
-				3 => array( 'Publish', 'We format, proof and distribute across every major store and format.' ),
-				4 => array( 'Launch', 'A tailored marketing push builds momentum from day one.' ),
+				1 => array( 'Book a free call', 'Grab a no-obligation consultation at a time that suits you.' ),
+				2 => array( 'Share your vision', 'Tell us about your book, your goals and where you are right now.' ),
+				3 => array( 'Get a tailored plan', 'We recommend the right services and send an honest, no-pressure quote.' ),
+				4 => array( 'We bring it to life', 'Your dedicated team writes, edits, designs, publishes and markets your book.' ),
 			);
 			for ( $n = 1; $n <= 4; $n++ ) :
 				?>
@@ -128,12 +128,30 @@ get_header();
 	</div>
 </section>
 
+<!-- ===================== BOOK A CALL ===================== -->
+<section class="bw-section bw-section--tight">
+	<div class="bw-wrap">
+		<div class="bw-consult">
+			<div class="bw-consult__text">
+				<span class="bw-eyebrow" style="color:var(--bw-gold);"><?php esc_html_e( 'No cost, no obligation', 'bookwright' ); ?></span>
+				<h2><?php esc_html_e( 'Book your free consultation', 'bookwright' ); ?></h2>
+				<p><?php esc_html_e( 'Talk to a publishing expert about your book. We\'ll listen to your goals, answer your questions and map out exactly what your book needs — with an honest, no-pressure quote.', 'bookwright' ); ?></p>
+				<p class="bw-consult__hours"><?php bookwright_icon( 'clock' ); ?> <?php echo esc_html( bookwright_option( 'bw_hours', 'Mon–Sat · 8:00 AM–6:00 PM' ) ); ?></p>
+			</div>
+			<div class="bw-consult__actions">
+				<a class="bw-btn bw-btn--primary" href="<?php echo esc_url( get_permalink( get_page_by_path( 'contact' ) ) ); ?>"><?php bookwright_icon( 'calendar' ); ?> <?php esc_html_e( 'Book a free call', 'bookwright' ); ?></a>
+				<a class="bw-btn bw-btn--light" href="tel:<?php echo esc_attr( bookwright_option( 'bw_phone', '' ) ); ?>"><?php bookwright_icon( 'phone' ); ?> <?php echo esc_html( bookwright_option( 'bw_phone', '+1 (555) 018-2420' ) ); ?></a>
+			</div>
+		</div>
+	</div>
+</section>
+
 <!-- ===================== FEATURED BOOKS ===================== -->
 <section class="bw-section">
 	<div class="bw-wrap">
 		<div class="bw-section-head bw-center">
-			<span class="bw-eyebrow"><?php esc_html_e( 'From our catalog', 'bookwright' ); ?></span>
-			<h2><?php echo esc_html( bookwright_option( 'bw_books_title', 'Books we helped bring to the world' ) ); ?></h2>
+			<span class="bw-eyebrow"><?php esc_html_e( 'Our work', 'bookwright' ); ?></span>
+			<h2><?php echo esc_html( bookwright_option( 'bw_books_title', 'Books we’ve helped bring to life' ) ); ?></h2>
 		</div>
 
 		<div class="bw-books">
@@ -153,28 +171,22 @@ get_header();
 				endwhile;
 				wp_reset_postdata();
 			else :
-				// Fallback static covers if no books exist yet.
-				$fallback = array(
-					array( 'The Lantern Keeper', 'Eleanor Vance', 'cover-1.svg' ),
-					array( 'Building Quiet Wealth', 'Marcus Ellison', 'cover-2.svg' ),
-					array( 'Saltwater Girlhood', 'Nadia Okafor', 'cover-3.svg' ),
-					array( 'The Clockwork Garden', 'Theo Marsh', 'cover-4.svg' ),
-				);
-				foreach ( $fallback as $f ) :
-					?>
-					<article class="bw-book">
-						<div class="bw-book__cover"><img src="<?php echo bookwright_img( $f[2] ); ?>" alt="<?php echo esc_attr( $f[0] ); ?>" /></div>
-						<h3><?php echo esc_html( $f[0] ); ?></h3>
-						<p class="bw-book__author"><?php echo esc_html( $f[1] ); ?></p>
-					</article>
-					<?php
-				endforeach;
+				// Fallback sample covers if no portfolio projects exist yet.
+					for ( $fi = 1; $fi <= 4; $fi++ ) :
+						?>
+						<article class="bw-book">
+							<div class="bw-book__cover"><img src="<?php echo bookwright_img( 'cover-' . $fi . '.svg' ); ?>" alt="" /></div>
+							<h3><?php esc_html_e( 'Recent project', 'bookwright' ); ?></h3>
+							<p class="bw-book__author"><?php esc_html_e( 'Client author', 'bookwright' ); ?></p>
+						</article>
+						<?php
+					endfor;
 			endif;
 			?>
 		</div>
 
 		<div class="bw-center" style="margin-top:44px;">
-			<a class="bw-btn bw-btn--ghost" href="<?php echo esc_url( get_permalink( get_page_by_path( 'books-catalog' ) ) ); ?>"><?php esc_html_e( 'Browse the full catalog', 'bookwright' ); ?> <?php bookwright_icon( 'arrow' ); ?></a>
+			<a class="bw-btn bw-btn--ghost" href="<?php echo esc_url( get_permalink( get_page_by_path( 'portfolio' ) ) ); ?>"><?php esc_html_e( 'See our full portfolio', 'bookwright' ); ?> <?php bookwright_icon( 'arrow' ); ?></a>
 		</div>
 	</div>
 </section>
@@ -185,10 +197,10 @@ get_header();
 		<div class="bw-stats-band">
 			<?php
 			$stat_defaults = array(
-				1 => array( '1200+', 'Titles published' ),
-				2 => array( '45M+', 'Copies sold' ),
-				3 => array( '35+', 'Bestseller lists' ),
-				4 => array( '60+', 'Countries reached' ),
+				1 => array( '750+', 'Books published' ),
+				2 => array( '900+', 'Happy authors' ),
+				3 => array( '15+', 'Years of experience' ),
+				4 => array( '100%', 'Ownership you keep' ),
 			);
 			for ( $i = 1; $i <= 4; $i++ ) :
 				?>
@@ -209,13 +221,13 @@ get_header();
 		</div>
 		<div>
 			<span class="bw-eyebrow"><?php esc_html_e( 'Why authors choose us', 'bookwright' ); ?></span>
-			<h2><?php esc_html_e( 'A publishing partner that actually reads your book', 'bookwright' ); ?></h2>
-			<p class="bw-lead"><?php esc_html_e( 'No templates, no assembly line. Every project gets a dedicated editor, designer and project manager who care about your work as much as you do.', 'bookwright' ); ?></p>
+			<h2><?php esc_html_e( 'Your creative partner from first draft to final launch', 'bookwright' ); ?></h2>
+			<p class="bw-lead"><?php esc_html_e( 'We treat every book like it’s our own. One dedicated team writes, edits, designs, publishes and markets your book — while you stay the author and owner throughout.', 'bookwright' ); ?></p>
 			<ul class="bw-checklist">
-				<li><?php esc_html_e( 'Transparent, milestone-based pricing — no surprise fees', 'bookwright' ); ?></li>
-				<li><?php esc_html_e( 'You keep 100% of your rights and royalties', 'bookwright' ); ?></li>
-				<li><?php esc_html_e( 'Award-winning designers and editors from major imprints', 'bookwright' ); ?></li>
-				<li><?php esc_html_e( 'A dedicated project manager from first draft to launch', 'bookwright' ); ?></li>
+				<li><?php esc_html_e( 'You keep 100% ownership and royalties — always', 'bookwright' ); ?></li>
+				<li><?php esc_html_e( 'Transparent process with honest, no-hidden-fee pricing', 'bookwright' ); ?></li>
+				<li><?php esc_html_e( 'A dedicated project manager as your single point of contact', 'bookwright' ); ?></li>
+				<li><?php esc_html_e( 'On-time delivery — every step, every milestone', 'bookwright' ); ?></li>
 			</ul>
 			<div style="margin-top:28px;">
 				<a class="bw-btn bw-btn--primary" href="<?php echo esc_url( get_permalink( get_page_by_path( 'about' ) ) ); ?>"><?php esc_html_e( 'More about us', 'bookwright' ); ?></a>
@@ -276,7 +288,7 @@ get_header();
 	<div class="bw-wrap">
 		<div class="bw-section-head bw-center">
 			<span class="bw-eyebrow"><?php esc_html_e( 'From the journal', 'bookwright' ); ?></span>
-			<h2><?php echo esc_html( bookwright_option( 'bw_journal_title', 'Guides for writers & self-publishers' ) ); ?></h2>
+			<h2><?php echo esc_html( bookwright_option( 'bw_journal_title', 'Tips for writers & authors' ) ); ?></h2>
 		</div>
 		<div class="bw-cards">
 			<?php
@@ -310,8 +322,8 @@ get_header();
 	<div class="bw-wrap">
 		<div class="bw-cta">
 			<span class="bw-eyebrow" style="color:var(--bw-gold);"><?php esc_html_e( 'Ready when you are', 'bookwright' ); ?></span>
-			<h2><?php esc_html_e( 'Let’s make the book you’ve been meaning to write', 'bookwright' ); ?></h2>
-			<p><?php esc_html_e( 'Book a free 30-minute consultation. We’ll read a sample, talk goals, and map out exactly what your book needs — no obligation.', 'bookwright' ); ?></p>
+			<h2><?php esc_html_e( 'Ready to publish your book?', 'bookwright' ); ?></h2>
+			<p><?php esc_html_e( 'Book a free, no-obligation consultation. We’ll talk through your goals and map out exactly what your book needs — start to finish.', 'bookwright' ); ?></p>
 			<div class="bw-cta__actions">
 				<a class="bw-btn bw-btn--primary" href="<?php echo esc_url( get_permalink( get_page_by_path( 'contact' ) ) ); ?>"><?php esc_html_e( 'Book a free consult', 'bookwright' ); ?></a>
 				<a class="bw-btn bw-btn--ghost" href="<?php echo esc_url( get_permalink( get_page_by_path( 'pricing' ) ) ); ?>"><?php esc_html_e( 'See pricing', 'bookwright' ); ?></a>

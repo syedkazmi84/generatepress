@@ -1,9 +1,10 @@
 # Bookwright — WordPress Theme for Book Publishing Services
 
-Bookwright is a complete, ready-to-use WordPress theme for **book publishing
-services, self-publishing agencies, editorial studios and authors**. Activate
-it and you get a full website immediately — homepage, service pages, pricing,
-portfolio, a books catalog, a blog and a contact page, all pre-filled with
+Bookwright is a complete, ready-to-use WordPress theme for a **book publishing
+services company** (ghostwriting, editing, design, publishing, printing,
+marketing, author websites and media booking). Activate it and you get a full
+website immediately — homepage, services, pricing, a portfolio showcase, a
+book-a-free-consultation flow, a blog and a contact page — all pre-filled with
 professional demo content, illustrations and a logo.
 
 ![Bookwright screenshot](screenshot.png)
@@ -21,7 +22,7 @@ Every section is managed from the WordPress dashboard:
 | Team members (About page) | **Team** menu (name, role, photo, bio) |
 | Pricing plans | **Pricing Plans** menu (price, period, features, “most popular” flag) |
 | FAQs | **FAQs** menu (question = title, answer = content) |
-| Books catalog | **Books** menu |
+| Portfolio projects | **Portfolio** menu (showcase — no store/pricing) |
 | Blog posts | **Posts** |
 | Homepage headings, stats, process steps, “featured in” logos | **Appearance → Customize → “Bookwright · Homepage Sections”** |
 | Hero, contact details, social links, footer text, logo | **Appearance → Customize** |
@@ -31,14 +32,14 @@ Templates fall back to sensible defaults if you delete everything, so the site n
 ## What you get out of the box
 
 - **One-click demo content.** On activation the theme automatically creates
-  every page, a navigation menu, sample blog posts and a full sample book
-  catalog, and sets the homepage — no importer plugin required.
+  every page, a navigation menu, sample blog posts and a sample portfolio,
+  and sets the homepage — no importer plugin required.
 - **Designed homepage** (`front-page.php`) with hero, services, process,
-  featured books, stats, testimonials, latest journal posts and a call to action.
-- **Custom “Books” catalog** — a `book` post type with a `genre` taxonomy and
-  per-book details (author, price, rating, buy link, cover).
-- **Page templates**: About, Services, Pricing (with FAQ), Portfolio, Books
-  Catalog, Contact (with a styled form + map).
+  a portfolio strip, a book-a-call band, stats, testimonials, journal and CTA.
+- **Portfolio showcase** — a `Portfolio` post type (client, service provided,
+  category, cover) to display books you’ve helped create. No storefront.
+- **Page templates**: About, Services, Pricing (with FAQ), Portfolio and
+  Contact (with a styled form + map).
 - **Blog** with sidebar, single post, categories, tags, search and comments.
 - **Bundled artwork** — logo, hero illustration, book covers, avatars and
   service graphics, all crisp SVG (no external image dependencies).
@@ -56,7 +57,7 @@ Templates fall back to sensible defaults if you delete everything, so the site n
 1. In WordPress go to **Appearance → Themes → Add New → Upload Theme**.
 2. Choose `bookwright.zip` and click **Install Now**.
 3. Click **Activate**.
-4. Done — visit your site. The homepage, menu, pages and sample catalog are
+4. Done — visit your site. The homepage, menu, pages and sample portfolio are
    already there.
 
 ### Option B — Manual
@@ -82,8 +83,8 @@ Templates fall back to sensible defaults if you delete everything, so the site n
 4. **Contact form** — install a form plugin (Contact Form 7 or WPForms) and
    paste its shortcode into the **Contact** page. The theme detects the
    shortcode and renders your real form; otherwise a styled demo form is shown.
-5. **Books** — edit the sample titles under **Books**, or add your own. Set a
-   featured image to use a real cover, or the bundled placeholder is used.
+5. **Portfolio** — edit the sample projects under **Portfolio**, or add your own.
+   Set a featured image to use a real cover, or the bundled placeholder is used.
 
 ---
 
@@ -96,15 +97,15 @@ bookwright/
 ├── front-page.php           Designed homepage
 ├── header.php / footer.php  Site chrome
 ├── index / single / page / archive / search / 404 / comments / sidebar
-├── single-book.php          Book detail page
-├── archive-book.php         Book catalog archive (with genre filters)
+├── single-book.php          Portfolio project detail page
+├── archive-book.php         Portfolio archive (with category filters)
 ├── searchform.php
 ├── inc/
 │   ├── template-tags.php     Icons, meta, breadcrumbs, helpers
-│   ├── cpt-book.php          "Book" post type + "Genre" taxonomy + meta box
+│   ├── cpt-book.php          "Portfolio" post type + category taxonomy + meta box
 │   ├── customizer.php        Contact / social / hero options
 │   └── demo-content.php      One-click demo installer
-├── page-templates/           About, Services, Pricing, Portfolio, Books, Contact
+├── page-templates/           About, Services, Pricing, Portfolio, Contact
 ├── template-parts/           book-card, cta
 └── assets/
     ├── css/theme.css         Full design system

@@ -1,6 +1,6 @@
 <?php
 /**
- * Book catalog archive.
+ * Portfolio archive.
  *
  * @package Bookwright
  */
@@ -10,8 +10,8 @@ get_header();
 <section class="bw-page-hero">
 	<div class="bw-wrap">
 		<?php bookwright_breadcrumb(); ?>
-		<h1><?php esc_html_e( 'Our Book Catalog', 'bookwright' ); ?></h1>
-		<p><?php esc_html_e( 'A selection of the titles we’ve edited, designed, published and launched.', 'bookwright' ); ?></p>
+		<h1><?php esc_html_e( 'Our Portfolio', 'bookwright' ); ?></h1>
+		<p><?php esc_html_e( 'A selection of the books we’ve written, edited, designed, published and marketed with our authors.', 'bookwright' ); ?></p>
 	</div>
 </section>
 

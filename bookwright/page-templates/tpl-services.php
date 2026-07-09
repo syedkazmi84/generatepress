@@ -10,8 +10,8 @@ get_header();
 <section class="bw-page-hero">
 	<div class="bw-wrap">
 		<?php bookwright_breadcrumb(); ?>
-		<h1><?php esc_html_e( 'Full-service publishing, à la carte', 'bookwright' ); ?></h1>
-		<p><?php esc_html_e( 'Choose exactly the help your book needs — from a single proofread to a complete publish-and-launch package.', 'bookwright' ); ?></p>
+		<h1><?php esc_html_e( 'Publishing services, tailored to you', 'bookwright' ); ?></h1>
+		<p><?php esc_html_e( 'From ghostwriting to marketing, choose exactly the help your book needs — or hand us the whole journey and we’ll take it from here.', 'bookwright' ); ?></p>
 	</div>
 </section>
 
@@ -86,13 +86,13 @@ get_header();
 	<div class="bw-wrap">
 		<div class="bw-section-head bw-center">
 			<span class="bw-eyebrow"><?php esc_html_e( 'Our process', 'bookwright' ); ?></span>
-			<h2><?php esc_html_e( 'How a Bookwright project runs', 'bookwright' ); ?></h2>
+			<h2><?php esc_html_e( 'How we work with you', 'bookwright' ); ?></h2>
 		</div>
 		<div class="bw-steps">
 			<?php
 			$steps = array(
 				array( 'Free consult', 'We read a sample and talk goals, budget and timeline — no charge, no pressure.' ),
-				array( 'Tailored plan', 'You get a fixed-price proposal with clear milestones and deliverables.' ),
+				array( 'Tailored plan', 'You get an honest, tailored quote with clear milestones and deliverables.' ),
 				array( 'Production', 'Editing, design and formatting run on a schedule you can actually see.' ),
 				array( 'Publish &amp; launch', 'We distribute everywhere and drive readers to your book from day one.' ),
 			);

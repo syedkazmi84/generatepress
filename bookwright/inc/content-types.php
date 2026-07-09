@@ -245,20 +245,22 @@ function bookwright_entry_photo( $fallback = 'avatar-1.svg' ) {
 function bookwright_default_services() {
 	// icon, title, short (excerpt), long (body), features[]
 	return array(
-		array( 'edit', 'Editorial & Proofreading', 'Developmental, line and copy editing that sharpens your story while protecting your voice.', 'Great books are rewritten, not written. Our editors work in clear stages so your budget goes exactly where your manuscript needs it.', array( 'Developmental / structural editing', 'Line & copy editing', 'Proofreading', 'Editorial assessment reports' ) ),
-		array( 'design', 'Cover & Interior Design', 'Scroll-stopping covers and beautiful, readable interiors for print and ebook.', 'A cover sells the click; a beautiful interior keeps the reader turning pages. We design both, for print and digital.', array( 'Three original cover concepts', 'Print & ebook interior layout', 'Typesetting & formatting', 'Print-ready files for KDP & IngramSpark' ) ),
-		array( 'book', 'Publishing & Distribution', 'We set up and launch across Amazon KDP, IngramSpark, Apple Books and more.', 'We handle the technical maze of getting your book listed, priced and available everywhere readers shop.', array( 'Amazon KDP & IngramSpark setup', 'ISBN & metadata optimisation', 'Global print & ebook distribution', 'Pricing & category strategy' ) ),
-		array( 'megaphone', 'Book Marketing', 'Launch strategy, ads, email and PR that put your book in front of the right readers.', 'A finished book is the start line, not the finish. Our marketing team builds momentum that lasts beyond launch week.', array( 'Launch strategy & timeline', 'Amazon & Meta advertising', 'Email & newsletter campaigns', 'PR, reviews & influencer outreach' ) ),
-		array( 'quill', 'Ghostwriting', 'Have the idea but not the time? Our writers turn your vision into finished chapters.', 'Bring us your outline, notes or voice memos and our ghostwriters craft polished chapters in your voice.', array( 'Discovery interviews', 'Chapter-by-chapter drafting', 'Unlimited revisions within scope', 'Full confidentiality' ) ),
-		array( 'globe', 'Audiobook Production', 'Professional narration and mastering to reach listeners on Audible and beyond.', 'Reach the fastest-growing segment of readers with a studio-quality audiobook, start to finish.', array( 'Professional narrator casting', 'Studio recording & direction', 'Mastering to ACX spec', 'Distribution to Audible & Apple' ) ),
+		array( 'quill', 'Ghostwriting & Book Writing', 'Seasoned ghostwriters turn your ideas, notes or voice memos into a finished manuscript — written in your voice.', 'Have a story or expertise but not the time to write it? Partner with a professional ghostwriter who captures your voice and does the writing for you. You stay the sole author and rights-holder — we work quietly behind the scenes.', array( 'One-on-one discovery interviews', 'Chapter-by-chapter drafting', 'Revisions until it sounds like you', '100% confidential — credited entirely to you' ) ),
+		array( 'edit', 'Editing & Proofreading', 'Developmental, line and copy editing plus a final proofread, so your book reads clean and professional.', 'Great books are shaped in the edit. Our editors work in clear stages, so your manuscript reads sharp, consistent and error-free from the first page to the last.', array( 'Developmental / structural editing', 'Line & copy editing', 'Final proofread', 'Style sheet & consistency pass' ) ),
+		array( 'book', 'Publishing & Distribution', 'We format, convert and publish your book across major platforms as print and ebook — you keep the rights.', 'We handle the technical side of getting your book listed and available everywhere readers shop, in both print and digital formats. You keep 100% of your ownership and royalties.', array( 'Print & ebook formatting', 'Platform setup & upload', 'ISBN & metadata', 'Global distribution — you keep the rights' ) ),
+		array( 'design', 'Cover & Interior Design', 'Original, market-ready cover concepts and clean interior layouts that make your book look its best.', 'Readers really do judge a book by its cover. Our designers craft original covers and polished interiors built to make your book look like it belongs on a bestseller shelf.', array( 'Three original cover concepts', 'Print & ebook interior layout', 'Typesetting & formatting', 'Print-ready files' ) ),
+		array( 'megaphone', 'Book Marketing', 'Author branding, social media and launch campaigns that build visibility and reach the right readers.', 'A finished book is the start line, not the finish. Our marketing team builds an author brand and a launch that connects your book with the readers who will love it.', array( 'Launch strategy & timeline', 'Social media & author branding', 'Advertising campaigns', 'Reviews & media outreach' ) ),
+		array( 'print', 'Book Printing', 'Premium print production with quality paper stocks, professional finishes and reliable fulfilment.', 'Bring your manuscript to life in print. We produce beautiful physical copies with premium paper and finishes — perfect for author copies, signings and events.', array( 'Premium paper & finishes', 'Hardcover, paperback & special editions', 'Proof copies before print run', 'Author-copy fulfilment' ) ),
+		array( 'monitor', 'Author Website Setup', 'A polished author website that showcases your book, grows your list and gives readers one home online.', 'Give readers one place to find you. We build a clean, mobile-friendly author website that showcases your book, captures email signups and grows with your author brand.', array( 'Custom author website', 'Book & author bio pages', 'Mailing-list signup', 'Mobile-friendly & SEO-ready' ) ),
+		array( 'mic', 'Media & Interview Booking', 'We pitch and arrange podcast, radio and TV interviews to put you and your story in front of new audiences.', 'Great publicity turns authors into authorities. We pitch your story and secure interview opportunities that grow your audience and your book’s reach.', array( 'Podcast & radio pitching', 'TV / interview booking', 'Media kit & talking points', 'Interview preparation & coaching' ) ),
 	);
 }
 
 function bookwright_default_testimonials() {
 	return array(
-		array( 'Eleanor Vance', 'Bookwright took my rough manuscript and turned it into a book I’m genuinely proud of. The cover alone doubled my click-through.', 'Author of The Lantern Keeper', 5, 'avatar-1.svg' ),
-		array( 'Nadia Okafor', 'The team hit every deadline and treated my little memoir like it was the next big bestseller. I felt supported the whole way.', 'Author of Saltwater Girlhood', 5, 'avatar-2.svg' ),
-		array( 'Marcus Ellison', 'I came for editing and stayed for the full launch. First week on Amazon we hit #1 in two categories. Worth every penny.', 'Author of Building Quiet Wealth', 5, 'avatar-3.svg' ),
+		array( 'Rebecca Hale', 'They took my half-finished draft and turned it into a book I’m proud to hand to anyone. The whole process was clear and completely stress-free.', 'First-time author', 5, 'avatar-1.svg' ),
+		array( 'James Okoro', 'From ghostwriting to launch, one team handled everything and kept me updated at every step — and I still own 100% of my book.', 'Business author', 5, 'avatar-3.svg' ),
+		array( 'Sofia Marín', 'The cover and the marketing launch went beyond what I imagined. My release week was the best I could have hoped for.', 'Memoir author', 5, 'avatar-2.svg' ),
 	);
 }
 
@@ -274,30 +276,31 @@ function bookwright_default_team() {
 function bookwright_default_plans() {
 	return array(
 		array(
-			'name' => 'Starter', 'price' => '$899', 'period' => 'one-time', 'featured' => false,
-			'desc' => 'For authors who need a polished, publish-ready manuscript.',
-			'features' => "Professional proofreading\nEbook formatting\nAmazon KDP setup\n!Cover design\n!Marketing launch\n!Dedicated project manager",
+			'name' => 'Publish', 'price' => 'Custom', 'period' => 'tailored quote', 'featured' => false,
+			'desc' => 'For authors with a finished manuscript who need it edited and published professionally.',
+			'features' => "Copy editing & proofreading\nPrint & ebook formatting\nCover design\nPublishing & distribution setup\n!Ghostwriting\n!Marketing & launch",
 		),
 		array(
-			'name' => 'Publish', 'price' => '$2,499', 'period' => 'one-time', 'featured' => true,
-			'desc' => 'Our most popular package — everything to publish beautifully.',
-			'features' => "Copy & line editing\nCustom cover design\nPrint & ebook formatting\nKDP & IngramSpark distribution\nBasic launch marketing\nDedicated project manager",
+			'name' => 'Complete Author', 'price' => 'Custom', 'period' => 'tailored quote', 'featured' => true,
+			'desc' => 'Our most popular package — we write, edit, design, publish and launch your book for you.',
+			'features' => "Ghostwriting or full editing\nCustom cover & interior design\nPrint & ebook publishing\nGlobal distribution — you keep the rights\nLaunch marketing campaign\nDedicated project manager",
 		),
 		array(
-			'name' => 'Bestseller', 'price' => '$5,900', 'period' => 'one-time', 'featured' => false,
-			'desc' => 'A full-scale publish-and-launch built to hit the charts.',
-			'features' => "Developmental + copy editing\nPremium cover & interior design\nGlobal distribution setup\nFull marketing & ad campaign\nPR & review outreach\nAudiobook production add-on",
+			'name' => 'Author Brand', 'price' => 'Custom', 'period' => 'tailored quote', 'featured' => false,
+			'desc' => 'Everything you need to publish and build a lasting author platform.',
+			'features' => "Everything in Complete Author\nProfessional book printing\nAuthor website setup\nMedia & interview booking\nOngoing marketing support\nPriority project support",
 		),
 	);
 }
 
 function bookwright_default_faqs() {
 	return array(
-		array( 'Do I keep the rights to my book?', 'Absolutely. You retain 100% of your rights and royalties, always. We’re a service provider, not a publisher that owns your work.' ),
-		array( 'How long does a typical project take?', 'Most Publish-package projects run 8–14 weeks depending on manuscript length and the level of editing required. We’ll give you a firm timeline before we start.' ),
-		array( 'Can I mix and match services?', 'Yes. Every service is available à la carte. Tell us what you need and we’ll build a custom quote.' ),
-		array( 'Do you offer payment plans?', 'We do. Most packages can be split into two or three milestone payments at no extra cost.' ),
-		array( 'What if I’m not happy with the work?', 'Every package includes rounds of revision and a satisfaction guarantee. Your dedicated project manager is with you the whole way.' ),
+		array( 'Do I keep the rights to my book?', 'Always. You remain the sole author and keep 100% of your rights and royalties. We are a publishing-assistance company that works behind the scenes — we never take ownership of your work.' ),
+		array( 'Do you write the book for me?', 'We can. Our ghostwriters turn your ideas, notes or interviews into a finished manuscript in your voice — and the book is credited entirely to you.' ),
+		array( 'How much does it cost?', 'Every project is different, so we give you an honest, tailored quote with no hidden fees. Book a free consultation and we’ll recommend only the services you actually need.' ),
+		array( 'How long does the process take?', 'It depends on the services and manuscript length. After your consultation we give you a clear timeline with milestones — and we’re known for delivering on time.' ),
+		array( 'Can I choose only the services I need?', 'Yes. Pick a package or build a custom plan — from writing and editing to design, printing, publishing and marketing. You only pay for what fits your goals.' ),
+		array( 'Are you affiliated with a specific retailer or platform?', 'No. We are an independent publishing-assistance company and are not affiliated with any single retailer or platform, so our advice stays in your best interest.' ),
 	);
 }
 

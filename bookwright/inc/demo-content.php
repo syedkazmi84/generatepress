@@ -189,7 +189,6 @@ function bookwright_create_pages() {
 	$map['services']  = bookwright_make_page( __( 'Services', 'bookwright' ), 'services', '', 'page-templates/tpl-services.php' );
 	$map['pricing']   = bookwright_make_page( __( 'Pricing', 'bookwright' ), 'pricing', '', 'page-templates/tpl-pricing.php' );
 	$map['portfolio'] = bookwright_make_page( __( 'Portfolio', 'bookwright' ), 'portfolio', '', 'page-templates/tpl-portfolio.php' );
-	$map['books']     = bookwright_make_page( __( 'Books', 'bookwright' ), 'books-catalog', '', 'page-templates/tpl-books.php' );
 	$map['contact']   = bookwright_make_page( __( 'Contact', 'bookwright' ), 'contact', '', 'page-templates/tpl-contact.php' );
 	$map['blog']      = bookwright_make_page( __( 'Journal', 'bookwright' ), 'journal', '' );
 
@@ -270,38 +269,39 @@ function bookwright_create_posts() {
 }
 
 /**
- * Sample books catalog.
+ * Sample portfolio projects (showcase only — no pricing).
  */
 function bookwright_create_books() {
 	if ( get_option( 'bookwright_books_created' ) ) {
 		return;
 	}
 
-	$genres = array( 'Fiction', 'Non-Fiction', 'Memoir', 'Children', 'Business', 'Poetry' );
-	foreach ( $genres as $g ) {
-		if ( ! term_exists( $g, 'genre' ) ) {
-			wp_insert_term( $g, 'genre' );
+	$cats = array( 'Fiction', 'Non-Fiction', 'Memoir', 'Children', 'Business', 'Poetry' );
+	foreach ( $cats as $c ) {
+		if ( ! term_exists( $c, 'genre' ) ) {
+			wp_insert_term( $c, 'genre' );
 		}
 	}
 
-	$books = array(
-		array( 'The Lantern Keeper', 'Eleanor Vance', 'Fiction', '$18.99', 5, 'A sweeping literary novel about memory, loss and the small lights we keep for one another.' ),
-		array( 'Building Quiet Wealth', 'Marcus Ellison', 'Business', '$24.00', 5, 'A calm, contrarian guide to compounding money and meaning without the hustle.' ),
-		array( 'Saltwater Girlhood', 'Nadia Okafor', 'Memoir', '$16.50', 4, 'A luminous coming-of-age memoir set along the West African coast.' ),
-		array( 'The Clockwork Garden', 'Theo Marsh', 'Children', '$12.99', 5, 'An illustrated adventure where a curious girl repairs a garden that runs on time.' ),
-		array( 'Signal & Noise', 'Priya Raman', 'Non-Fiction', '$21.00', 4, 'How to think clearly in an age engineered for distraction.' ),
-		array( 'Everything We Left Unsaid', 'Daniel Cho', 'Fiction', '$17.99', 5, 'Two estranged siblings, one final summer, and the letters they never sent.' ),
-		array( 'Field Notes on Wonder', 'Amara Bright', 'Poetry', '$14.00', 5, 'A debut collection tracing awe from the kitchen table to the cosmos.' ),
-		array( 'The Founder’s Compass', 'Rosa Delgado', 'Business', '$26.50', 4, 'Decision-making frameworks for the messy first thousand days of a startup.' ),
+	// title, client/author, category, service provided, short description
+	$projects = array(
+		array( 'The Founder\'s Compass', 'Rosa Delgado', 'Business', 'Editing & Cover Design', 'A practical guide to the first thousand days of a startup, edited and designed for a confident launch.' ),
+		array( 'Quiet Wealth', 'James Okoro', 'Business', 'Ghostwriting & Marketing', 'Ghostwritten from a series of interviews, then launched with a full author-branding campaign.' ),
+		array( 'Saltwater Girlhood', 'Nadia Okafor', 'Memoir', 'Full Publishing', 'A luminous coming-of-age memoir taken from manuscript to print, ebook and launch.' ),
+		array( 'The Clockwork Garden', 'Theo Marsh', 'Children', 'Cover & Interior Design', 'An illustrated children\'s adventure with custom cover art and a playful interior layout.' ),
+		array( 'Field Notes on Wonder', 'Sofia Marín', 'Poetry', 'Editing & Publishing', 'A debut poetry collection carefully edited and typeset for both print and digital readers.' ),
+		array( 'Signal & Noise', 'Priya Raman', 'Non-Fiction', 'Publishing & Marketing', 'A non-fiction title published across major platforms and supported with a targeted ad campaign.' ),
+		array( 'Letters We Never Sent', 'Daniel Cho', 'Fiction', 'Ghostwriting & Editing', 'A literary novel developed with our writing team and polished through developmental and line editing.' ),
+		array( 'Building a Life of Meaning', 'Amara Bright', 'Non-Fiction', 'Full Service', 'Written, edited, designed and marketed end-to-end — with the author keeping 100% ownership.' ),
 	);
 
 	$i = 0;
-	foreach ( $books as $b ) {
-		list( $title, $author, $genre, $price, $rating, $desc ) = $b;
+	foreach ( $projects as $b ) {
+		list( $title, $client, $cat, $service, $desc ) = $b;
 		$id = wp_insert_post(
 			array(
 				'post_title'   => $title,
-				'post_content' => '<p>' . esc_html( $desc ) . '</p><p>' . esc_html( $author ) . ' worked closely with the Bookwright team through developmental editing, cover design and launch. The result is a book that found its readers — and its shelf.</p>',
+				'post_content' => '<p>' . esc_html( $desc ) . '</p><p>' . esc_html( $client ) . ' partnered with our team for ' . esc_html( strtolower( $service ) ) . '. The author remained the sole owner and rights-holder throughout.</p>',
 				'post_excerpt' => $desc,
 				'post_status'  => 'publish',
 				'post_type'    => 'book',
@@ -309,13 +309,10 @@ function bookwright_create_books() {
 			)
 		);
 		if ( $id && ! is_wp_error( $id ) ) {
-			update_post_meta( $id, '_bw_author', $author );
-			update_post_meta( $id, '_bw_price', $price );
-			update_post_meta( $id, '_bw_rating', $rating );
-			update_post_meta( $id, '_bw_link', '#' );
-			// Bundled fallback cover (cover-1..6.svg), cycled.
+			update_post_meta( $id, '_bw_author', $client );
+			update_post_meta( $id, '_bw_service', $service );
 			update_post_meta( $id, '_bw_cover', 'cover-' . ( ( $i % 6 ) + 1 ) . '.svg' );
-			wp_set_object_terms( $id, $genre, 'genre' );
+			wp_set_object_terms( $id, $cat, 'genre' );
 		}
 		$i++;
 	}
@@ -337,7 +334,6 @@ function bookwright_build_menus( $pages ) {
 			array( 'Home', $pages['home'] ),
 			array( 'About', $pages['about'] ),
 			array( 'Services', $pages['services'] ),
-			array( 'Books', $pages['books'] ),
 			array( 'Pricing', $pages['pricing'] ),
 			array( 'Portfolio', $pages['portfolio'] ),
 			array( 'Journal', $pages['blog'] ),

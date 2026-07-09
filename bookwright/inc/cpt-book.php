@@ -1,6 +1,13 @@
 <?php
 /**
- * "Book" custom post type + Genre taxonomy for the publishing catalog.
+ * "Portfolio" custom post type + Category taxonomy.
+ *
+ * Showcases books the company has helped create (writing, editing, design,
+ * publishing, marketing). This is a non-commercial portfolio — there are no
+ * prices or buy buttons; it demonstrates the work, it does not sell books.
+ *
+ * The post type key stays `book` for template continuity (single-book.php,
+ * archive-book.php, template-parts/book-card.php).
  *
  * @package Bookwright
  */
@@ -10,42 +17,42 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Register the Book post type.
+ * Register the Portfolio post type.
  */
 function bookwright_register_book_cpt() {
 	$labels = array(
-		'name'               => __( 'Books', 'bookwright' ),
-		'singular_name'      => __( 'Book', 'bookwright' ),
-		'add_new'            => __( 'Add New Book', 'bookwright' ),
-		'add_new_item'       => __( 'Add New Book', 'bookwright' ),
-		'edit_item'          => __( 'Edit Book', 'bookwright' ),
-		'new_item'           => __( 'New Book', 'bookwright' ),
-		'view_item'          => __( 'View Book', 'bookwright' ),
-		'search_items'       => __( 'Search Books', 'bookwright' ),
-		'not_found'          => __( 'No books found', 'bookwright' ),
-		'not_found_in_trash' => __( 'No books found in Trash', 'bookwright' ),
-		'all_items'          => __( 'All Books', 'bookwright' ),
-		'menu_name'          => __( 'Books', 'bookwright' ),
+		'name'               => __( 'Portfolio', 'bookwright' ),
+		'singular_name'      => __( 'Project', 'bookwright' ),
+		'add_new'            => __( 'Add New Project', 'bookwright' ),
+		'add_new_item'       => __( 'Add New Project', 'bookwright' ),
+		'edit_item'          => __( 'Edit Project', 'bookwright' ),
+		'new_item'           => __( 'New Project', 'bookwright' ),
+		'view_item'          => __( 'View Project', 'bookwright' ),
+		'search_items'       => __( 'Search Portfolio', 'bookwright' ),
+		'not_found'          => __( 'No projects found', 'bookwright' ),
+		'not_found_in_trash' => __( 'No projects found in Trash', 'bookwright' ),
+		'all_items'          => __( 'All Projects', 'bookwright' ),
+		'menu_name'          => __( 'Portfolio', 'bookwright' ),
 	);
 
 	register_post_type(
 		'book',
 		array(
-			'labels'       => $labels,
-			'public'       => true,
-			'has_archive'  => true,
-			'menu_icon'    => 'dashicons-book-alt',
+			'labels'        => $labels,
+			'public'        => true,
+			'has_archive'   => true,
+			'menu_icon'     => 'dashicons-portfolio',
 			'menu_position' => 5,
-			'rewrite'      => array( 'slug' => 'books' ),
-			'supports'     => array( 'title', 'editor', 'thumbnail', 'excerpt', 'page-attributes' ),
-			'show_in_rest' => true,
+			'rewrite'       => array( 'slug' => 'portfolio' ),
+			'supports'      => array( 'title', 'editor', 'thumbnail', 'excerpt', 'page-attributes' ),
+			'show_in_rest'  => true,
 		)
 	);
 }
 add_action( 'init', 'bookwright_register_book_cpt' );
 
 /**
- * Register the Genre taxonomy.
+ * Register the Category taxonomy (genre) for portfolio projects.
  */
 function bookwright_register_genre_tax() {
 	register_taxonomy(
@@ -53,27 +60,27 @@ function bookwright_register_genre_tax() {
 		'book',
 		array(
 			'labels'            => array(
-				'name'          => __( 'Genres', 'bookwright' ),
-				'singular_name' => __( 'Genre', 'bookwright' ),
-				'menu_name'     => __( 'Genres', 'bookwright' ),
+				'name'          => __( 'Categories', 'bookwright' ),
+				'singular_name' => __( 'Category', 'bookwright' ),
+				'menu_name'     => __( 'Categories', 'bookwright' ),
 			),
 			'hierarchical'      => true,
 			'public'            => true,
 			'show_admin_column' => true,
 			'show_in_rest'      => true,
-			'rewrite'           => array( 'slug' => 'genre' ),
+			'rewrite'           => array( 'slug' => 'work-category' ),
 		)
 	);
 }
 add_action( 'init', 'bookwright_register_genre_tax' );
 
 /**
- * Book detail meta box (author name, price, buy link, rating).
+ * Project detail meta box (author/client + the service we provided).
  */
 function bookwright_book_metabox() {
 	add_meta_box(
 		'bookwright_book_details',
-		__( 'Book Details', 'bookwright' ),
+		__( 'Project Details', 'bookwright' ),
 		'bookwright_book_metabox_html',
 		'book',
 		'side',
@@ -85,10 +92,8 @@ add_action( 'add_meta_boxes', 'bookwright_book_metabox' );
 function bookwright_book_metabox_html( $post ) {
 	wp_nonce_field( 'bookwright_save_book', 'bookwright_book_nonce' );
 	$fields = array(
-		'_bw_author' => __( 'Author name', 'bookwright' ),
-		'_bw_price'  => __( 'Price (e.g. $18.99)', 'bookwright' ),
-		'_bw_link'   => __( 'Buy / details URL', 'bookwright' ),
-		'_bw_rating' => __( 'Rating (1-5)', 'bookwright' ),
+		'_bw_author'  => __( 'Author / client name', 'bookwright' ),
+		'_bw_service' => __( 'Service provided (e.g. Ghostwriting, Cover design)', 'bookwright' ),
 	);
 	foreach ( $fields as $key => $label ) {
 		$val = get_post_meta( $post->ID, $key, true );
@@ -99,6 +104,7 @@ function bookwright_book_metabox_html( $post ) {
 			esc_attr( $val )
 		);
 	}
+	echo '<p style="color:#666;font-size:12px;">' . esc_html__( 'Set a Featured Image to use a real cover, or leave blank to use a bundled sample cover.', 'bookwright' ) . '</p>';
 }
 
 function bookwright_save_book_meta( $post_id ) {
@@ -111,20 +117,16 @@ function bookwright_save_book_meta( $post_id ) {
 	if ( ! current_user_can( 'edit_post', $post_id ) ) {
 		return;
 	}
-	foreach ( array( '_bw_author', '_bw_price', '_bw_link', '_bw_rating' ) as $key ) {
+	foreach ( array( '_bw_author', '_bw_service' ) as $key ) {
 		if ( isset( $_POST[ $key ] ) ) {
-			$raw = sanitize_text_field( wp_unslash( $_POST[ $key ] ) );
-			if ( '_bw_link' === $key ) {
-				$raw = esc_url_raw( $raw );
-			}
-			update_post_meta( $post_id, $key, $raw );
+			update_post_meta( $post_id, $key, sanitize_text_field( wp_unslash( $_POST[ $key ] ) ) );
 		}
 	}
 }
 add_action( 'save_post_book', 'bookwright_save_book_meta' );
 
 /**
- * Helper to fetch a book meta value.
+ * Helper to fetch a project meta value.
  */
 function bookwright_book_meta( $key, $post_id = null ) {
 	$post_id = $post_id ? $post_id : get_the_ID();

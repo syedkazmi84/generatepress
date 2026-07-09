@@ -10,8 +10,8 @@ get_header();
 <section class="bw-page-hero">
 	<div class="bw-wrap">
 		<?php bookwright_breadcrumb(); ?>
-		<h1><?php esc_html_e( 'Our portfolio', 'bookwright' ); ?></h1>
-		<p><?php esc_html_e( 'A shelf of recent titles we edited, designed, published and launched with their authors.', 'bookwright' ); ?></p>
+		<h1><?php esc_html_e( 'Our work', 'bookwright' ); ?></h1>
+		<p><?php esc_html_e( 'A selection of books we’ve helped bring to life — through ghostwriting, editing, design, publishing and marketing.', 'bookwright' ); ?></p>
 	</div>
 </section>
 
@@ -48,10 +48,10 @@ get_header();
 <section class="bw-section bw-section--tight bw-section--ink">
 	<div class="bw-wrap">
 		<div class="bw-stats-band">
-			<div class="bw-stat-lg"><strong data-count="1200" data-suffix="+">1200+</strong><span><?php esc_html_e( 'Titles delivered', 'bookwright' ); ?></span></div>
-			<div class="bw-stat-lg"><strong data-count="35" data-suffix="+">35+</strong><span><?php esc_html_e( 'Bestseller lists', 'bookwright' ); ?></span></div>
-			<div class="bw-stat-lg"><strong data-count="18" data-suffix="+">18+</strong><span><?php esc_html_e( 'Awards won', 'bookwright' ); ?></span></div>
-			<div class="bw-stat-lg"><strong data-count="4" data-suffix=".9">4.9</strong><span><?php esc_html_e( 'Avg. author rating', 'bookwright' ); ?></span></div>
+			<div class="bw-stat-lg"><strong>750+</strong><span><?php esc_html_e( 'Books published', 'bookwright' ); ?></span></div>
+			<div class="bw-stat-lg"><strong>900+</strong><span><?php esc_html_e( 'Happy authors', 'bookwright' ); ?></span></div>
+			<div class="bw-stat-lg"><strong>15+</strong><span><?php esc_html_e( 'Years of experience', 'bookwright' ); ?></span></div>
+			<div class="bw-stat-lg"><strong>100%</strong><span><?php esc_html_e( 'Ownership you keep', 'bookwright' ); ?></span></div>
 		</div>
 	</div>
 </section>

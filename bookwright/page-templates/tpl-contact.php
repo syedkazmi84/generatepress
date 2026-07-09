@@ -10,8 +10,8 @@ get_header();
 <section class="bw-page-hero">
 	<div class="bw-wrap">
 		<?php bookwright_breadcrumb(); ?>
-		<h1><?php esc_html_e( 'Let’s talk about your book', 'bookwright' ); ?></h1>
-		<p><?php esc_html_e( 'Tell us where you are in the journey and we’ll reply within one business day with next steps and a free quote.', 'bookwright' ); ?></p>
+		<h1><?php esc_html_e( 'Book your free consultation', 'bookwright' ); ?></h1>
+		<p><?php esc_html_e( 'Tell us about your book and we’ll get back to you within one business day to schedule your free, no-obligation call.', 'bookwright' ); ?></p>
 	</div>
 </section>
 
@@ -51,8 +51,8 @@ get_header();
 
 			<!-- Form column -->
 			<div class="bw-card" style="padding:38px;">
-				<h3><?php esc_html_e( 'Request a free quote', 'bookwright' ); ?></h3>
-				<p style="color:var(--bw-muted);"><?php esc_html_e( 'Fill in a few details and we’ll take it from there.', 'bookwright' ); ?></p>
+				<h3><?php esc_html_e( 'Book a free consultation', 'bookwright' ); ?></h3>
+				<p style="color:var(--bw-muted);"><?php esc_html_e( 'Share a few details and we’ll be in touch to set up your call.', 'bookwright' ); ?></p>
 				<?php
 				// Use Contact Form 7 / WPForms shortcode if the page contains one; otherwise show a styled demo form.
 				$content = get_post_field( 'post_content', get_the_ID() );

@@ -10,24 +10,24 @@ get_header();
 <section class="bw-page-hero">
 	<div class="bw-wrap">
 		<?php bookwright_breadcrumb(); ?>
-		<h1><?php esc_html_e( 'A studio built by book people', 'bookwright' ); ?></h1>
-		<p><?php esc_html_e( 'We’re editors, designers and marketers who left big publishing to give independent authors the same craft — without giving up their rights.', 'bookwright' ); ?></p>
+		<h1><?php esc_html_e( 'Your creative partner in publishing', 'bookwright' ); ?></h1>
+		<p><?php esc_html_e( 'We’re writers, editors, designers and marketers who help authors publish confidently — while keeping full ownership of their work.', 'bookwright' ); ?></p>
 	</div>
 </section>
 
 <!-- Story -->
 <section class="bw-section">
 	<div class="bw-wrap bw-split">
-		<div><img src="<?php echo bookwright_img( 'about.svg' ); ?>" alt="<?php esc_attr_e( 'The Bookwright team at work', 'bookwright' ); ?>" /></div>
+		<div><img src="<?php echo bookwright_img( 'about.svg' ); ?>" alt="<?php esc_attr_e( 'Our team at work', 'bookwright' ); ?>" /></div>
 		<div>
 			<span class="bw-eyebrow"><?php esc_html_e( 'Our story', 'bookwright' ); ?></span>
-			<h2><?php esc_html_e( 'Founded on a simple belief: every good book deserves great publishing', 'bookwright' ); ?></h2>
-			<p><?php esc_html_e( 'Bookwright began in 2014 when a group of publishing veterans grew frustrated watching brilliant manuscripts fail — not for lack of talent, but for lack of support. We set out to build the studio we wished authors had.', 'bookwright' ); ?></p>
-			<p><?php esc_html_e( 'A decade later we’ve helped more than 1,200 authors publish books that sell, win awards and change lives — while keeping 100% of their rights and royalties.', 'bookwright' ); ?></p>
+			<h2><?php esc_html_e( 'We’re not just a publishing company — we’re your creative partners', 'bookwright' ); ?></h2>
+			<p><?php esc_html_e( 'We exist to simplify publishing. From the first idea to the final launch, we combine ghostwriting, editing, design, publishing and marketing under one roof — so you can share your message with readers around the world.', 'bookwright' ); ?></p>
+			<p><?php esc_html_e( 'Hundreds of authors have trusted us for writing, editing, publishing and marketing — with consistent, professional results and honest, transparent pricing. We treat every story like our own, and you always remain the sole author and rights-holder.', 'bookwright' ); ?></p>
 			<ul class="bw-checklist">
-				<li><?php esc_html_e( 'Craft first — real editors, real designers, real care', 'bookwright' ); ?></li>
-				<li><?php esc_html_e( 'Author-owned — your book, your rights, always', 'bookwright' ); ?></li>
-				<li><?php esc_html_e( 'Transparent pricing with no hidden fees', 'bookwright' ); ?></li>
+				<li><?php esc_html_e( 'Personalised, one-on-one guidance on every project', 'bookwright' ); ?></li>
+				<li><?php esc_html_e( 'You keep 100% ownership — always', 'bookwright' ); ?></li>
+				<li><?php esc_html_e( 'A transparent process with no hidden fees', 'bookwright' ); ?></li>
 			</ul>
 		</div>
 	</div>
@@ -37,10 +37,10 @@ get_header();
 <section class="bw-section bw-section--tight bw-section--ink">
 	<div class="bw-wrap">
 		<div class="bw-stats-band">
-			<div class="bw-stat-lg"><strong data-count="2014">2014</strong><span><?php esc_html_e( 'Founded', 'bookwright' ); ?></span></div>
-			<div class="bw-stat-lg"><strong data-count="1200" data-suffix="+">1200+</strong><span><?php esc_html_e( 'Authors served', 'bookwright' ); ?></span></div>
-			<div class="bw-stat-lg"><strong data-count="40" data-suffix="+">40+</strong><span><?php esc_html_e( 'Team members', 'bookwright' ); ?></span></div>
-			<div class="bw-stat-lg"><strong data-count="18" data-suffix="+">18+</strong><span><?php esc_html_e( 'Industry awards', 'bookwright' ); ?></span></div>
+			<div class="bw-stat-lg"><strong>750+</strong><span><?php esc_html_e( 'Books published', 'bookwright' ); ?></span></div>
+			<div class="bw-stat-lg"><strong>900+</strong><span><?php esc_html_e( 'Authors served', 'bookwright' ); ?></span></div>
+			<div class="bw-stat-lg"><strong>15+</strong><span><?php esc_html_e( 'Years of experience', 'bookwright' ); ?></span></div>
+			<div class="bw-stat-lg"><strong>100%</strong><span><?php esc_html_e( 'Ownership you keep', 'bookwright' ); ?></span></div>
 		</div>
 	</div>
 </section>
@@ -55,9 +55,9 @@ get_header();
 		<div class="bw-cards">
 			<?php
 			$vals = array(
-				array( 'shield', 'Author-first', 'You keep your rights, your royalties and the final say. We’re partners, not gatekeepers.' ),
-				array( 'award', 'Uncompromising craft', 'The same editors and designers behind major imprint titles, focused on your book.' ),
-				array( 'chart', 'Results that matter', 'We measure success in reviews, rankings and readers — not just delivered files.' ),
+				array( 'shield', 'Author-first', 'You keep 100% ownership, your royalties and the final say. We stay behind the scenes.' ),
+				array( 'award', 'Uncompromising craft', 'Skilled ghostwriters, editors, designers and consultants with real publishing experience.' ),
+				array( 'chart', 'Transparent process', 'Clear steps, flexible options and honest pricing with no hidden fees — start to finish.' ),
 			);
 			foreach ( $vals as $v ) :
 				?>

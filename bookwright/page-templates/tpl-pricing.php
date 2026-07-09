@@ -11,7 +11,7 @@ get_header();
 	<div class="bw-wrap">
 		<?php bookwright_breadcrumb(); ?>
 		<h1><?php esc_html_e( 'Simple, transparent pricing', 'bookwright' ); ?></h1>
-		<p><?php esc_html_e( 'Fixed-price packages with no hidden fees. Need something custom? We build à-la-carte quotes too.', 'bookwright' ); ?></p>
+		<p><?php esc_html_e( 'Flexible packages with honest, no-hidden-fee pricing. Every book is different, so we tailor a quote to exactly what you need.', 'bookwright' ); ?></p>
 	</div>
 </section>
 
@@ -64,13 +64,13 @@ get_header();
 							<li class="<?php echo $f[1] ? '' : 'bw-off'; ?>"><?php echo esc_html( $f[0] ); ?></li>
 						<?php endforeach; ?>
 					</ul>
-					<a class="bw-btn <?php echo $p['featured'] ? 'bw-btn--primary' : 'bw-btn--ghost'; ?>" href="<?php echo $contact_url; ?>"><?php esc_html_e( 'Choose plan', 'bookwright' ); ?></a>
+					<a class="bw-btn <?php echo $p['featured'] ? 'bw-btn--primary' : 'bw-btn--ghost'; ?>" href="<?php echo $contact_url; ?>"><?php esc_html_e( 'Get a custom quote', 'bookwright' ); ?></a>
 				</div>
 			<?php endforeach; ?>
 		</div>
 
 		<p class="bw-center" style="margin-top:34px;color:var(--bw-muted);">
-			<?php esc_html_e( 'All packages include a free consultation and a satisfaction guarantee. Payment plans available.', 'bookwright' ); ?>
+			<?php esc_html_e( 'Every package starts with a free consultation. Prefer to pick services individually? We build custom plans too — just ask.', 'bookwright' ); ?>
 		</p>
 	</div>
 </section>
