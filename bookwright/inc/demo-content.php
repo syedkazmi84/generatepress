@@ -124,7 +124,10 @@ function bookwright_seed_components() {
 		}
 	}
 
-	// FAQ categories, so each page can show its own set.
+	// Create empty FAQ categories, ready for you to assign FAQs to pages.
+	// FAQs are left UNCATEGORISED on purpose: by default every page shows the
+	// complete set of FAQs. Tick a category on an FAQ to route it to that page
+	// (General → Home, Services → Services page, Pricing → Pricing page).
 	$faq_cats = array( 'general' => 'General', 'services' => 'Services', 'pricing' => 'Pricing' );
 	foreach ( $faq_cats as $slug => $name ) {
 		if ( ! term_exists( $slug, 'faq_cat' ) ) {
@@ -132,19 +135,10 @@ function bookwright_seed_components() {
 		}
 	}
 
-	// Which category (or categories) each demo FAQ belongs to, by index.
-	$faq_map = array(
-		0 => array( 'general', 'pricing' ),   // Do I keep the rights?
-		1 => array( 'services' ),             // Do you write the book for me?
-		2 => array( 'pricing' ),              // How much does it cost?
-		3 => array( 'general', 'services' ),  // How long does the process take?
-		4 => array( 'services', 'pricing' ),  // Can I choose only the services I need?
-		5 => array( 'general' ),              // Are you affiliated...?
-	);
-
-	// FAQs.
+	// FAQs (no category assigned — the full set shows on every page until you
+	// start assigning categories).
 	foreach ( bookwright_default_faqs() as $i => $f ) {
-		$id = wp_insert_post(
+		wp_insert_post(
 			array(
 				'post_type'    => 'bw_faq',
 				'post_status'  => 'publish',
@@ -153,9 +147,6 @@ function bookwright_seed_components() {
 				'menu_order'   => $i,
 			)
 		);
-		if ( $id && ! is_wp_error( $id ) && isset( $faq_map[ $i ] ) ) {
-			wp_set_object_terms( $id, $faq_map[ $i ], 'faq_cat' );
-		}
 	}
 
 	update_option( 'bookwright_components_seeded', BOOKWRIGHT_VERSION );
