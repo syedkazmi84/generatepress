@@ -27,6 +27,18 @@
 *::before,
 *::after { box-sizing: border-box; }
 
+/* Inline icon default size — prevents SVGs from expanding to full width
+   when used directly in text (top bar, footer, buttons). Container-specific
+   rules below (e.g. .bw-card__icon svg) override this where a larger icon
+   is wanted. */
+.bw-icon {
+	width: 1.05em;
+	height: 1.05em;
+	display: inline-block;
+	vertical-align: -0.15em;
+	flex: 0 0 auto;
+}
+
 html { scroll-behavior: smooth; }
 
 body {
@@ -148,8 +160,10 @@ hr { border: 0; border-top: 1px solid var(--bw-line); margin: 2.5rem 0; }
 .bw-topbar a { color: #efe7d4; }
 .bw-topbar a:hover { color: var(--bw-gold); }
 .bw-topbar__meta { display: flex; gap: 22px; flex-wrap: wrap; }
+.bw-topbar__meta span { display: inline-flex; align-items: center; gap: 7px; }
 .bw-topbar__social { display: flex; gap: 14px; }
 .bw-topbar__social a { display: inline-flex; }
+.bw-topbar__social .bw-icon { width: 17px; height: 17px; }
 
 .bw-header {
 	position: sticky;
@@ -569,6 +583,9 @@ textarea { min-height: 140px; resize: vertical; }
 .bw-footer__social { display: flex; gap: 12px; margin-top: 18px; }
 .bw-footer__social a { width: 38px; height: 38px; border-radius: 50%; background: rgba(255,255,255,.08); display: inline-flex; align-items: center; justify-content: center; }
 .bw-footer__social a:hover { background: var(--bw-gold); color: #221a0c; }
+.bw-footer__social .bw-icon { width: 18px; height: 18px; }
+.bw-footer__col .bw-icon,
+.bw-footer p .bw-icon { vertical-align: -0.15em; margin-right: 4px; }
 .bw-newsletter { display: flex; gap: 8px; margin-top: 14px; }
 .bw-newsletter input { flex: 1; background: rgba(255,255,255,.06); border-color: rgba(255,255,255,.14); color: #fff; }
 .bw-newsletter input::placeholder { color: #8f8d86; }

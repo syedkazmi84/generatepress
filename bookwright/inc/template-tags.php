@@ -46,7 +46,7 @@ function bookwright_icon( $name, $echo = true ) {
 	);
 
 	$path = isset( $paths[ $name ] ) ? $paths[ $name ] : $paths['book'];
-	$svg  = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">' . $path . '</svg>';
+	$svg  = '<svg class="bw-icon" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">' . $path . '</svg>';
 
 	if ( 'star' === $name || 'facebook' === $name || 'instagram' === $name || 'twitter' === $name || 'linkedin' === $name ) {
 		// keep stroke for social; star uses fill toggle below.
