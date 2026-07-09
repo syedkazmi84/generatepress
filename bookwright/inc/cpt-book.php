@@ -41,6 +41,7 @@ function bookwright_register_book_cpt() {
 			'labels'        => $labels,
 			'public'        => true,
 			'has_archive'   => true,
+			'show_in_menu'  => 'bookwright-hub',
 			'menu_icon'     => 'dashicons-portfolio',
 			'menu_position' => 5,
 			'rewrite'       => array( 'slug' => 'portfolio' ),

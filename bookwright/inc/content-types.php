@@ -58,7 +58,7 @@ function bookwright_register_content_types() {
 				),
 				'public'       => false,
 				'show_ui'      => true,
-				'show_in_menu' => true,
+				'show_in_menu' => 'bookwright-hub',
 				'show_in_rest' => true,
 				'menu_icon'    => $cfg['icon'],
 				'supports'     => $cfg['supports'],

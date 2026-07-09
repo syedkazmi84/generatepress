@@ -160,5 +160,8 @@ add_filter( 'excerpt_more', 'bookwright_excerpt_more' );
 require BOOKWRIGHT_DIR . '/inc/template-tags.php';
 require BOOKWRIGHT_DIR . '/inc/cpt-book.php';
 require BOOKWRIGHT_DIR . '/inc/content-types.php';
+if ( is_admin() ) {
+	require BOOKWRIGHT_DIR . '/inc/admin-menu.php';
+}
 require BOOKWRIGHT_DIR . '/inc/customizer.php';
 require BOOKWRIGHT_DIR . '/inc/demo-content.php';
