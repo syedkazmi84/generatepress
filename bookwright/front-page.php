@@ -46,11 +46,12 @@ get_header();
 	<div class="bw-wrap">
 		<p><?php esc_html_e( 'As featured in', 'bookwright' ); ?></p>
 		<ul>
-			<li>The Paper Review</li>
-			<li>Inkwell</li>
-			<li>Readerly</li>
-			<li>Prose &amp; Co.</li>
-			<li>Bindery</li>
+			<?php
+			$logos = array_filter( array_map( 'trim', explode( ',', bookwright_option( 'bw_logos', 'The Paper Review, Inkwell, Readerly, Prose & Co., Bindery' ) ) ) );
+			foreach ( $logos as $logo ) {
+				echo '<li>' . esc_html( $logo ) . '</li>';
+			}
+			?>
 		</ul>
 	</div>
 </div>
@@ -59,30 +60,43 @@ get_header();
 <section class="bw-section">
 	<div class="bw-wrap">
 		<div class="bw-section-head bw-center">
-			<span class="bw-eyebrow"><?php esc_html_e( 'What we do', 'bookwright' ); ?></span>
-			<h2><?php esc_html_e( 'Everything your book needs, in one studio', 'bookwright' ); ?></h2>
-			<p class="bw-lead"><?php esc_html_e( 'Pick a single service or hand us the whole journey. Either way you get a dedicated team and a clear plan.', 'bookwright' ); ?></p>
+			<span class="bw-eyebrow"><?php echo esc_html( bookwright_option( 'bw_services_eyebrow', 'What we do' ) ); ?></span>
+			<h2><?php echo esc_html( bookwright_option( 'bw_services_title', 'Everything your book needs, in one studio' ) ); ?></h2>
+			<p class="bw-lead"><?php echo esc_html( bookwright_option( 'bw_services_lead', 'Pick a single service or hand us the whole journey. Either way you get a dedicated team and a clear plan.' ) ); ?></p>
 		</div>
 
 		<div class="bw-cards">
 			<?php
-			$services = array(
-				array( 'edit', 'Editorial &amp; Proofreading', 'Developmental, line and copy editing that sharpens your story while protecting your voice.' ),
-				array( 'design', 'Cover &amp; Interior Design', 'Scroll-stopping covers and beautiful, readable interiors for print and ebook.' ),
-				array( 'book', 'Publishing &amp; Distribution', 'We set up and launch across Amazon KDP, IngramSpark, Apple Books and more.' ),
-				array( 'megaphone', 'Book Marketing', 'Launch strategy, ads, email and PR that put your book in front of the right readers.' ),
-				array( 'quill', 'Ghostwriting', 'Have the idea but not the time? Our writers turn your vision into finished chapters.' ),
-				array( 'globe', 'Audiobook Production', 'Professional narration and mastering to reach listeners on Audible and beyond.' ),
-			);
-			foreach ( $services as $s ) :
-				?>
-				<article class="bw-card">
-					<div class="bw-card__icon"><?php bookwright_icon( $s[0] ); ?></div>
-					<h3><?php echo wp_kses_post( $s[1] ); ?></h3>
-					<p><?php echo esc_html( $s[2] ); ?></p>
-					<a class="bw-card__link" href="<?php echo esc_url( get_permalink( get_page_by_path( 'services' ) ) ); ?>"><?php esc_html_e( 'Learn more', 'bookwright' ); ?></a>
-				</article>
-			<?php endforeach; ?>
+			$services_url = esc_url( get_permalink( get_page_by_path( 'services' ) ) );
+			if ( bookwright_has_items( 'bw_service' ) ) :
+				$q = bookwright_get_items( 'bw_service', 6 );
+				while ( $q->have_posts() ) :
+					$q->the_post();
+					$icon = get_post_meta( get_the_ID(), '_bw_icon', true );
+					$link = get_post_meta( get_the_ID(), '_bw_link', true );
+					?>
+					<article class="bw-card">
+						<div class="bw-card__icon"><?php bookwright_icon( $icon ? $icon : 'book' ); ?></div>
+						<h3><?php the_title(); ?></h3>
+						<p><?php echo esc_html( get_the_excerpt() ); ?></p>
+						<a class="bw-card__link" href="<?php echo $link ? esc_url( $link ) : $services_url; ?>"><?php esc_html_e( 'Learn more', 'bookwright' ); ?></a>
+					</article>
+					<?php
+				endwhile;
+				wp_reset_postdata();
+			else :
+				foreach ( bookwright_default_services() as $s ) :
+					?>
+					<article class="bw-card">
+						<div class="bw-card__icon"><?php bookwright_icon( $s[0] ); ?></div>
+						<h3><?php echo esc_html( $s[1] ); ?></h3>
+						<p><?php echo esc_html( $s[2] ); ?></p>
+						<a class="bw-card__link" href="<?php echo $services_url; ?>"><?php esc_html_e( 'Learn more', 'bookwright' ); ?></a>
+					</article>
+					<?php
+				endforeach;
+			endif;
+			?>
 		</div>
 	</div>
 </section>
@@ -92,28 +106,24 @@ get_header();
 	<div class="bw-wrap">
 		<div class="bw-section-head bw-center">
 			<span class="bw-eyebrow"><?php esc_html_e( 'How it works', 'bookwright' ); ?></span>
-			<h2><?php esc_html_e( 'A calm, four-step path to publication', 'bookwright' ); ?></h2>
+			<h2><?php echo esc_html( bookwright_option( 'bw_process_title', 'A calm, four-step path to publication' ) ); ?></h2>
 		</div>
 		<div class="bw-steps">
 			<?php
-			$steps = array(
-				array( 'Discover', 'We read your manuscript and map the fastest route to a finished book.' ),
-				array( 'Refine', 'Editing and design shape the words and the look until both sing.' ),
-				array( 'Publish', 'We format, proof and distribute across every major store and format.' ),
-				array( 'Launch', 'A tailored marketing push builds momentum from day one.' ),
+			$step_defaults = array(
+				1 => array( 'Discover', 'We read your manuscript and map the fastest route to a finished book.' ),
+				2 => array( 'Refine', 'Editing and design shape the words and the look until both sing.' ),
+				3 => array( 'Publish', 'We format, proof and distribute across every major store and format.' ),
+				4 => array( 'Launch', 'A tailored marketing push builds momentum from day one.' ),
 			);
-			$n = 1;
-			foreach ( $steps as $st ) :
+			for ( $n = 1; $n <= 4; $n++ ) :
 				?>
 				<div class="bw-step">
 					<div class="bw-step__num"><?php echo esc_html( sprintf( '%02d', $n ) ); ?></div>
-					<h4><?php echo esc_html( $st[0] ); ?></h4>
-					<p><?php echo esc_html( $st[1] ); ?></p>
+					<h4><?php echo esc_html( bookwright_option( 'bw_step' . $n . '_t', $step_defaults[ $n ][0] ) ); ?></h4>
+					<p><?php echo esc_html( bookwright_option( 'bw_step' . $n . '_d', $step_defaults[ $n ][1] ) ); ?></p>
 				</div>
-				<?php
-				$n++;
-			endforeach;
-			?>
+			<?php endfor; ?>
 		</div>
 	</div>
 </section>
@@ -123,7 +133,7 @@ get_header();
 	<div class="bw-wrap">
 		<div class="bw-section-head bw-center">
 			<span class="bw-eyebrow"><?php esc_html_e( 'From our catalog', 'bookwright' ); ?></span>
-			<h2><?php esc_html_e( 'Books we helped bring to the world', 'bookwright' ); ?></h2>
+			<h2><?php echo esc_html( bookwright_option( 'bw_books_title', 'Books we helped bring to the world' ) ); ?></h2>
 		</div>
 
 		<div class="bw-books">
@@ -173,10 +183,20 @@ get_header();
 <section class="bw-section bw-section--tight bw-section--ink">
 	<div class="bw-wrap">
 		<div class="bw-stats-band">
-			<div class="bw-stat-lg"><strong data-count="1200" data-suffix="+">1200+</strong><span><?php esc_html_e( 'Titles published', 'bookwright' ); ?></span></div>
-			<div class="bw-stat-lg"><strong data-count="45" data-suffix="M+">45M+</strong><span><?php esc_html_e( 'Copies sold', 'bookwright' ); ?></span></div>
-			<div class="bw-stat-lg"><strong data-count="35" data-suffix="+">35+</strong><span><?php esc_html_e( 'Bestseller lists', 'bookwright' ); ?></span></div>
-			<div class="bw-stat-lg"><strong data-count="60" data-suffix="+">60+</strong><span><?php esc_html_e( 'Countries reached', 'bookwright' ); ?></span></div>
+			<?php
+			$stat_defaults = array(
+				1 => array( '1200+', 'Titles published' ),
+				2 => array( '45M+', 'Copies sold' ),
+				3 => array( '35+', 'Bestseller lists' ),
+				4 => array( '60+', 'Countries reached' ),
+			);
+			for ( $i = 1; $i <= 4; $i++ ) :
+				?>
+				<div class="bw-stat-lg">
+					<strong><?php echo esc_html( bookwright_option( 'bw_stat' . $i . '_n', $stat_defaults[ $i ][0] ) ); ?></strong>
+					<span><?php echo esc_html( bookwright_option( 'bw_stat' . $i . '_l', $stat_defaults[ $i ][1] ) ); ?></span>
+				</div>
+			<?php endfor; ?>
 		</div>
 	</div>
 </section>
@@ -209,26 +229,44 @@ get_header();
 	<div class="bw-wrap">
 		<div class="bw-section-head bw-center">
 			<span class="bw-eyebrow"><?php esc_html_e( 'Loved by authors', 'bookwright' ); ?></span>
-			<h2><?php esc_html_e( 'What our authors say', 'bookwright' ); ?></h2>
+			<h2><?php echo esc_html( bookwright_option( 'bw_testi_title', 'What our authors say' ) ); ?></h2>
 		</div>
 		<div class="bw-quotes">
 			<?php
-			$quotes = array(
-				array( 'Bookwright took my rough manuscript and turned it into a book I’m genuinely proud of. The cover alone doubled my click-through.', 'Eleanor Vance', 'Author of The Lantern Keeper', 'avatar-1.svg' ),
-				array( 'The team hit every deadline and treated my little memoir like it was the next big bestseller. I felt supported the whole way.', 'Nadia Okafor', 'Author of Saltwater Girlhood', 'avatar-2.svg' ),
-				array( 'I came for editing and stayed for the full launch. First week on Amazon we hit #1 in two categories. Worth every penny.', 'Marcus Ellison', 'Author of Building Quiet Wealth', 'avatar-3.svg' ),
-			);
-			foreach ( $quotes as $q ) :
-				?>
-				<figure class="bw-quote">
-					<div class="bw-quote__stars">★★★★★</div>
-					<blockquote style="border:0;background:none;padding:0;margin:0;font-size:1.12rem;"><p style="margin:0;">&ldquo;<?php echo esc_html( $q[0] ); ?>&rdquo;</p></blockquote>
-					<figcaption class="bw-quote__by">
-						<img src="<?php echo bookwright_img( $q[3] ); ?>" alt="<?php echo esc_attr( $q[1] ); ?>" />
-						<span><strong><?php echo esc_html( $q[1] ); ?></strong><span><?php echo esc_html( $q[2] ); ?></span></span>
-					</figcaption>
-				</figure>
-			<?php endforeach; ?>
+			if ( bookwright_has_items( 'bw_testimonial' ) ) :
+				$q = bookwright_get_items( 'bw_testimonial', 3 );
+				while ( $q->have_posts() ) :
+					$q->the_post();
+					$role   = get_post_meta( get_the_ID(), '_bw_role', true );
+					$rating = (int) get_post_meta( get_the_ID(), '_bw_rating', true );
+					$rating = $rating ? $rating : 5;
+					?>
+					<figure class="bw-quote">
+						<div class="bw-quote__stars"><?php echo esc_html( str_repeat( '★', $rating ) ); ?></div>
+						<blockquote style="border:0;background:none;padding:0;margin:0;font-size:1.12rem;"><p style="margin:0;">&ldquo;<?php echo esc_html( wp_strip_all_tags( get_the_content() ) ); ?>&rdquo;</p></blockquote>
+						<figcaption class="bw-quote__by">
+							<img src="<?php echo esc_url( bookwright_entry_photo() ); ?>" alt="<?php the_title_attribute(); ?>" />
+							<span><strong><?php the_title(); ?></strong><span><?php echo esc_html( $role ); ?></span></span>
+						</figcaption>
+					</figure>
+					<?php
+				endwhile;
+				wp_reset_postdata();
+			else :
+				foreach ( bookwright_default_testimonials() as $t ) :
+					?>
+					<figure class="bw-quote">
+						<div class="bw-quote__stars"><?php echo esc_html( str_repeat( '★', (int) $t[3] ) ); ?></div>
+						<blockquote style="border:0;background:none;padding:0;margin:0;font-size:1.12rem;"><p style="margin:0;">&ldquo;<?php echo esc_html( $t[1] ); ?>&rdquo;</p></blockquote>
+						<figcaption class="bw-quote__by">
+							<img src="<?php echo bookwright_img( $t[4] ); ?>" alt="<?php echo esc_attr( $t[0] ); ?>" />
+							<span><strong><?php echo esc_html( $t[0] ); ?></strong><span><?php echo esc_html( $t[2] ); ?></span></span>
+						</figcaption>
+					</figure>
+					<?php
+				endforeach;
+			endif;
+			?>
 		</div>
 	</div>
 </section>
@@ -238,7 +276,7 @@ get_header();
 	<div class="bw-wrap">
 		<div class="bw-section-head bw-center">
 			<span class="bw-eyebrow"><?php esc_html_e( 'From the journal', 'bookwright' ); ?></span>
-			<h2><?php esc_html_e( 'Guides for writers &amp; self-publishers', 'bookwright' ); ?></h2>
+			<h2><?php echo esc_html( bookwright_option( 'bw_journal_title', 'Guides for writers & self-publishers' ) ); ?></h2>
 		</div>
 		<div class="bw-cards">
 			<?php

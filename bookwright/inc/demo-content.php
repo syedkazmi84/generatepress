@@ -26,6 +26,7 @@ function bookwright_import_demo() {
 	bookwright_configure_front_page( $pages );
 	bookwright_create_posts();
 	bookwright_create_books();
+	bookwright_seed_components();
 	bookwright_build_menus( $pages );
 
 	update_option( 'bookwright_demo_imported', BOOKWRIGHT_VERSION );
@@ -33,6 +34,121 @@ function bookwright_import_demo() {
 	flush_rewrite_rules();
 }
 add_action( 'after_switch_theme', 'bookwright_import_demo' );
+
+/**
+ * Seed the editable component post types (services, testimonials, team,
+ * pricing plans, FAQs). Runs once, guarded by its own option so existing
+ * installs also pick it up without needing to reactivate the theme.
+ */
+function bookwright_seed_components() {
+	if ( get_option( 'bookwright_components_seeded' ) ) {
+		return;
+	}
+
+	// Services.
+	foreach ( bookwright_default_services() as $i => $s ) {
+		$body = '<p>' . esc_html( isset( $s[3] ) ? $s[3] : $s[2] ) . '</p>';
+		if ( ! empty( $s[4] ) ) {
+			$body .= '<ul class="bw-checklist">';
+			foreach ( $s[4] as $feat ) {
+				$body .= '<li>' . esc_html( $feat ) . '</li>';
+			}
+			$body .= '</ul>';
+		}
+		$id = wp_insert_post(
+			array(
+				'post_type'    => 'bw_service',
+				'post_status'  => 'publish',
+				'post_title'   => $s[1],
+				'post_excerpt' => $s[2],
+				'post_content' => $body,
+				'menu_order'   => $i,
+			)
+		);
+		if ( $id && ! is_wp_error( $id ) ) {
+			update_post_meta( $id, '_bw_icon', $s[0] );
+		}
+	}
+
+	// Testimonials.
+	foreach ( bookwright_default_testimonials() as $i => $t ) {
+		$id = wp_insert_post(
+			array(
+				'post_type'    => 'bw_testimonial',
+				'post_status'  => 'publish',
+				'post_title'   => $t[0],
+				'post_content' => $t[1],
+				'menu_order'   => $i,
+			)
+		);
+		if ( $id && ! is_wp_error( $id ) ) {
+			update_post_meta( $id, '_bw_role', $t[2] );
+			update_post_meta( $id, '_bw_rating', $t[3] );
+			update_post_meta( $id, '_bw_photo', $t[4] );
+		}
+	}
+
+	// Team.
+	foreach ( bookwright_default_team() as $i => $m ) {
+		$id = wp_insert_post(
+			array(
+				'post_type'   => 'bw_team',
+				'post_status' => 'publish',
+				'post_title'  => $m[0],
+				'menu_order'  => $i,
+			)
+		);
+		if ( $id && ! is_wp_error( $id ) ) {
+			update_post_meta( $id, '_bw_role', $m[1] );
+			update_post_meta( $id, '_bw_photo', $m[2] );
+		}
+	}
+
+	// Pricing plans.
+	foreach ( bookwright_default_plans() as $i => $d ) {
+		$id = wp_insert_post(
+			array(
+				'post_type'   => 'bw_plan',
+				'post_status' => 'publish',
+				'post_title'  => $d['name'],
+				'menu_order'  => $i,
+			)
+		);
+		if ( $id && ! is_wp_error( $id ) ) {
+			update_post_meta( $id, '_bw_price', $d['price'] );
+			update_post_meta( $id, '_bw_period', $d['period'] );
+			update_post_meta( $id, '_bw_desc', $d['desc'] );
+			update_post_meta( $id, '_bw_featured', $d['featured'] ? '1' : '' );
+			update_post_meta( $id, '_bw_features', $d['features'] );
+		}
+	}
+
+	// FAQs.
+	foreach ( bookwright_default_faqs() as $i => $f ) {
+		wp_insert_post(
+			array(
+				'post_type'    => 'bw_faq',
+				'post_status'  => 'publish',
+				'post_title'   => $f[0],
+				'post_content' => $f[1],
+				'menu_order'   => $i,
+			)
+		);
+	}
+
+	update_option( 'bookwright_components_seeded', BOOKWRIGHT_VERSION );
+}
+
+/**
+ * Back-fill the editable components for sites that activated Bookwright before
+ * this feature existed (their demo-imported flag is already set).
+ */
+function bookwright_maybe_seed_components() {
+	if ( get_option( 'bookwright_demo_imported' ) && ! get_option( 'bookwright_components_seeded' ) ) {
+		bookwright_seed_components();
+	}
+}
+add_action( 'admin_init', 'bookwright_maybe_seed_components' );
 
 /**
  * Create (or find) a page by slug, optionally with a template.

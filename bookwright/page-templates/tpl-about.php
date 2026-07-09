@@ -80,20 +80,33 @@ get_header();
 		</div>
 		<div class="bw-team">
 			<?php
-			$team = array(
-				array( 'Amara Bright', 'Founder &amp; Publisher', 'avatar-1.svg' ),
-				array( 'Daniel Cho', 'Editorial Director', 'avatar-4.svg' ),
-				array( 'Priya Raman', 'Creative Director', 'avatar-2.svg' ),
-				array( 'Marcus Ellison', 'Head of Marketing', 'avatar-3.svg' ),
-			);
-			foreach ( $team as $m ) :
-				?>
-				<div class="bw-member">
-					<div class="bw-member__photo"><img src="<?php echo bookwright_img( $m[2] ); ?>" alt="<?php echo esc_attr( $m[0] ); ?>" /></div>
-					<h4><?php echo esc_html( $m[0] ); ?></h4>
-					<span><?php echo wp_kses_post( $m[1] ); ?></span>
-				</div>
-			<?php endforeach; ?>
+			if ( bookwright_has_items( 'bw_team' ) ) :
+				$q = bookwright_get_items( 'bw_team' );
+				while ( $q->have_posts() ) :
+					$q->the_post();
+					$role = get_post_meta( get_the_ID(), '_bw_role', true );
+					?>
+					<div class="bw-member">
+						<div class="bw-member__photo"><img src="<?php echo esc_url( bookwright_entry_photo() ); ?>" alt="<?php the_title_attribute(); ?>" /></div>
+						<h4><?php the_title(); ?></h4>
+						<span><?php echo esc_html( $role ); ?></span>
+						<?php if ( get_the_content() ) : ?><p><?php echo esc_html( wp_trim_words( wp_strip_all_tags( get_the_content() ), 22 ) ); ?></p><?php endif; ?>
+					</div>
+					<?php
+				endwhile;
+				wp_reset_postdata();
+			else :
+				foreach ( bookwright_default_team() as $m ) :
+					?>
+					<div class="bw-member">
+						<div class="bw-member__photo"><img src="<?php echo bookwright_img( $m[2] ); ?>" alt="<?php echo esc_attr( $m[0] ); ?>" /></div>
+						<h4><?php echo esc_html( $m[0] ); ?></h4>
+						<span><?php echo esc_html( $m[1] ); ?></span>
+					</div>
+					<?php
+				endforeach;
+			endif;
+			?>
 		</div>
 	</div>
 </section>

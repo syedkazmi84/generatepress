@@ -10,6 +10,24 @@ professional demo content, illustrations and a logo.
 
 ---
 
+## Everything is editable — no code
+
+Every section is managed from the WordPress dashboard:
+
+| Section | Where to edit |
+|---|---|
+| Services (home + Services page) | **Services** menu (custom post type — icon, description, link) |
+| Testimonials | **Testimonials** menu (quote, author, role, rating, photo) |
+| Team members (About page) | **Team** menu (name, role, photo, bio) |
+| Pricing plans | **Pricing Plans** menu (price, period, features, “most popular” flag) |
+| FAQs | **FAQs** menu (question = title, answer = content) |
+| Books catalog | **Books** menu |
+| Blog posts | **Posts** |
+| Homepage headings, stats, process steps, “featured in” logos | **Appearance → Customize → “Bookwright · Homepage Sections”** |
+| Hero, contact details, social links, footer text, logo | **Appearance → Customize** |
+
+Templates fall back to sensible defaults if you delete everything, so the site never breaks.
+
 ## What you get out of the box
 
 - **One-click demo content.** On activation the theme automatically creates
