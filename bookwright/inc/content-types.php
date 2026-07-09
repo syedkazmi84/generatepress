@@ -239,7 +239,7 @@ function bookwright_content_metaboxes() {
 			__( 'Details', 'bookwright' ),
 			'bookwright_content_metabox_html',
 			$type,
-			'normal',
+			'side',
 			'high'
 		);
 	}
