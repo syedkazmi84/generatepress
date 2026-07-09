@@ -39,11 +39,6 @@ function bookwright_register_content_types() {
 			'icon'     => 'dashicons-tag',
 			'supports' => array( 'title', 'page-attributes' ),
 		),
-		'bw_faq'         => array(
-			'labels'   => array( __( 'FAQ', 'bookwright' ), __( 'FAQs', 'bookwright' ) ),
-			'icon'     => 'dashicons-editor-help',
-			'supports' => array( 'title', 'editor', 'page-attributes' ),
-		),
 	);
 
 	foreach ( $types as $slug => $cfg ) {
@@ -74,131 +69,36 @@ function bookwright_register_content_types() {
 add_action( 'init', 'bookwright_register_content_types' );
 
 /**
- * FAQ category taxonomy — lets you group FAQs so different pages can show
- * different sets (e.g. a "pricing" group, a "services" group).
- */
-function bookwright_register_faq_category() {
-	register_taxonomy(
-		'faq_cat',
-		'bw_faq',
-		array(
-			'labels'            => array(
-				'name'          => __( 'FAQ Categories', 'bookwright' ),
-				'singular_name' => __( 'FAQ Category', 'bookwright' ),
-				'menu_name'     => __( 'Categories', 'bookwright' ),
-			),
-			'hierarchical'      => true,
-			'public'            => false,
-			'show_ui'           => true,
-			'show_admin_column' => true,
-			'show_in_rest'      => true,
-		)
-	);
-}
-add_action( 'init', 'bookwright_register_faq_category' );
-
-/**
- * Render an FAQ accordion. Shared by templates and the [bw_faqs] shortcode.
+ * Render an FAQ accordion from a plain array of [ question, answer ] pairs.
  *
- * @param array $args category (slug), count, title, first_open.
+ * FAQs are defined directly in each page template (front-page.php,
+ * tpl-services.php, tpl-pricing.php, …) so every page can have its own set —
+ * there is no FAQ post type or dashboard editor to manage.
+ *
+ * @param array $items      Array of array( question, answer ).
+ * @param bool  $first_open Whether to open the first item by default.
  */
-function bookwright_render_faqs( $args = array() ) {
-	$args = wp_parse_args(
-		$args,
-		array(
-			'category'   => '',
-			'count'      => -1,
-			'title'      => '',
-			'first_open' => true,
-		)
-	);
-
-	$query_args = array(
-		'post_type'      => 'bw_faq',
-		'posts_per_page' => (int) $args['count'],
-		'orderby'        => array( 'menu_order' => 'ASC', 'date' => 'ASC' ),
-		'no_found_rows'  => true,
-	);
-	if ( ! empty( $args['category'] ) ) {
-		$query_args['tax_query'] = array(
-			array(
-				'taxonomy' => 'faq_cat',
-				'field'    => 'slug',
-				'terms'    => array_map( 'trim', explode( ',', $args['category'] ) ),
-			),
-		);
+function bookwright_faq_accordion( $items, $first_open = true ) {
+	if ( empty( $items ) || ! is_array( $items ) ) {
+		return;
 	}
-
-	$q = new WP_Query( $query_args );
-
-	// If a category was requested but has no FAQs yet, fall back to all FAQs so
-	// the page is never blank (once you assign categories, each page differs).
-	if ( ! $q->have_posts() && ! empty( $args['category'] ) ) {
-		unset( $query_args['tax_query'] );
-		$q = new WP_Query( $query_args );
-	}
-
-	ob_start();
-
-	if ( $args['title'] ) {
-		echo '<div class="bw-section-head bw-center"><h2>' . esc_html( $args['title'] ) . '</h2></div>';
-	}
-
 	echo '<div class="bw-faq">';
-	if ( $q->have_posts() ) {
-		$i = 0;
-		while ( $q->have_posts() ) {
-			$q->the_post();
-			$open = ( 0 === $i && $args['first_open'] ) ? ' open' : '';
-			echo '<details' . $open . '>'; // phpcs:ignore
-			echo '<summary>' . esc_html( get_the_title() ) . '</summary>';
-			echo '<div class="bw-entry" style="padding-bottom:8px;">' . wp_kses_post( apply_filters( 'the_content', get_the_content() ) ) . '</div>';
-			echo '</details>';
-			$i++;
+	$i = 0;
+	foreach ( $items as $f ) {
+		if ( empty( $f[0] ) ) {
+			continue;
 		}
-		wp_reset_postdata();
-	} else {
-		// Fallback so a page never shows an empty FAQ block.
-		foreach ( bookwright_default_faqs() as $idx => $f ) {
-			$open = ( 0 === $idx && $args['first_open'] ) ? ' open' : '';
-			echo '<details' . $open . '><summary>' . esc_html( $f[0] ) . '</summary><p>' . esc_html( $f[1] ) . '</p></details>'; // phpcs:ignore
-		}
+		$open = ( 0 === $i && $first_open ) ? ' open' : '';
+		printf(
+			'<details%1$s><summary>%2$s</summary><p>%3$s</p></details>',
+			esc_attr( $open ), // phpcs:ignore WordPress.Security.EscapeOutput
+			esc_html( $f[0] ),
+			esc_html( isset( $f[1] ) ? $f[1] : '' )
+		);
+		$i++;
 	}
 	echo '</div>';
-
-	return ob_get_clean();
 }
-
-/**
- * [bw_faqs] shortcode — drop FAQs onto ANY page or post.
- *
- * Usage examples:
- *   [bw_faqs]                              — all FAQs
- *   [bw_faqs category="pricing"]           — only FAQs in the "pricing" category
- *   [bw_faqs category="services" title="Service questions" count="5"]
- */
-function bookwright_faqs_shortcode( $atts ) {
-	$atts = shortcode_atts(
-		array(
-			'category'   => '',
-			'count'      => -1,
-			'title'      => '',
-			'first_open' => '1',
-		),
-		$atts,
-		'bw_faqs'
-	);
-
-	return '<div class="bw-wrap" style="max-width:820px;">' . bookwright_render_faqs(
-		array(
-			'category'   => $atts['category'],
-			'count'      => $atts['count'],
-			'title'      => $atts['title'],
-			'first_open' => '1' === (string) $atts['first_open'],
-		)
-	) . '</div>';
-}
-add_shortcode( 'bw_faqs', 'bookwright_faqs_shortcode' );
 
 /**
  * Field definitions for each type's meta box.

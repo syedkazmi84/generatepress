@@ -124,30 +124,9 @@ function bookwright_seed_components() {
 		}
 	}
 
-	// Create empty FAQ categories, ready for you to assign FAQs to pages.
-	// FAQs are left UNCATEGORISED on purpose: by default every page shows the
-	// complete set of FAQs. Tick a category on an FAQ to route it to that page
-	// (General → Home, Services → Services page, Pricing → Pricing page).
-	$faq_cats = array( 'general' => 'General', 'services' => 'Services', 'pricing' => 'Pricing' );
-	foreach ( $faq_cats as $slug => $name ) {
-		if ( ! term_exists( $slug, 'faq_cat' ) ) {
-			wp_insert_term( $name, 'faq_cat', array( 'slug' => $slug ) );
-		}
-	}
-
-	// FAQs (no category assigned — the full set shows on every page until you
-	// start assigning categories).
-	foreach ( bookwright_default_faqs() as $i => $f ) {
-		wp_insert_post(
-			array(
-				'post_type'    => 'bw_faq',
-				'post_status'  => 'publish',
-				'post_title'   => $f[0],
-				'post_content' => $f[1],
-				'menu_order'   => $i,
-			)
-		);
-	}
+	// Note: FAQs are not a post type — they are written directly in the page
+	// templates (front-page.php, tpl-services.php, tpl-pricing.php), so there
+	// is nothing to seed here.
 
 	update_option( 'bookwright_components_seeded', BOOKWRIGHT_VERSION );
 }

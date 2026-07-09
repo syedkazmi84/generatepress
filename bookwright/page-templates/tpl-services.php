@@ -119,7 +119,17 @@ get_header();
 			<span class="bw-eyebrow"><?php esc_html_e( 'Questions', 'bookwright' ); ?></span>
 			<h2><?php esc_html_e( 'Service questions', 'bookwright' ); ?></h2>
 		</div>
-		<?php echo bookwright_render_faqs( array( 'category' => 'services', 'first_open' => true ) ); ?>
+		<?php
+		// Services page FAQs — edit this list to change what shows here.
+		$services_faqs = array(
+			array( 'Which service do I need?', 'Not sure where to start? Book a free consultation and we\'ll listen to your goals and recommend exactly the services your book needs — nothing more.' ),
+			array( 'Can you write the whole book for me?', 'Yes. Our ghostwriters can take your ideas, notes or interviews and write the full manuscript in your voice — and you stay the sole author.' ),
+			array( 'Do you edit as well as write and design?', 'We do everything under one roof: ghostwriting, editing, cover and interior design, publishing, printing, marketing and author websites.' ),
+			array( 'How involved will I be in the process?', 'As involved as you want. You approve every milestone, and a dedicated project manager keeps you updated from first draft to final launch.' ),
+			array( 'Do I keep ownership of my book?', 'Always. You keep 100% of your rights and royalties on every service we provide.' ),
+		);
+		bookwright_faq_accordion( $services_faqs );
+		?>
 	</div>
 </section>
 

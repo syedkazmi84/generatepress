@@ -11,7 +11,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 define( 'BOOKWRIGHT_VERSION', '1.1.0' );
 // Bump this when the bundled demo content changes so existing sites refresh it.
-define( 'BOOKWRIGHT_CONTENT_VERSION', '4' );
+define( 'BOOKWRIGHT_CONTENT_VERSION', '5' );
 define( 'BOOKWRIGHT_DIR', get_template_directory() );
 define( 'BOOKWRIGHT_URI', get_template_directory_uri() );
 

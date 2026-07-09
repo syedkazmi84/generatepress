@@ -324,35 +324,17 @@ get_header();
 			<span class="bw-eyebrow"><?php esc_html_e( 'Good to know', 'bookwright' ); ?></span>
 			<h2><?php esc_html_e( 'Frequently asked questions', 'bookwright' ); ?></h2>
 		</div>
-		<div class="bw-faq">
-			<?php
-			$faq_i = 0;
-			if ( bookwright_has_items( 'bw_faq' ) ) :
-				$fq = bookwright_get_items( 'bw_faq', 6 );
-				while ( $fq->have_posts() ) :
-					$fq->the_post();
-					?>
-					<details<?php echo 0 === $faq_i ? ' open' : ''; ?>>
-						<summary><?php the_title(); ?></summary>
-						<div class="bw-entry" style="padding-bottom:8px;"><?php the_content(); ?></div>
-					</details>
-					<?php
-					$faq_i++;
-				endwhile;
-				wp_reset_postdata();
-			else :
-				foreach ( bookwright_default_faqs() as $f ) :
-					?>
-					<details<?php echo 0 === $faq_i ? ' open' : ''; ?>>
-						<summary><?php echo esc_html( $f[0] ); ?></summary>
-						<p><?php echo esc_html( $f[1] ); ?></p>
-					</details>
-					<?php
-					$faq_i++;
-				endforeach;
-			endif;
-			?>
-		</div>
+		<?php
+		// Home page FAQs — edit this list to change what shows here.
+		$home_faqs = array(
+			array( 'Do I keep the rights to my book?', 'Always. You remain the sole author and keep 100% of your rights and royalties. We work behind the scenes and never take ownership of your work.' ),
+			array( 'Do you write the book for me?', 'We can. Our ghostwriters turn your ideas, notes or interviews into a finished manuscript in your voice — credited entirely to you.' ),
+			array( 'How much does it cost?', 'Every project is different, so we give you an honest, tailored quote with no hidden fees. Book a free consultation and we’ll recommend only what you need.' ),
+			array( 'How long does the process take?', 'It depends on the services and manuscript length. After your consultation we give you a clear timeline with milestones — and we’re known for delivering on time.' ),
+			array( 'Can I choose only the services I need?', 'Yes. Pick a package or build a custom plan — from writing and editing to design, printing, publishing and marketing. You only pay for what fits your goals.' ),
+		);
+		bookwright_faq_accordion( $home_faqs );
+		?>
 		<p class="bw-center" style="margin-top:26px;">
 			<a class="bw-btn bw-btn--ghost" href="<?php echo esc_url( get_permalink( get_page_by_path( 'contact' ) ) ); ?>"><?php esc_html_e( 'Still have questions? Talk to us', 'bookwright' ); ?></a>
 		</p>

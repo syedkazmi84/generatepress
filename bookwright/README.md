@@ -21,9 +21,9 @@ Every section is managed from the WordPress dashboard:
 | Testimonials | **Testimonials** menu (quote, author, role, rating, photo) |
 | Team members (About page) | **Team** menu (name, role, photo, bio) |
 | Pricing plans | **Pricing Plans** menu (price, period, features, “most popular” flag) |
-| FAQs | **FAQs** menu (question = title, answer = content) |
 | Portfolio projects | **Portfolio** menu (showcase — no store/pricing) |
 | Blog posts | **Posts** |
+| FAQs (per page) | Edit the FAQ list directly in the page template (front-page.php, tpl-services.php, tpl-pricing.php) |
 | Homepage headings, stats, process steps, “featured in” logos | **Appearance → Customize → “Bookwright · Homepage Sections”** |
 | Hero, contact details, social links, footer text, logo | **Appearance → Customize** |
 

@@ -82,7 +82,17 @@ get_header();
 			<span class="bw-eyebrow"><?php esc_html_e( 'Questions', 'bookwright' ); ?></span>
 			<h2><?php esc_html_e( 'Frequently asked questions', 'bookwright' ); ?></h2>
 		</div>
-		<?php echo bookwright_render_faqs( array( 'category' => 'pricing', 'first_open' => true ) ); ?>
+		<?php
+		// Pricing page FAQs — edit this list to change what shows here.
+		$pricing_faqs = array(
+			array( 'How much does it cost?', 'Every book is different, so we give you an honest, tailored quote with no hidden fees. Book a free consultation and we\'ll price exactly what you need.' ),
+			array( 'What\'s included in a package?', 'Each package lists what\'s included on the card above. Not sure which fits? We\'ll recommend the right one on your free call — or build a custom plan.' ),
+			array( 'Do you offer payment plans?', 'Yes. Most packages can be split into two or three milestone payments at no extra cost. Just ask during your consultation.' ),
+			array( 'Can I pick just one service?', 'Absolutely. You can order any service on its own — editing, a cover, publishing setup, marketing — or bundle several into a custom plan.' ),
+			array( 'Are there any hidden fees?', 'No. The quote we give you is the price you pay. If the scope changes, we agree it with you in writing first.' ),
+		);
+		bookwright_faq_accordion( $pricing_faqs );
+		?>
 		</div>
 </section>
 
