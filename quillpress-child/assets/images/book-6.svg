@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 420" role="img" aria-label="The Quiet Orbit, science fiction">
+  <defs><radialGradient id="b6" cx="50%" cy="38%" r="70%"><stop offset="0" stop-color="#26345c"/><stop offset="1" stop-color="#101830"/></radialGradient></defs>
+  <rect width="300" height="420" fill="url(#b6)"/>
+  <circle cx="150" cy="160" r="66" fill="none" stroke="#c8a24c" stroke-width="1.5"/>
+  <circle cx="150" cy="160" r="42" fill="#7c2b3b" opacity="0.5"/>
+  <circle cx="150" cy="160" r="42" fill="none" stroke="#e7cf95" stroke-width="1"/>
+  <ellipse cx="150" cy="160" rx="96" ry="30" fill="none" stroke="#c8a24c" stroke-width="1" opacity="0.6" transform="rotate(-18 150 160)"/>
+  <circle cx="222" cy="128" r="4" fill="#e7cf95"/>
+  <g fill="#f7f2e7">
+    <circle cx="60" cy="70" r="1.6"/><circle cx="240" cy="220" r="1.6"/><circle cx="90" cy="240" r="1.2"/><circle cx="210" cy="60" r="1.2"/><circle cx="40" cy="150" r="1"/>
+  </g>
+  <text x="150" y="300" text-anchor="middle" fill="#f7f2e7" font-family="Georgia, serif" font-size="30" font-weight="700">The Quiet</text>
+  <text x="150" y="334" text-anchor="middle" fill="#e7cf95" font-family="Georgia, serif" font-size="30" font-weight="700">Orbit</text>
+  <text x="150" y="386" text-anchor="middle" fill="#9fb0cf" font-family="Inter, sans-serif" font-size="11" letter-spacing="2">T. R. VOSS</text>
+</svg>

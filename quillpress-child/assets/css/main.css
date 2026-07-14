@@ -1,0 +1,585 @@
+/* =========================================================================
+   Quill & Press — Design System
+   A refined, literary aesthetic for a book-publishing-services company.
+   Palette: ink navy · brass gold · burgundy · parchment cream.
+   ========================================================================= */
+
+:root {
+	--qp-ink:        #16203a;
+	--qp-ink-2:      #1e2c4f;
+	--qp-ink-soft:   #2a3a5e;
+	--qp-brass:      #c8a24c;
+	--qp-brass-2:    #b08a35;
+	--qp-brass-soft: #e7cf95;
+	--qp-burgundy:   #7c2b3b;
+	--qp-cream:      #f7f2e7;
+	--qp-cream-2:    #efe6d3;
+	--qp-paper:      #ffffff;
+	--qp-text:       #26303f;
+	--qp-muted:      #61708a;
+	--qp-line:       #e6ddc9;
+	--qp-line-ink:   rgba(255,255,255,.14);
+
+	--qp-serif: "Fraunces", Georgia, "Times New Roman", serif;
+	--qp-sans:  "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+
+	--qp-radius:   14px;
+	--qp-radius-l: 22px;
+	--qp-shadow:   0 18px 40px -22px rgba(22,32,58,.45);
+	--qp-shadow-l: 0 40px 80px -40px rgba(22,32,58,.55);
+	--qp-maxw:     1180px;
+	--qp-gutter:   clamp(1.1rem, 4vw, 2.4rem);
+}
+
+/* ---------- Base typography ------------------------------------------- */
+
+body {
+	font-family: var(--qp-sans);
+	color: var(--qp-text);
+	background: var(--qp-paper);
+	-webkit-font-smoothing: antialiased;
+	line-height: 1.7;
+}
+
+h1, h2, h3, h4, h5, .qp-display, .qp-h2 {
+	font-family: var(--qp-serif);
+	color: var(--qp-ink);
+	font-weight: 600;
+	line-height: 1.12;
+	letter-spacing: -.01em;
+}
+
+a { color: var(--qp-burgundy); }
+a:hover { color: var(--qp-brass-2); }
+
+/* Fluid display + heading scale used across imported content. */
+.qp-display {
+	font-size: clamp(2.4rem, 5.4vw, 4rem);
+	font-weight: 600;
+	margin: 0 0 .5em;
+}
+.qp-h2 {
+	font-size: clamp(1.9rem, 3.6vw, 2.7rem);
+	margin: 0 0 .5em;
+}
+.entry-content h3 { font-size: clamp(1.25rem, 2.4vw, 1.55rem); }
+
+.qp-eyebrow {
+	font-family: var(--qp-sans);
+	font-weight: 600;
+	font-size: .8rem;
+	letter-spacing: .18em;
+	text-transform: uppercase;
+	color: var(--qp-brass-2);
+	margin: 0 0 1rem;
+	display: block;
+}
+.qp-section--ink .qp-eyebrow { color: var(--qp-brass-soft); }
+
+.qp-lead {
+	font-size: clamp(1.08rem, 1.6vw, 1.28rem);
+	color: var(--qp-muted);
+	line-height: 1.65;
+	margin: 0 0 1.4em;
+}
+.qp-section--ink .qp-lead { color: rgba(255,255,255,.78); }
+.qp-muted { color: var(--qp-muted); }
+
+/* ---------- Sections -------------------------------------------------- */
+
+.qp-section {
+	padding-block: clamp(3.4rem, 7vw, 6rem);
+	padding-inline: var(--qp-gutter);
+}
+.qp-section.alignfull { padding-inline: var(--qp-gutter); }
+.qp-section--lg    { padding-block: clamp(4.5rem, 9vw, 8rem); }
+.qp-section--tight { padding-block: clamp(2.2rem, 4vw, 3.2rem); }
+
+.qp-section--cream  { background: var(--qp-cream); }
+.qp-section--cream2 { background: var(--qp-cream-2); }
+.qp-section--paper  { background: var(--qp-paper); }
+.qp-section--ink,
+.qp-section--ink h1, .qp-section--ink h2, .qp-section--ink h3,
+.qp-section--ink h4, .qp-section--ink p, .qp-section--ink li {
+	color: #fff;
+}
+.qp-section--ink {
+	background:
+		radial-gradient(120% 90% at 85% -10%, rgba(200,162,76,.20), transparent 55%),
+		linear-gradient(160deg, var(--qp-ink) 0%, var(--qp-ink-2) 100%);
+}
+
+/* subtle top hairline between stacked light sections */
+.qp-section--hairline { border-top: 1px solid var(--qp-line); }
+
+/* Center helper reused by headings */
+.qp-center, .has-text-align-center { text-align: center; }
+.qp-narrow { max-width: 720px; margin-inline: auto; }
+
+/* ---------- Buttons --------------------------------------------------- */
+
+.entry-content .wp-block-button__link,
+.qp-btn > .wp-block-button__link,
+a.qp-btn {
+	font-family: var(--qp-sans);
+	font-weight: 600;
+	font-size: .98rem;
+	letter-spacing: .01em;
+	padding: .9em 1.7em;
+	border-radius: 999px;
+	border: 1px solid transparent;
+	transition: transform .18s ease, box-shadow .18s ease, background .18s ease, color .18s ease;
+	display: inline-block;
+	text-decoration: none;
+}
+
+/* primary (brass) */
+.qp-btn .wp-block-button__link,
+.wp-block-button.qp-btn .wp-block-button__link {
+	background: linear-gradient(180deg, var(--qp-brass) 0%, var(--qp-brass-2) 100%);
+	color: var(--qp-ink);
+	box-shadow: 0 14px 26px -14px rgba(176,138,53,.9);
+}
+.qp-btn .wp-block-button__link:hover {
+	transform: translateY(-2px);
+	box-shadow: 0 20px 32px -14px rgba(176,138,53,1);
+	color: var(--qp-ink);
+}
+
+/* ghost / outline on light */
+.qp-btn.qp-btn--ghost .wp-block-button__link {
+	background: transparent;
+	color: var(--qp-ink);
+	border-color: var(--qp-ink);
+	box-shadow: none;
+}
+.qp-btn.qp-btn--ghost .wp-block-button__link:hover {
+	background: var(--qp-ink);
+	color: #fff;
+	transform: translateY(-2px);
+}
+
+/* light outline on dark */
+.qp-btn.qp-btn--light .wp-block-button__link {
+	background: transparent;
+	color: #fff;
+	border-color: rgba(255,255,255,.45);
+	box-shadow: none;
+}
+.qp-btn.qp-btn--light .wp-block-button__link:hover {
+	background: #fff;
+	color: var(--qp-ink);
+	transform: translateY(-2px);
+}
+
+.wp-block-buttons { gap: .8rem 1rem; }
+
+/* ---------- Hero ------------------------------------------------------ */
+
+.qp-hero { position: relative; overflow: hidden; }
+.qp-hero::before {
+	content: "";
+	position: absolute; inset: 0;
+	background:
+		radial-gradient(60% 60% at 12% 8%, rgba(200,162,76,.16), transparent 60%),
+		radial-gradient(55% 55% at 92% 100%, rgba(124,43,59,.20), transparent 60%);
+	pointer-events: none;
+}
+.qp-hero > * { position: relative; }
+.qp-hero .qp-display { color: #fff; }
+.qp-hero .wp-block-columns { align-items: center; gap: clamp(1.5rem,4vw,3.5rem); }
+
+.qp-hero-art img,
+.qp-figure img { display: block; }
+.qp-hero-art .wp-block-image { margin: 0; }
+
+/* floating stat pills on hero art */
+.qp-badge {
+	display: inline-flex; align-items: center; gap: .55rem;
+	background: rgba(255,255,255,.10);
+	border: 1px solid var(--qp-line-ink);
+	backdrop-filter: blur(6px);
+	color: #fff; font-weight: 600; font-size: .9rem;
+	padding: .55rem 1rem; border-radius: 999px;
+	margin: .25rem;
+}
+.qp-badge b { color: var(--qp-brass-soft); }
+
+/* ---------- Cards & grids -------------------------------------------- */
+
+/* Any columns row we mark as .qp-cards renders its columns as cards. */
+.qp-cards { gap: clamp(1rem, 2.4vw, 1.6rem) !important; }
+.qp-cards .wp-block-column {
+	background: var(--qp-paper);
+	border: 1px solid var(--qp-line);
+	border-radius: var(--qp-radius-l);
+	padding: clamp(1.5rem, 2.6vw, 2.1rem);
+	box-shadow: var(--qp-shadow);
+	transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+}
+.qp-cards .wp-block-column:hover {
+	transform: translateY(-6px);
+	box-shadow: var(--qp-shadow-l);
+	border-color: var(--qp-brass-soft);
+}
+.qp-cards .wp-block-column > :first-child { margin-top: 0; }
+.qp-cards .wp-block-column > :last-child  { margin-bottom: 0; }
+.qp-cards h3 { margin: .3em 0 .4em; }
+.qp-cards p  { color: var(--qp-muted); margin: 0 0 .8em; }
+
+.qp-section--ink .qp-cards .wp-block-column {
+	background: rgba(255,255,255,.04);
+	border-color: var(--qp-line-ink);
+	box-shadow: none;
+}
+.qp-section--ink .qp-cards h3 { color: #fff; }
+.qp-section--ink .qp-cards p  { color: rgba(255,255,255,.72); }
+
+/* Service / feature icon tile */
+.qp-icon {
+	width: 66px; height: 66px; border-radius: 16px;
+	display: grid; place-items: center;
+	background: linear-gradient(160deg, var(--qp-cream) 0%, var(--qp-cream-2) 100%);
+	border: 1px solid var(--qp-line);
+	margin-bottom: 1.1rem;
+	overflow: hidden;
+}
+.qp-icon img { width: 40px; height: 40px; }
+.qp-section--ink .qp-icon {
+	background: linear-gradient(160deg, rgba(200,162,76,.22), rgba(200,162,76,.06));
+	border-color: var(--qp-line-ink);
+}
+
+/* small card link */
+.qp-cardlink { font-weight: 600; text-decoration: none; color: var(--qp-burgundy); }
+.qp-cardlink:hover { color: var(--qp-brass-2); }
+.qp-cardlink::after { content: " →"; }
+
+/* ---------- Process / steps ------------------------------------------ */
+
+.qp-steps { counter-reset: qpstep; gap: clamp(1rem,2.4vw,1.6rem) !important; }
+.qp-steps .wp-block-column {
+	position: relative;
+	background: var(--qp-paper);
+	border: 1px solid var(--qp-line);
+	border-radius: var(--qp-radius-l);
+	padding: 2.2rem 1.6rem 1.6rem;
+}
+.qp-steps .wp-block-column::before {
+	counter-increment: qpstep;
+	content: counter(qpstep, decimal-leading-zero);
+	font-family: var(--qp-serif);
+	font-size: 1.05rem; font-weight: 600;
+	color: var(--qp-ink);
+	position: absolute; top: -18px; left: 1.6rem;
+	width: 46px; height: 46px; border-radius: 50%;
+	display: grid; place-items: center;
+	background: linear-gradient(180deg, var(--qp-brass-soft), var(--qp-brass));
+	box-shadow: var(--qp-shadow);
+}
+.qp-steps h3 { margin: .2em 0 .35em; font-size: 1.2rem; }
+.qp-steps p  { color: var(--qp-muted); margin: 0; }
+
+/* ---------- Stats ----------------------------------------------------- */
+
+.qp-stats { gap: 1rem !important; }
+.qp-stats .wp-block-column { text-align: center; padding: .5rem; }
+.qp-stat-num {
+	font-family: var(--qp-serif);
+	font-size: clamp(2.2rem, 4vw, 3.1rem);
+	font-weight: 600; line-height: 1;
+	color: var(--qp-brass);
+	margin: 0;
+}
+.qp-stat-label {
+	display: block; margin-top: .5rem;
+	font-size: .92rem; letter-spacing: .03em;
+	color: rgba(255,255,255,.75);
+}
+.qp-section--cream .qp-stat-num { color: var(--qp-burgundy); }
+.qp-section--cream .qp-stat-label { color: var(--qp-muted); }
+
+/* ---------- Testimonials / quotes ------------------------------------ */
+
+.qp-quotes { gap: clamp(1rem,2.4vw,1.6rem) !important; }
+.qp-quote {
+	background: var(--qp-paper);
+	border: 1px solid var(--qp-line);
+	border-radius: var(--qp-radius-l);
+	padding: 2rem 1.8rem;
+	box-shadow: var(--qp-shadow);
+	position: relative;
+}
+.qp-quote::before {
+	content: "\201C";
+	font-family: var(--qp-serif);
+	font-size: 4.5rem; line-height: 1;
+	color: var(--qp-brass-soft);
+	position: absolute; top: .4rem; right: 1.2rem;
+}
+.qp-quote p { font-size: 1.05rem; color: var(--qp-text); }
+.qp-quote .qp-stars { color: var(--qp-brass); letter-spacing: .1em; margin-bottom: .6rem; }
+.qp-author { display: flex; align-items: center; gap: .8rem; margin-top: 1.2rem; }
+.qp-author img { width: 48px; height: 48px; border-radius: 50%; border: 2px solid var(--qp-brass-soft); }
+.qp-author b { display: block; font-family: var(--qp-serif); color: var(--qp-ink); }
+.qp-author span { font-size: .85rem; color: var(--qp-muted); }
+
+/* ---------- Book covers (portfolio) ---------------------------------- */
+
+.qp-books { gap: clamp(1.2rem,3vw,2rem) !important; }
+.qp-books .wp-block-column { text-align: center; }
+.qp-book {
+	display: block; border-radius: 8px; overflow: hidden;
+	box-shadow: 0 26px 40px -24px rgba(22,32,58,.7);
+	transform: perspective(1000px) rotateY(0deg);
+	transition: transform .3s ease, box-shadow .3s ease;
+	margin-bottom: .9rem;
+	border: 1px solid rgba(0,0,0,.06);
+}
+.qp-book:hover {
+	transform: perspective(1000px) rotateY(-8deg) translateY(-6px);
+	box-shadow: 0 40px 60px -28px rgba(22,32,58,.8);
+}
+.qp-book img { width: 100%; display: block; }
+.qp-book-title { font-family: var(--qp-serif); font-weight: 600; color: var(--qp-ink); margin: 0; }
+.qp-book-meta  { font-size: .85rem; color: var(--qp-muted); }
+.qp-section--ink .qp-book-title { color: #fff; }
+
+/* ---------- Feature list --------------------------------------------- */
+
+.qp-check { list-style: none; padding: 0; margin: 0; }
+.qp-check li {
+	position: relative; padding-left: 2rem; margin-bottom: .8rem;
+	color: var(--qp-text);
+}
+.qp-check li::before {
+	content: ""; position: absolute; left: 0; top: .15rem;
+	width: 22px; height: 22px; border-radius: 50%;
+	background: var(--qp-brass-soft) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2316203a' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E") center/13px no-repeat;
+}
+.qp-section--ink .qp-check li { color: rgba(255,255,255,.85); }
+
+/* ---------- Pricing --------------------------------------------------- */
+
+.qp-pricing { gap: clamp(1rem,2.4vw,1.6rem) !important; align-items: stretch !important; }
+.qp-pricing .wp-block-column {
+	background: var(--qp-paper);
+	border: 1px solid var(--qp-line);
+	border-radius: var(--qp-radius-l);
+	padding: 2.2rem 1.9rem;
+	box-shadow: var(--qp-shadow);
+	display: flex; flex-direction: column;
+}
+.qp-pricing .qp-price-featured {
+	border-color: var(--qp-brass);
+	box-shadow: 0 40px 70px -34px rgba(176,138,53,.6);
+	position: relative;
+}
+.qp-price-featured::after {
+	content: "Most popular";
+	position: absolute; top: 1.4rem; right: -0.4rem;
+	background: var(--qp-burgundy); color: #fff;
+	font-size: .72rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase;
+	padding: .35rem .9rem; border-radius: 4px 0 0 4px;
+}
+.qp-plan-name { font-family: var(--qp-serif); font-size: 1.35rem; color: var(--qp-ink); margin: 0 0 .2rem; }
+.qp-plan-desc { color: var(--qp-muted); font-size: .92rem; margin: 0 0 1.1rem; }
+.qp-plan-price { font-family: var(--qp-serif); font-size: 2.6rem; color: var(--qp-ink); line-height: 1; margin: 0; }
+.qp-plan-price small { font-family: var(--qp-sans); font-size: .95rem; color: var(--qp-muted); font-weight: 500; }
+.qp-pricing hr { border: 0; border-top: 1px solid var(--qp-line); margin: 1.3rem 0; }
+.qp-pricing .qp-check { flex: 1; }
+.qp-pricing .wp-block-button { margin-top: 1.2rem; }
+.qp-pricing .wp-block-button__link { display: block; text-align: center; }
+
+/* ---------- Split / media rows --------------------------------------- */
+
+.qp-split .wp-block-columns { align-items: center; gap: clamp(1.6rem,4vw,3.4rem); }
+.qp-figure img, .qp-round img { border-radius: var(--qp-radius-l); box-shadow: var(--qp-shadow-l); }
+.qp-figure { margin: 0; }
+
+/* ---------- Logo / trust strip --------------------------------------- */
+
+.qp-trust { opacity: .85; }
+.qp-trust .wp-block-columns { align-items: center; gap: 1.4rem; justify-content: center; flex-wrap: wrap; }
+.qp-trust img { max-height: 34px; width: auto; margin-inline: auto; filter: grayscale(1); opacity: .7; transition: opacity .2s, filter .2s; }
+.qp-trust img:hover { filter: none; opacity: 1; }
+
+/* ---------- CTA band -------------------------------------------------- */
+
+.qp-cta { text-align: center; border-radius: var(--qp-radius-l); overflow: hidden; }
+.qp-cta .qp-h2 { color: #fff; }
+
+/* ---------- FAQ (native details block) ------------------------------- */
+
+.qp-faq .wp-block-details {
+	background: var(--qp-paper);
+	border: 1px solid var(--qp-line);
+	border-radius: var(--qp-radius);
+	padding: 1.1rem 1.4rem;
+	margin-bottom: .8rem;
+	box-shadow: var(--qp-shadow);
+}
+.qp-faq summary {
+	font-family: var(--qp-serif); font-weight: 600; font-size: 1.08rem;
+	color: var(--qp-ink); cursor: pointer; list-style: none;
+	display: flex; justify-content: space-between; align-items: center; gap: 1rem;
+}
+.qp-faq summary::-webkit-details-marker { display: none; }
+.qp-faq summary::after { content: "+"; font-size: 1.5rem; color: var(--qp-brass-2); transition: transform .2s; }
+.qp-faq details[open] summary::after { transform: rotate(45deg); }
+.qp-faq details p { color: var(--qp-muted); margin: .9rem 0 0; }
+
+/* ---------- Contact info tiles --------------------------------------- */
+
+.qp-contact-tiles .wp-block-column {
+	text-align: center; padding: 1.6rem 1.2rem;
+	background: var(--qp-cream); border-radius: var(--qp-radius); border: 1px solid var(--qp-line);
+}
+.qp-contact-tiles h3 { font-size: 1.1rem; margin: .6rem 0 .3rem; }
+.qp-contact-tiles p { margin: 0; color: var(--qp-muted); }
+
+/* ---------- Header / nav polish (works with GeneratePress) ----------- */
+
+.main-navigation .main-nav ul li a { font-weight: 600; font-family: var(--qp-sans); }
+.site-header { border-bottom: 1px solid var(--qp-line); }
+.main-title, .site-logo { font-family: var(--qp-serif); }
+/* Make the last primary-menu item render as a button */
+.main-navigation .main-nav ul li.qp-nav-cta a {
+	background: linear-gradient(180deg, var(--qp-brass), var(--qp-brass-2));
+	color: var(--qp-ink) !important;
+	border-radius: 999px;
+	margin: .35em 0 .35em .4em;
+}
+
+/* ---------- Footer ---------------------------------------------------- */
+
+.site-footer.qp-footer, .footer-widgets + .site-info, .site-info {
+	background: var(--qp-ink);
+	color: rgba(255,255,255,.7);
+}
+.qp-footer a { color: rgba(255,255,255,.8); }
+.qp-footer a:hover { color: var(--qp-brass-soft); }
+
+/* ---------- Blog / posts --------------------------------------------- */
+
+.qp-postcards .wp-block-column { padding: 0; }
+.entry-content > * { margin-block: 1.1rem; }
+
+/* ---------- Responsive ------------------------------------------------ */
+
+@media (max-width: 781px) {
+	.qp-hero .wp-block-columns,
+	.qp-split .wp-block-columns { gap: 2rem; }
+	.qp-price-featured::after { top: -.8rem; right: 1rem; border-radius: 4px; }
+	.qp-steps .wp-block-column { margin-top: 1.4rem; }
+}
+
+/* keep constrained content readable */
+.qp-section > .wp-block-group__inner-container,
+.qp-section { --wp--style--global--content-size: var(--qp-maxw); }
+
+/* ---------- Hero badges ---------------------------------------------- */
+
+.qp-hero-badges { margin-top: 1.6rem; display: flex; flex-wrap: wrap; gap: .5rem; }
+
+/* ---------- Rounded team images -------------------------------------- */
+
+.qp-round img { border-radius: 50%; box-shadow: none; border: 3px solid var(--qp-brass-soft); }
+.qp-cards .qp-round { display: flex; }
+.qp-cardmore { margin-top: auto; }
+
+/* ---------- Contact form (HTML block) -------------------------------- */
+
+.qp-form { display: flex; flex-direction: column; gap: 1rem; }
+.qp-form-row { display: flex; gap: 1rem; }
+.qp-form-row label { flex: 1; }
+.qp-form label { display: block; font-weight: 600; color: var(--qp-ink); font-size: .92rem; }
+.qp-form input, .qp-form select, .qp-form textarea {
+	width: 100%; margin-top: .4rem;
+	padding: .8rem 1rem; border: 1px solid var(--qp-line);
+	border-radius: 10px; background: #fff; font: inherit; color: var(--qp-text);
+}
+.qp-form input:focus, .qp-form select:focus, .qp-form textarea:focus {
+	outline: none; border-color: var(--qp-brass); box-shadow: 0 0 0 3px rgba(200,162,76,.2);
+}
+.qp-form-btn {
+	align-self: flex-start;
+	background: linear-gradient(180deg, var(--qp-brass), var(--qp-brass-2));
+	color: var(--qp-ink); font-weight: 700; border: 0; cursor: pointer;
+	padding: .95em 2rem; border-radius: 999px;
+	box-shadow: 0 14px 26px -14px rgba(176,138,53,.9); transition: transform .18s;
+}
+.qp-form-btn:hover { transform: translateY(-2px); }
+.qp-form-note { font-size: .8rem; color: var(--qp-muted); margin: 0; }
+
+@media (max-width: 600px) { .qp-form-row { flex-direction: column; } }
+
+/* ---------- Header monogram + nav ------------------------------------ */
+
+.site-branding .main-title { display: inline-flex; align-items: center; gap: .55rem; }
+.site-branding .main-title a { color: var(--qp-ink); text-decoration: none; }
+.site-branding .main-title::before {
+	content: ""; width: 34px; height: 34px; flex: 0 0 34px;
+	background: url("../images/logo-mark.svg") center/contain no-repeat;
+}
+.site-description { color: var(--qp-muted); font-size: .8rem; letter-spacing: .04em; }
+
+/* Navigation sits on the light header — clear the default dark GP nav bar. */
+.main-navigation,
+.main-navigation .inside-navigation,
+.main-navigation ul { background-color: transparent; }
+.main-navigation .main-nav ul li a { color: var(--qp-ink); background-color: transparent; }
+.main-navigation .main-nav ul li a:hover,
+.main-navigation .main-nav ul li[class*="current-menu"] > a,
+.main-navigation .main-nav ul li.sfHover > a { color: var(--qp-burgundy); background-color: transparent; }
+.inside-navigation { align-items: center; }
+
+/* Dropdown sub-menus get their own light card. */
+.main-navigation ul ul {
+	background: #fff;
+	border: 1px solid var(--qp-line);
+	box-shadow: var(--qp-shadow);
+	border-radius: 12px;
+	overflow: hidden;
+	padding: .35rem;
+	min-width: 240px;
+}
+.main-navigation ul ul li a { color: var(--qp-ink); border-radius: 8px; }
+.main-navigation ul ul li a:hover,
+.main-navigation ul ul li.current-menu-item > a {
+	background: var(--qp-cream); color: var(--qp-burgundy);
+}
+.main-navigation .main-nav ul li.qp-nav-cta:hover a,
+.main-navigation .main-nav ul li.qp-nav-cta a:hover { color: var(--qp-ink) !important; }
+
+/* Mobile toggle + menu on light header */
+.main-navigation .menu-toggle { color: var(--qp-ink); }
+@media (max-width: 768px) {
+	.main-navigation ul,
+	.main-navigation .main-nav ul li a { background-color: var(--qp-ink); color: #fff; }
+	.main-navigation .main-nav ul li a { color: #fff; }
+	.main-navigation ul ul { background: rgba(255,255,255,.06); }
+}
+
+/* ---------- Custom footer -------------------------------------------- */
+
+.qp-site-footer { background: var(--qp-ink); color: rgba(255,255,255,.72); }
+.qp-footer-inner {
+	max-width: var(--qp-maxw); margin: 0 auto; padding: clamp(2.6rem,5vw,3.6rem) var(--qp-gutter) 1.6rem;
+	display: grid; grid-template-columns: 1.4fr 1fr; gap: 2rem; align-items: start;
+}
+.qp-footer-brand .qp-fmark { display: flex; align-items: center; gap: .6rem; font-family: var(--qp-serif); font-size: 1.35rem; color: #fff; margin-bottom: .7rem; }
+.qp-footer-brand .qp-fmark img { width: 34px; height: 34px; }
+.qp-footer-brand p { color: rgba(255,255,255,.62); max-width: 34ch; margin: 0; }
+.qp-footer-nav { display: flex; flex-direction: column; gap: .55rem; }
+.qp-footer-nav ul, .qp-footer-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: .55rem; }
+.qp-footer-nav h4 { color: var(--qp-brass-soft); font-family: var(--qp-sans); font-size: .78rem; letter-spacing: .16em; text-transform: uppercase; margin: 0 0 .3rem; }
+.qp-footer-nav a { color: rgba(255,255,255,.78); text-decoration: none; }
+.qp-footer-nav a:hover { color: var(--qp-brass-soft); }
+.qp-footer-bar { border-top: 1px solid var(--qp-line-ink); margin-top: 1.4rem; padding: 1.1rem var(--qp-gutter); text-align: center; font-size: .85rem; color: rgba(255,255,255,.55); max-width: var(--qp-maxw); margin-inline: auto; }
+.qp-footer-bar a { color: rgba(255,255,255,.7); }
+
+@media (max-width: 640px) { .qp-footer-inner { grid-template-columns: 1fr; } }
+
+/* Hide default GeneratePress footer when our custom footer is present */
+.qp-has-custom-footer .site-info { display: none; }

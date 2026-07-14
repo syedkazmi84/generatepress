@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 420" role="img" aria-label="Midnight in the Archive, a mystery">
+  <defs><linearGradient id="b2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7c2b3b"/><stop offset="1" stop-color="#4d1a24"/></linearGradient></defs>
+  <rect width="300" height="420" fill="url(#b2)"/>
+  <g opacity="0.9">
+    <rect x="70" y="60" width="160" height="150" rx="4" fill="none" stroke="#e7cf95" stroke-width="1.5"/>
+    <path d="M70 110h160M70 160h160M120 60v150M180 60v150" stroke="#e7cf95" stroke-width="0.8" opacity="0.5"/>
+    <circle cx="150" cy="135" r="20" fill="#16203a"/>
+    <circle cx="150" cy="135" r="20" fill="none" stroke="#c8a24c" stroke-width="1.5"/>
+    <path d="M150 135l14-9" stroke="#c8a24c" stroke-width="2"/>
+  </g>
+  <text x="150" y="270" text-anchor="middle" fill="#f7f2e7" font-family="Georgia, serif" font-size="30" font-weight="700">Midnight</text>
+  <text x="150" y="300" text-anchor="middle" fill="#f7f2e7" font-family="Georgia, serif" font-size="18">in the</text>
+  <text x="150" y="336" text-anchor="middle" fill="#e7cf95" font-family="Georgia, serif" font-size="30" font-weight="700">Archive</text>
+  <text x="150" y="392" text-anchor="middle" fill="#e2b9c1" font-family="Inter, sans-serif" font-size="11" letter-spacing="2">J. HAWTHORNE REED</text>
+</svg>

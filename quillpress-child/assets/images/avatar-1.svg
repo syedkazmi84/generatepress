@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" role="img" aria-label="Author portrait">
+  <defs><linearGradient id="av1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1e2c4f"/><stop offset="1" stop-color="#16203a"/></linearGradient></defs>
+  <rect width="120" height="120" rx="60" fill="url(#av1)"/>
+  <circle cx="60" cy="48" r="21" fill="#e7cf95"/>
+  <path d="M22 108c2-24 17-38 38-38s36 14 38 38z" fill="#e7cf95"/>
+  <path d="M60 27a21 21 0 0 1 18 10c-6 3-30 3-36 0a21 21 0 0 1 18-10z" fill="#ffffff" opacity="0.14"/>
+</svg>

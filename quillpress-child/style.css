@@ -1,0 +1,19 @@
+/*
+ Theme Name:   Quill & Press — Book Publishing Services
+ Theme URI:    https://generatepress.com
+ Description:  A complete, ready-to-import GeneratePress child theme for a professional book publishing services company. Includes a one-click demo importer (Appearance → Import Demo) that builds the entire website — home, services, portfolio, pricing, blog and more — using native WordPress editor blocks and bundled artwork. Rename "Quill & Press" to your own brand once imported.
+ Author:       Quill & Press
+ Author URI:   https://generatepress.com
+ Template:     generatepress
+ Version:      1.0.0
+ License:      GNU General Public License v2 or later
+ License URI:  http://www.gnu.org/licenses/gpl-2.0.html
+ Text Domain:  quillpress
+ Tags:         book-publishing, business, one-click-demo-import, generateblocks
+*/
+
+/*
+ * All presentational styling lives in assets/css/main.css, which is enqueued
+ * from functions.php. Keep this file for the theme header only so the child
+ * theme stays easy to maintain.
+ */

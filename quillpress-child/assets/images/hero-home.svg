@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 520" fill="none" role="img" aria-label="An open book with a quill and floating manuscript pages">
+  <defs>
+    <linearGradient id="hpg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#fbf6ec"/><stop offset="1" stop-color="#efe6d3"/>
+    </linearGradient>
+    <linearGradient id="hbr" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#e7cf95"/><stop offset="1" stop-color="#b08a35"/>
+    </linearGradient>
+    <linearGradient id="hink" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#1e2c4f"/><stop offset="1" stop-color="#16203a"/>
+    </linearGradient>
+  </defs>
+  <!-- soft halo -->
+  <circle cx="300" cy="250" r="230" fill="url(#hbr)" opacity="0.14"/>
+  <circle cx="300" cy="250" r="168" fill="#7c2b3b" opacity="0.08"/>
+  <!-- floating pages -->
+  <g opacity="0.9">
+    <rect x="70" y="70" width="120" height="150" rx="10" fill="#fff" stroke="#e6ddc9" transform="rotate(-11 130 145)"/>
+    <line x1="92" y1="108" x2="168" y2="108" stroke="#c8a24c" stroke-width="4" transform="rotate(-11 130 145)"/>
+    <line x1="92" y1="128" x2="168" y2="128" stroke="#dfd6c2" stroke-width="4" transform="rotate(-11 130 145)"/>
+    <line x1="92" y1="148" x2="150" y2="148" stroke="#dfd6c2" stroke-width="4" transform="rotate(-11 130 145)"/>
+  </g>
+  <g opacity="0.95">
+    <rect x="420" y="90" width="120" height="150" rx="10" fill="#fff" stroke="#e6ddc9" transform="rotate(9 480 165)"/>
+    <line x1="442" y1="128" x2="518" y2="128" stroke="#7c2b3b" stroke-width="4" transform="rotate(9 480 165)"/>
+    <line x1="442" y1="148" x2="518" y2="148" stroke="#dfd6c2" stroke-width="4" transform="rotate(9 480 165)"/>
+    <line x1="442" y1="168" x2="500" y2="168" stroke="#dfd6c2" stroke-width="4" transform="rotate(9 480 165)"/>
+  </g>
+  <!-- open book -->
+  <g>
+    <path d="M300 200 C230 168 150 168 96 190 L96 388 C150 366 230 366 300 398 Z" fill="url(#hpg)" stroke="#d9cdb2" stroke-width="2"/>
+    <path d="M300 200 C370 168 450 168 504 190 L504 388 C450 366 370 366 300 398 Z" fill="#fff" stroke="#d9cdb2" stroke-width="2"/>
+    <path d="M300 200 L300 398" stroke="#c9bd9f" stroke-width="3"/>
+    <!-- text lines left -->
+    <g stroke="#c7bda3" stroke-width="4" stroke-linecap="round">
+      <line x1="128" y1="222" x2="268" y2="212"/><line x1="128" y1="244" x2="268" y2="236"/>
+      <line x1="128" y1="266" x2="252" y2="260"/><line x1="128" y1="308" x2="268" y2="304"/>
+      <line x1="128" y1="330" x2="268" y2="328"/><line x1="128" y1="352" x2="240" y2="352"/>
+    </g>
+    <g stroke="#c7bda3" stroke-width="4" stroke-linecap="round">
+      <line x1="332" y1="212" x2="472" y2="222"/><line x1="332" y1="236" x2="472" y2="244"/>
+      <line x1="348" y1="260" x2="472" y2="266"/><line x1="332" y1="304" x2="472" y2="308"/>
+      <line x1="332" y1="328" x2="472" y2="330"/><line x1="360" y1="352" x2="472" y2="352"/>
+    </g>
+    <!-- brass initial cap -->
+    <rect x="128" y="206" width="30" height="30" rx="5" fill="url(#hbr)"/>
+    <text x="143" y="228" font-family="Georgia, serif" font-size="20" fill="#16203a" text-anchor="middle" font-weight="700">Q</text>
+  </g>
+  <!-- quill -->
+  <g transform="rotate(18 430 300)">
+    <path d="M300 430 C360 350 470 250 520 210 C512 300 470 380 402 420 C372 436 330 440 300 430 Z" fill="url(#hink)"/>
+    <path d="M330 418 C380 360 452 292 508 224" stroke="#c8a24c" stroke-width="3" fill="none" opacity="0.6"/>
+    <path d="M296 432 L280 452 L300 446 Z" fill="#c8a24c"/>
+  </g>
+  <!-- stars -->
+  <g fill="#c8a24c">
+    <path d="M470 96 l6 14 15 2 -11 11 3 15 -13 -8 -13 8 3 -15 -11 -11 15 -2z" opacity="0.9"/>
+    <path d="M120 400 l4 10 11 1 -8 8 2 11 -9 -6 -9 6 2 -11 -8 -8 11 -1z" opacity="0.75"/>
+    <circle cx="540" cy="340" r="5" opacity="0.7"/>
+    <circle cx="70" cy="250" r="4" opacity="0.6"/>
+  </g>
+</svg>

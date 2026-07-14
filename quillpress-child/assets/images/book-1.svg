@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 420" role="img" aria-label="The Cartographer's Daughter, a novel">
+  <defs><linearGradient id="b1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1e2c4f"/><stop offset="1" stop-color="#16203a"/></linearGradient></defs>
+  <rect width="300" height="420" fill="url(#b1)"/>
+  <rect x="14" y="14" width="272" height="392" fill="none" stroke="#c8a24c" stroke-width="1.5" opacity="0.7"/>
+  <g stroke="#c8a24c" fill="none" opacity="0.8">
+    <circle cx="150" cy="180" r="70" stroke-width="1.5"/>
+    <circle cx="150" cy="180" r="52" stroke-width="1"/>
+    <path d="M150 110v140M80 180h140" stroke-width="1"/>
+    <path d="M150 118l10 22-10-6-10 6z" fill="#c8a24c"/>
+    <path d="M150 242l-10-22 10 6 10-6z" fill="#e7cf95"/>
+  </g>
+  <text x="150" y="310" text-anchor="middle" fill="#f7f2e7" font-family="Georgia, serif" font-size="26" font-weight="700">The</text>
+  <text x="150" y="342" text-anchor="middle" fill="#f7f2e7" font-family="Georgia, serif" font-size="26" font-weight="700">Cartographer's</text>
+  <text x="150" y="372" text-anchor="middle" fill="#e7cf95" font-family="Georgia, serif" font-size="26" font-weight="700">Daughter</text>
+  <text x="150" y="66" text-anchor="middle" fill="#c8a24c" font-family="Inter, sans-serif" font-size="11" letter-spacing="3">A NOVEL</text>
+  <text x="150" y="400" text-anchor="middle" fill="#9fb0cf" font-family="Inter, sans-serif" font-size="11" letter-spacing="2">ELENA MÁRQUEZ</text>
+</svg>

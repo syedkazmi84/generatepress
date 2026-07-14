@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" role="img" aria-label="Traditional vs. Self-Publishing">
+  <defs><linearGradient id="pb3" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#26345c"/><stop offset="1" stop-color="#101830"/></linearGradient></defs>
+  <rect width="800" height="450" fill="url(#pb3)"/>
+  <circle cx="600" cy="180" r="90" fill="none" stroke="#c8a24c" stroke-width="2"/><path d="M600 90a90 90 0 0 1 0 180z" fill="#c8a24c" opacity="0.35"/><path d="M600 180l0-90M600 180l64 64" stroke="#e7cf95" stroke-width="2"/>
+  <text x="50" y="400" fill="#f7f2e7" font-family="Georgia, serif" font-size="30" font-weight="700" opacity="0.9">Traditional vs. Self-Publishing</text>
+</svg>

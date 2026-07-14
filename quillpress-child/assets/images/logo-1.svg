@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 190 40" role="img" aria-label="Literary Guild">
+  <path d="M20 6l4 9 10 1-7 7 2 10-9-5-9 5 2-10-7-7 10-1z" fill="#c8a24c"/>
+  <text x="46" y="20" font-family="Georgia, serif" font-size="16" font-weight="700" fill="#16203a">Literary Guild</text>
+  <text x="46" y="33" font-family="Inter, sans-serif" font-size="8" letter-spacing="3" fill="#61708a">EST. 1998</text>
+</svg>

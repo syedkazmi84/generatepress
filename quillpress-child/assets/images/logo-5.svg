@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 190 40" role="img" aria-label="Shelf and Spine">
+  <rect x="10" y="8" width="5" height="24" fill="#16203a"/><rect x="17" y="8" width="5" height="24" fill="#c8a24c"/><rect x="24" y="8" width="5" height="24" fill="#7c2b3b"/>
+  <text x="46" y="20" font-family="Georgia, serif" font-size="16" font-weight="700" fill="#16203a">Shelf &amp; Spine</text>
+  <text x="46" y="33" font-family="Inter, sans-serif" font-size="8" letter-spacing="3" fill="#61708a">PODCAST</text>
+</svg>

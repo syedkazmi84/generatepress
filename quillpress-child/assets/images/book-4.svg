@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 420" role="img" aria-label="Scaling Signal, a business book">
+  <rect width="300" height="420" fill="#16203a"/>
+  <rect x="0" y="0" width="300" height="140" fill="#c8a24c"/>
+  <g stroke="#16203a" stroke-width="3" fill="none">
+    <path d="M40 100l40-40 30 24 50-56"/>
+    <circle cx="160" cy="28" r="6" fill="#16203a"/>
+  </g>
+  <g fill="#c8a24c">
+    <rect x="40" y="220" width="18" height="60"/>
+    <rect x="66" y="200" width="18" height="80"/>
+    <rect x="92" y="172" width="18" height="108"/>
+    <rect x="118" y="150" width="18" height="130"/>
+  </g>
+  <text x="40" y="330" fill="#f7f2e7" font-family="Georgia, serif" font-size="34" font-weight="700">Scaling</text>
+  <text x="40" y="366" fill="#e7cf95" font-family="Georgia, serif" font-size="34" font-weight="700">Signal</text>
+  <text x="40" y="398" fill="#9fb0cf" font-family="Inter, sans-serif" font-size="10" letter-spacing="2">DR. AMARA WELLS</text>
+</svg>
