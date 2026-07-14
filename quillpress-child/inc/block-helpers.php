@@ -1,12 +1,13 @@
 <?php
 /**
- * Block markup helpers.
+ * GenerateBlocks markup helpers.
  *
- * Small functions that return valid Gutenberg (WordPress editor) block markup
- * so the demo content stays readable and fully editable after import. Every
- * page is built from native core blocks styled by the child theme's design
- * system, so the layouts render correctly even before GenerateBlocks styling
- * is customised.
+ * Every page is assembled from GenerateBlocks blocks — Container, Grid,
+ * Headline, Button and Image (generateblocks/*). GenerateBlocks generates the
+ * structural + responsive CSS from each block's attributes at render time; the
+ * child theme's design system (assets/css/main.css) layers the visual styling
+ * on top via qp- classes. This keeps the pages 100% GenerateBlocks and fully
+ * editable in the GenerateBlocks editor after import.
  *
  * @package Quill_Press
  */
@@ -16,216 +17,336 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Full-width section wrapper (constrained inner content).
+ * Sequential, collision-free unique id for GenerateBlocks blocks.
+ * Monotonic across a single import run, so it is always unique within a page.
  */
-function qp_section( $classes, $inner, $content_size = '1140px' ) {
-	$classes = trim( 'qp-section ' . $classes );
-	$attrs   = wp_json_encode(
+function qp_uid() {
+	static $n = 1000;
+	$n++;
+	return 'qp' . base_convert( $n, 10, 36 );
+}
+
+/**
+ * GenerateBlocks Container.
+ *
+ * $args: class, tag, outer (full|contained), inner (contained|full), width,
+ *        isGrid (bool), gridWidth (number %), pad (px string), style (inline).
+ */
+function qp_container( $args, $inner ) {
+	$d = array_merge(
 		array(
-			'align'     => 'full',
-			'className' => $classes,
-			'layout'    => array(
-				'type'        => 'constrained',
-				'contentSize' => $content_size,
-			),
-		)
+			'class'     => '',
+			'tag'       => 'div',
+			'outer'     => 'full',
+			'inner'     => 'contained',
+			'width'     => 1140,
+			'isGrid'    => false,
+			'gridWidth' => 0,
+			'pad'       => '0px',
+			'style'     => '',
+		),
+		$args
 	);
-	return "<!-- wp:group {$attrs} -->\n"
-		. '<div class="wp-block-group alignfull ' . esc_attr( $classes ) . '">' . "\n"
-		. $inner
-		. "\n</div>\n<!-- /wp:group -->\n";
-}
 
-/**
- * Plain constrained group (no full-bleed background) — used to nest content.
- */
-function qp_group( $classes, $inner, $content_size = '' ) {
-	$layout = array( 'type' => 'constrained' );
-	if ( $content_size ) {
-		$layout['contentSize'] = $content_size;
+	$uid   = qp_uid();
+	$attrs = array( 'uniqueId' => $uid );
+	if ( 'div' !== $d['tag'] ) {
+		$attrs['tagName'] = $d['tag'];
 	}
-	$attrs = wp_json_encode(
-		array(
-			'className' => $classes,
-			'layout'    => $layout,
-		)
+	if ( $d['class'] ) {
+		$attrs['className'] = $d['class'];
+	}
+	$attrs['outerContainer'] = $d['outer'];
+	$attrs['innerContainer'] = $d['inner'];
+	if ( 'contained' === $d['inner'] ) {
+		$attrs['containerWidth'] = (int) $d['width'];
+	}
+	$attrs['spacing'] = array(
+		'paddingTop'    => $d['pad'],
+		'paddingRight'  => $d['pad'],
+		'paddingBottom' => $d['pad'],
+		'paddingLeft'   => $d['pad'],
 	);
-	return "<!-- wp:group {$attrs} -->\n"
-		. '<div class="wp-block-group ' . esc_attr( $classes ) . '">' . "\n"
+	if ( $d['isGrid'] ) {
+		$attrs['isGrid'] = true;
+		if ( $d['gridWidth'] ) {
+			$attrs['width'] = $d['gridWidth'];
+		}
+	}
+
+	$json     = wp_json_encode( $attrs );
+	$tag      = 'div' !== $d['tag'] ? $d['tag'] : 'div';
+	$cls_list = trim( 'gb-container gb-container-' . $uid . ' ' . $d['class'] );
+	$style    = $d['style'] ? ' style="' . esc_attr( $d['style'] ) . '"' : '';
+	$open     = "<!-- wp:generateblocks/container {$json} -->\n";
+	$close    = "\n<!-- /wp:generateblocks/container -->\n";
+
+	if ( $d['isGrid'] ) {
+		return $open
+			. '<div class="gb-grid-column gb-grid-column-' . esc_attr( $uid ) . '">'
+			. '<' . $tag . ' class="' . esc_attr( $cls_list ) . '"' . $style . '><div class="gb-inside-container">' . "\n"
+			. $inner
+			. "\n</div></" . $tag . '></div>' . $close;
+	}
+	return $open
+		. '<' . $tag . ' class="' . esc_attr( $cls_list ) . '"' . $style . '><div class="gb-inside-container">' . "\n"
 		. $inner
-		. "\n</div>\n<!-- /wp:group -->\n";
+		. "\n</div></" . $tag . '>' . $close;
 }
 
 /**
- * Eyebrow label.
+ * GenerateBlocks Grid holding container "grid item" children.
  */
-function qp_eyebrow( $text, $center = false ) {
-	$class = 'qp-eyebrow' . ( $center ? ' has-text-align-center' : '' );
-	$attrs = wp_json_encode( array( 'className' => $class ) );
-	return "<!-- wp:paragraph {$attrs} -->\n<p class=\"" . esc_attr( $class ) . '">' . $text . "</p>\n<!-- /wp:paragraph -->\n";
-}
+function qp_grid( $items_inner, $wrap_class, $gap, $item_width, $per_item_class = array() ) {
+	$uid   = qp_uid();
+	$attrs = array( 'uniqueId' => $uid );
+	if ( $wrap_class ) {
+		$attrs['className'] = $wrap_class;
+	}
+	$attrs['horizontalGap'] = $gap;
+	$attrs['verticalGap']   = $gap;
+	$attrs['verticalAlignment'] = 'stretch';
 
-/**
- * Heading. $extra adds classes such as qp-display / qp-h2.
- */
-function qp_heading( $level, $text, $extra = '', $center = false ) {
-	$class = trim( 'wp-block-heading' . ( $center ? ' has-text-align-center' : '' ) . ' ' . $extra );
-	$json  = array( 'level' => (int) $level );
-	if ( $center ) {
-		$json['textAlign'] = 'center';
-	}
-	if ( $extra ) {
-		$json['className'] = trim( $extra );
-	}
-	$attrs = wp_json_encode( $json );
-	return "<!-- wp:heading {$attrs} -->\n<h{$level} class=\"" . esc_attr( $class ) . "\">{$text}</h{$level}>\n<!-- /wp:heading -->\n";
-}
+	$json = wp_json_encode( $attrs );
+	$cls  = trim( 'gb-grid-wrapper gb-grid-wrapper-' . $uid . ' ' . $wrap_class );
 
-/**
- * Paragraph.
- */
-function qp_para( $text, $extra = '', $center = false ) {
-	$class = trim( ( $center ? 'has-text-align-center ' : '' ) . $extra );
-	$json  = array();
-	if ( $center ) {
-		$json['align'] = 'center';
-	}
-	if ( $extra ) {
-		$json['className'] = $extra;
-	}
-	$open  = $json ? ' ' . wp_json_encode( $json ) : '';
-	$attr  = $class ? ' class="' . esc_attr( $class ) . '"' : '';
-	return "<!-- wp:paragraph{$open} -->\n<p{$attr}>{$text}</p>\n<!-- /wp:paragraph -->\n";
-}
-
-/**
- * Buttons row. $buttons = array of array( 'text','url','class' ).
- */
-function qp_buttons( $buttons, $center = false ) {
 	$inner = '';
-	foreach ( $buttons as $b ) {
-		$cls   = isset( $b['class'] ) ? $b['class'] : 'qp-btn';
-		$attrs = wp_json_encode( array( 'className' => $cls ) );
-		$inner .= "<!-- wp:button {$attrs} -->\n"
-			. '<div class="wp-block-button ' . esc_attr( $cls ) . '"><a class="wp-block-button__link wp-element-button" href="' . esc_url( $b['url'] ) . '">' . $b['text'] . "</a></div>\n"
-			. "<!-- /wp:button -->\n";
-	}
-	$json = array();
-	if ( $center ) {
-		$json['layout'] = array(
-			'type'           => 'flex',
-			'justifyContent' => 'center',
+	foreach ( $items_inner as $i => $html ) {
+		$cc     = isset( $per_item_class[ $i ] ) ? $per_item_class[ $i ] : '';
+		$inner .= qp_container(
+			array(
+				'class'     => trim( $cc ),
+				'isGrid'    => true,
+				'gridWidth' => $item_width,
+				'inner'     => 'full',
+			),
+			$html
 		);
 	}
-	$open = $json ? ' ' . wp_json_encode( $json ) : '';
-	$cls  = 'wp-block-buttons' . ( $center ? ' is-content-justification-center is-layout-flex' : '' );
-	return "<!-- wp:buttons{$open} -->\n<div class=\"" . esc_attr( $cls ) . "\">\n{$inner}</div>\n<!-- /wp:buttons -->\n";
+	return "<!-- wp:generateblocks/grid {$json} -->\n<div class=\"" . esc_attr( $cls ) . "\">\n{$inner}</div>\n<!-- /wp:generateblocks/grid -->\n";
 }
 
 /**
- * Image block. $extra adds classes such as qp-icon / qp-book / qp-figure.
+ * Full-width section (constrained inner content). Signature-compatible with the
+ * previous core-blocks helper.
+ */
+function qp_section( $classes, $inner, $content_size = '1140px' ) {
+	return qp_container(
+		array(
+			'class' => trim( 'qp-section ' . $classes ),
+			'tag'   => 'section',
+			'outer' => 'full',
+			'inner' => 'contained',
+			'width' => (int) $content_size,
+			'pad'   => '0px',
+		),
+		$inner
+	);
+}
+
+/**
+ * Plain constrained group used to nest content.
+ */
+function qp_group( $classes, $inner, $content_size = '' ) {
+	$width = $content_size ? (int) $content_size : 1140;
+	$inner_type = $content_size ? 'contained' : 'full';
+	return qp_container(
+		array(
+			'class' => $classes,
+			'outer' => 'contained',
+			'inner' => $inner_type,
+			'width' => $width,
+			'pad'   => '0px',
+		),
+		$inner
+	);
+}
+
+/**
+ * A thin divider rendered as an empty GenerateBlocks container.
+ */
+function qp_divider() {
+	return qp_container(
+		array(
+			'class' => 'qp-hr',
+			'outer' => 'contained',
+			'inner' => 'full',
+			'pad'   => '0px',
+		),
+		''
+	);
+}
+
+/**
+ * Eyebrow label (Headline element = p).
+ */
+function qp_eyebrow( $text, $center = false ) {
+	return qp_para( $text, 'qp-eyebrow', $center );
+}
+
+/**
+ * Heading — GenerateBlocks Headline.
+ */
+function qp_heading( $level, $text, $extra = '', $center = false ) {
+	$uid = qp_uid();
+	$cls = trim( $extra . ( $center ? ' has-text-align-center' : '' ) );
+	$attrs = array(
+		'uniqueId' => $uid,
+		'element'  => 'h' . (int) $level,
+	);
+	if ( $cls ) {
+		$attrs['className'] = $cls;
+	}
+	$json    = wp_json_encode( $attrs );
+	$htmlcls = trim( 'gb-headline gb-headline-' . $uid . ' ' . $cls );
+	return "<!-- wp:generateblocks/headline {$json} -->\n<h{$level} class=\"" . esc_attr( $htmlcls ) . "\">{$text}</h{$level}>\n<!-- /wp:generateblocks/headline -->\n";
+}
+
+/**
+ * Paragraph — GenerateBlocks Headline with element = p.
+ */
+function qp_para( $text, $extra = '', $center = false ) {
+	$uid = qp_uid();
+	$cls = trim( $extra . ( $center ? ' has-text-align-center' : '' ) );
+	$attrs = array(
+		'uniqueId' => $uid,
+		'element'  => 'p',
+	);
+	if ( $cls ) {
+		$attrs['className'] = $cls;
+	}
+	$json    = wp_json_encode( $attrs );
+	$htmlcls = trim( 'gb-headline gb-headline-' . $uid . ' ' . $cls );
+	return "<!-- wp:generateblocks/headline {$json} -->\n<p class=\"" . esc_attr( $htmlcls ) . "\">{$text}</p>\n<!-- /wp:generateblocks/headline -->\n";
+}
+
+/**
+ * Buttons — GenerateBlocks Button Container + Buttons.
+ * $buttons = array of array( 'text','url','class' ).
+ */
+function qp_buttons( $buttons, $center = false ) {
+	$uid    = qp_uid();
+	$wattrs = array( 'uniqueId' => $uid );
+	if ( $center ) {
+		$wattrs['className'] = 'qp-btns-center';
+	}
+	$wjson = wp_json_encode( $wattrs );
+	$wcls  = trim( 'gb-button-wrapper gb-button-wrapper-' . $uid . ( $center ? ' qp-btns-center' : '' ) );
+
+	$inner = '';
+	foreach ( $buttons as $b ) {
+		$bu     = qp_uid();
+		$cls    = isset( $b['class'] ) ? $b['class'] : 'qp-btn';
+		$battrs = array(
+			'uniqueId' => $bu,
+			'text'     => $b['text'],
+			'url'      => $b['url'],
+		);
+		if ( $cls ) {
+			$battrs['className'] = $cls;
+		}
+		$bjson  = wp_json_encode( $battrs );
+		$bcls   = trim( 'gb-button gb-button-' . $bu . ' ' . $cls );
+		$inner .= "<!-- wp:generateblocks/button {$bjson} -->\n<a class=\"" . esc_attr( $bcls ) . '" href="' . esc_url( $b['url'] ) . '">' . $b['text'] . "</a>\n<!-- /wp:generateblocks/button -->\n";
+	}
+	return "<!-- wp:generateblocks/button-container {$wjson} -->\n<div class=\"" . esc_attr( $wcls ) . "\">\n{$inner}</div>\n<!-- /wp:generateblocks/button-container -->\n";
+}
+
+/**
+ * Image — GenerateBlocks Image (references a URL directly).
  */
 function qp_image( $url, $alt, $extra = '', $width = 0 ) {
-	$class = trim( 'wp-block-image ' . $extra );
-	$json  = array();
+	$uid   = qp_uid();
+	$attrs = array(
+		'uniqueId' => $uid,
+		'mediaUrl' => $url,
+	);
 	if ( $extra ) {
-		$json['className'] = $extra;
+		$attrs['className'] = $extra;
 	}
-	if ( $width ) {
-		$json['width'] = $width;
-	}
-	$open = $json ? ' ' . wp_json_encode( $json ) : '';
-	$img  = '<img src="' . esc_url( $url ) . '" alt="' . esc_attr( $alt ) . '"'
-		. ( $width ? ' style="width:' . (int) $width . 'px"' : '' ) . '/>';
-	return "<!-- wp:image{$open} -->\n<figure class=\"" . esc_attr( $class ) . "\">{$img}</figure>\n<!-- /wp:image -->\n";
+	$json    = wp_json_encode( $attrs );
+	$figcls  = trim( 'gb-block-image gb-block-image-' . $uid . ' ' . $extra );
+	$style   = $width ? ' style="width:' . (int) $width . 'px"' : '';
+	return "<!-- wp:generateblocks/image {$json} -->\n<figure class=\"" . esc_attr( $figcls ) . "\"><img class=\"gb-image gb-image-" . esc_attr( $uid ) . '" src="' . esc_url( $url ) . '" alt="' . esc_attr( $alt ) . "\"{$style}/></figure>\n<!-- /wp:generateblocks/image -->\n";
 }
 
 /**
- * Columns wrapper. $columns = array of inner-HTML strings.
+ * Checkmark list rendered as GenerateBlocks paragraphs (one per item).
+ */
+function qp_checklist( $items, $extra = 'qp-check' ) {
+	$out = '';
+	foreach ( $items as $it ) {
+		$out .= qp_para( $it, 'qp-check-item' );
+	}
+	return qp_group( trim( $extra ), $out );
+}
+
+/**
+ * Vertical spacer rendered as a GenerateBlocks container (top padding).
+ */
+function qp_spacer( $height = 40 ) {
+	$uid   = qp_uid();
+	$attrs = array(
+		'uniqueId'  => $uid,
+		'className' => 'qp-spacer',
+		'spacing'   => array(
+			'paddingTop'    => (int) $height . 'px',
+			'paddingRight'  => '0px',
+			'paddingBottom' => '0px',
+			'paddingLeft'   => '0px',
+		),
+	);
+	$json = wp_json_encode( $attrs );
+	return "<!-- wp:generateblocks/container {$json} -->\n<div class=\"gb-container gb-container-" . esc_attr( $uid ) . " qp-spacer\"><div class=\"gb-inside-container\"></div></div>\n<!-- /wp:generateblocks/container -->\n";
+}
+
+/**
+ * Columns wrapper — mapped onto a GenerateBlocks Grid. Signature-compatible.
  */
 function qp_columns( $columns, $wrap_class = '', $col_class = '', $col_attrs = array() ) {
-	$inner = '';
+	$n = count( $columns );
+	if ( $n < 1 ) {
+		return '';
+	}
+	$width = round( 100 / $n, 2 );
+	$per   = array();
 	foreach ( $columns as $i => $c ) {
-		$cc    = $col_class;
+		$cc = $col_class;
 		if ( isset( $col_attrs[ $i ]['class'] ) ) {
 			$cc = trim( $cc . ' ' . $col_attrs[ $i ]['class'] );
 		}
-		$json  = array();
-		if ( $cc ) {
-			$json['className'] = $cc;
-		}
-		$open  = $json ? ' ' . wp_json_encode( $json ) : '';
-		$cls   = trim( 'wp-block-column ' . $cc );
-		$inner .= "<!-- wp:column{$open} -->\n<div class=\"" . esc_attr( $cls ) . "\">\n{$c}</div>\n<!-- /wp:column -->\n";
+		$per[ $i ] = $cc;
 	}
-	$json = array();
-	if ( $wrap_class ) {
-		$json['className'] = $wrap_class;
-	}
-	$open = $json ? ' ' . wp_json_encode( $json ) : '';
-	$cls  = trim( 'wp-block-columns ' . $wrap_class );
-	return "<!-- wp:columns{$open} -->\n<div class=\"" . esc_attr( $cls ) . "\">\n{$inner}</div>\n<!-- /wp:columns -->\n";
+	return qp_grid( $columns, $wrap_class, 24, $width, $per );
 }
 
-/**
- * Checkmark list. $items = array of strings.
- */
-function qp_checklist( $items, $extra = 'qp-check' ) {
-	$lis = '';
-	foreach ( $items as $it ) {
-		$lis .= "<!-- wp:list-item -->\n<li>{$it}</li>\n<!-- /wp:list-item -->\n";
-	}
-	$attrs = wp_json_encode( array( 'className' => $extra ) );
-	return "<!-- wp:list {$attrs} -->\n<ul class=\"wp-block-list " . esc_attr( $extra ) . "\">\n{$lis}</ul>\n<!-- /wp:list -->\n";
-}
+/* -------------------------------------------------------------------------
+ * Higher-level component builders (return the inner content of a grid item)
+ * ---------------------------------------------------------------------- */
 
-/**
- * Spacer.
- */
-function qp_spacer( $height = 40 ) {
-	$attrs = wp_json_encode( array( 'height' => $height . 'px' ) );
-	return "<!-- wp:spacer {$attrs} -->\n<div style=\"height:{$height}px\" aria-hidden=\"true\" class=\"wp-block-spacer\"></div>\n<!-- /wp:spacer -->\n";
-}
-
-/**
- * A single "icon card" column inner (icon tile + heading + text + link).
- */
 function qp_icon_card( $icon_file, $title, $text, $link_text = '', $link_url = '' ) {
 	$html  = qp_image( quillpress_img( $icon_file ), $title, 'qp-icon' );
 	$html .= qp_heading( 3, $title );
 	$html .= qp_para( $text );
 	if ( $link_text ) {
-		$attrs = wp_json_encode( array( 'className' => 'qp-cardmore' ) );
-		$html .= "<!-- wp:paragraph {$attrs} -->\n<p class=\"qp-cardmore\"><a class=\"qp-cardlink\" href=\"" . esc_url( $link_url ) . "\">{$link_text}</a></p>\n<!-- /wp:paragraph -->\n";
+		$html .= qp_para( '<a class="qp-cardlink" href="' . esc_url( $link_url ) . '">' . $link_text . '</a>', 'qp-cardmore' );
 	}
 	return $html;
 }
 
-/**
- * A testimonial / quote column inner.
- */
 function qp_quote_card( $stars, $quote, $avatar_file, $name, $role ) {
-	$html  = qp_para( str_repeat( '★', $stars ), 'qp-stars' );
-	$html .= qp_para( $quote );
-	$author = qp_image( quillpress_img( $avatar_file ), $name, '' )
-		. qp_para( "<strong>{$name}</strong><br><span>{$role}</span>" );
+	$html   = qp_para( str_repeat( '★', $stars ), 'qp-stars' );
+	$html  .= qp_para( $quote );
+	$author = qp_image( quillpress_img( $avatar_file ), $name, 'qp-avatar' )
+		. qp_para( "<strong>{$name}</strong><br><span>{$role}</span>", 'qp-author-name' );
 	$html  .= qp_group( 'qp-author', $author );
 	return $html;
 }
 
-/**
- * A stat column inner (big number + label).
- */
 function qp_stat( $number, $label ) {
-	$html  = qp_heading( 3, $number, 'qp-stat-num' );
-	$attrs = wp_json_encode( array( 'className' => 'qp-stat-label' ) );
-	$html .= "<!-- wp:paragraph {$attrs} -->\n<p class=\"qp-stat-label\">{$label}</p>\n<!-- /wp:paragraph -->\n";
-	return $html;
+	return qp_heading( 3, $number, 'qp-stat-num' ) . qp_para( $label, 'qp-stat-label' );
 }
 
-/**
- * A book cover column inner (cover + title + meta).
- */
 function qp_book_card( $cover_file, $title, $meta ) {
 	$html  = qp_image( quillpress_img( $cover_file ), $title, 'qp-book' );
 	$html .= qp_para( "<strong>{$title}</strong>", 'qp-book-title' );
@@ -234,21 +355,26 @@ function qp_book_card( $cover_file, $title, $meta ) {
 }
 
 /**
- * FAQ item using the native Details block.
+ * FAQ item rendered as a GenerateBlocks card (question + answer).
  */
 function qp_faq_item( $q, $a ) {
-	$summary = "<!-- wp:paragraph {\"placeholder\":\"Type / to add a hidden block\"} -->\n<p>{$a}</p>\n<!-- /wp:paragraph -->";
-	return "<!-- wp:details -->\n<details class=\"wp-block-details\"><summary>{$q}</summary>\n{$summary}\n</details>\n<!-- /wp:details -->\n";
+	$inner = qp_heading( 3, $q, 'qp-faq-q' ) . qp_para( $a, 'qp-faq-a' );
+	return qp_container(
+		array(
+			'class' => 'qp-faq-item',
+			'outer' => 'contained',
+			'inner' => 'full',
+			'pad'   => '0px',
+		),
+		$inner
+	);
 }
 
-/**
- * A pricing plan column inner.
- */
 function qp_price_card( $name, $desc, $price, $per, $features, $cta_text, $cta_url, $featured = false ) {
 	$html  = qp_para( "<strong>{$name}</strong>", 'qp-plan-name' );
 	$html .= qp_para( $desc, 'qp-plan-desc' );
 	$html .= qp_para( $price . ' <small>' . $per . '</small>', 'qp-plan-price' );
-	$html .= "<!-- wp:separator -->\n<hr class=\"wp-block-separator has-alpha-channel-opacity\"/>\n<!-- /wp:separator -->\n";
+	$html .= qp_divider();
 	$html .= qp_checklist( $features );
 	$html .= qp_buttons(
 		array(

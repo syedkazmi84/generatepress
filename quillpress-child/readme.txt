@@ -35,16 +35,16 @@ Clicking "Import All" builds an entire, professionally designed website:
 It also configures the header + footer menus, sets the homepage, imports the
 bundled artwork into the Media Library, and applies matching theme settings.
 
-Everything is built with native WordPress editor blocks, so every page stays
+Everything is built with GenerateBlocks blocks, so every page stays
 fully editable after import.
 
 
 == Requirements ==
 
 1. The GeneratePress theme (free) installed. This is a child theme of it.
-2. The GenerateBlocks plugin (free) active — recommended, so you can extend the
-   layouts with GenerateBlocks later. The demo content itself uses core blocks
-   and will display correctly even without it.
+2. The GenerateBlocks plugin (free) active — REQUIRED. Every page is built with
+   GenerateBlocks blocks (Container, Grid, Headline, Button, Image), so the
+   plugin must be active for the layouts and their generated CSS to render.
 
 The bundled zips for GeneratePress, GenerateBlocks, GenerateBlocks Pro and
 GP Premium are included in this project's repository.

@@ -148,9 +148,8 @@ function qp_page_home() {
 			array( 'text' => 'Explore Services', 'url' => qp_url( 'services' ), 'class' => 'qp-btn qp-btn--light' ),
 		)
 	);
-	$hero_badges  = '<p class="qp-badge"><b>★ 4.9</b> from 900+ authors</p> <p class="qp-badge"><b>1,200+</b> books published</p>';
-	$badge_attrs  = wp_json_encode( array( 'className' => 'qp-hero-badges' ) );
-	$hero_text   .= "<!-- wp:paragraph {$badge_attrs} -->\n<p class=\"qp-hero-badges\">{$hero_badges}</p>\n<!-- /wp:paragraph -->\n";
+	$hero_badges  = '<span class="qp-badge"><b>★ 4.9</b> from 900+ authors</span> <span class="qp-badge"><b>1,200+</b> books published</span>';
+	$hero_text   .= qp_para( $hero_badges, 'qp-hero-badges' );
 	$hero_art     = qp_image( quillpress_img( 'hero-home.svg' ), 'Open book with quill and manuscript pages', 'qp-hero-art' );
 	$hero_cols    = qp_columns( array( $hero_text, $hero_art ), '', '' );
 	$hero         = qp_section( 'qp-section--ink qp-hero qp-section--lg', $hero_cols, '1140px' );
@@ -687,15 +686,24 @@ function qp_page_contact() {
 	$left .= qp_para( 'Fill in a few details about your project. Prefer email? Reach us any time at <strong>hello@quillandpress.com</strong> — a real human replies to every message.', 'qp-lead' );
 	$left .= qp_checklist( array( 'A reply within one working day.', 'A fixed quote within two.', 'No pressure, no obligation.' ) );
 
-	$form_html  = '<form class="qp-form" method="post" action="#" onsubmit="return false;">';
-	$form_html .= '<div class="qp-form-row"><label>Your name<input type="text" name="qp-name" placeholder="Jane Author"></label>';
-	$form_html .= '<label>Email<input type="email" name="qp-email" placeholder="jane@email.com"></label></div>';
-	$form_html .= '<label>What can we help with?<select name="qp-service"><option>Full publishing package</option><option>Editing &amp; proofreading</option><option>Cover design</option><option>Formatting &amp; typesetting</option><option>Book marketing</option><option>Distribution</option><option>Something else</option></select></label>';
-	$form_html .= '<label>Tell us about your book<textarea name="qp-message" rows="5" placeholder="Genre, word count, where you are in the process…"></textarea></label>';
-	$form_html .= '<button type="submit" class="qp-form-btn">Send my request</button>';
-	$form_html .= '<p class="qp-form-note">Demo form — connect Contact Form 7, WPForms or Fluent Forms to make it live.</p>';
-	$form_html .= '</form>';
-	$right = "<!-- wp:html -->\n{$form_html}\n<!-- /wp:html -->\n";
+	// Right column: a GenerateBlocks "quote request" card. Drop your form
+	// plugin's block inside this container to make it a live enquiry form.
+	$card  = qp_heading( 3, 'Request your free quote', 'qp-formcard-title' );
+	$card .= qp_para( 'Email us the details below and we&#8217;ll reply within one working day with a tailored plan and a fixed price.' );
+	$card .= qp_checklist(
+		array(
+			'Your book&#8217;s genre &amp; approximate word count',
+			'Which services you&#8217;re interested in',
+			'Where you are in the writing process',
+		)
+	);
+	$card .= qp_buttons(
+		array(
+			array( 'text' => 'Email hello@quillandpress.com', 'url' => 'mailto:hello@quillandpress.com', 'class' => 'qp-btn' ),
+		)
+	);
+	$card .= qp_para( 'Prefer a form? Add a Contact Form 7, WPForms or Fluent Forms block inside this container in the editor.', 'qp-form-note' );
+	$right = qp_group( 'qp-formcard', $card );
 
 	$formsec = qp_section( 'qp-section--cream qp-split', qp_columns( array( $left, $right ), '', '' ) );
 

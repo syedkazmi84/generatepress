@@ -35,9 +35,10 @@ Portfolio 路 Pricing 路 Testimonials 路 FAQ 路 Contact 路 Blog (with 3 posts) 鈥
 plus the header & footer menus, a static homepage, imported artwork, and
 matching theme settings.
 
-Every page is authored with **native WordPress editor blocks** and styled by
-the child theme's `qp-`-prefixed design system, so it looks polished
-immediately and stays fully editable.
+Every page is authored entirely with **GenerateBlocks blocks** (Container,
+Grid, Headline, Button, Image) and styled by the child theme's `qp-`-prefixed
+design system, so it looks polished immediately and stays fully editable in the
+GenerateBlocks editor. GenerateBlocks must be active.
 
 ## Design
 
