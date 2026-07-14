@@ -1,0 +1,114 @@
+/**
+ * Front-end styles for elements used by the bundled demo content
+ * (the à-la-carte check lists and the demo contact form). These are scoped so
+ * they never affect a site that hasn't imported the demo.
+ *
+ * @package Blank_Base
+ */
+
+/* Check-mark list (used on Services / Pricing). */
+.bb-check-list {
+	list-style: none;
+	margin-left: 0;
+	padding-left: 0;
+}
+
+.bb-check-list li {
+	position: relative;
+	padding-left: 1.9em;
+	margin-bottom: 0.6em;
+	line-height: 1.5;
+}
+
+.bb-check-list li::before {
+	content: "";
+	position: absolute;
+	left: 0;
+	top: 0.15em;
+	width: 1.2em;
+	height: 1.2em;
+	border-radius: 50%;
+	background: var(--wp--preset--color--accent, #c8a45c);
+}
+
+.bb-check-list li::after {
+	content: "";
+	position: absolute;
+	left: 0.4em;
+	top: 0.34em;
+	width: 0.32em;
+	height: 0.6em;
+	border: solid var(--wp--preset--color--ink, #1b2440);
+	border-width: 0 0.16em 0.16em 0;
+	transform: rotate(45deg);
+}
+
+/* Demo contact form. */
+.bb-demo-form {
+	background: var(--wp--preset--color--background, #fff);
+	border: 1px solid var(--wp--preset--color--border, #e6e0d4);
+	border-radius: 16px;
+	padding: 2rem;
+	box-shadow: 0 18px 40px -28px rgba(27, 36, 64, 0.35);
+}
+
+.bb-demo-form__row {
+	margin-bottom: 1.1rem;
+}
+
+.bb-demo-form label {
+	display: block;
+	font-weight: 600;
+	font-size: 0.9rem;
+	color: var(--wp--preset--color--ink, #1b2440);
+	margin-bottom: 0.35rem;
+}
+
+.bb-demo-form input,
+.bb-demo-form select,
+.bb-demo-form textarea {
+	width: 100%;
+	margin-top: 0.35rem;
+	padding: 0.7rem 0.85rem;
+	font: inherit;
+	font-weight: 400;
+	color: inherit;
+	background: var(--wp--preset--color--cream, #f6f1e7);
+	border: 1px solid var(--wp--preset--color--border, #e6e0d4);
+	border-radius: 8px;
+	box-sizing: border-box;
+}
+
+.bb-demo-form input:focus,
+.bb-demo-form select:focus,
+.bb-demo-form textarea:focus {
+	outline: 2px solid var(--wp--preset--color--accent, #c8a45c);
+	outline-offset: 1px;
+	border-color: transparent;
+}
+
+.bb-demo-form__submit {
+	display: inline-block;
+	width: 100%;
+	padding: 0.85rem 1.5rem;
+	font: inherit;
+	font-weight: 600;
+	color: var(--wp--preset--color--cream, #f6f1e7);
+	background: var(--wp--preset--color--ink, #1b2440);
+	border: 0;
+	border-radius: 8px;
+	cursor: pointer;
+	transition: background 0.2s ease;
+}
+
+.bb-demo-form__submit:hover {
+	background: var(--wp--preset--color--accent, #c8a45c);
+	color: var(--wp--preset--color--ink, #1b2440);
+}
+
+.bb-demo-form__note {
+	margin: 0.85rem 0 0;
+	font-size: 0.8rem;
+	color: var(--wp--preset--color--muted, #6c6c6c);
+	text-align: center;
+}

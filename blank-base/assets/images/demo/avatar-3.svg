@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" width="240" height="240" fill="none" >
+      <defs><linearGradient id="av3" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#3f8a8f"/><stop offset="1" stop-color="#1b2440"/></linearGradient>
+        <clipPath id="avc3"><circle cx="120" cy="120" r="120"/></clipPath></defs>
+      <g clip-path="url(#avc3)">
+        <rect width="240" height="240" fill="url(#av3)"/>
+        <path d="M36 240 C 36 168 90 150 120 150 C 150 150 204 168 204 240 Z" fill="#7c9a80"/>
+        <path d="M96 150 h48 v18 a24 24 0 0 1 -48 0 Z" fill="#f0d0b0"/>
+        <circle cx="120" cy="112" r="42" fill="#f0d0b0"/>
+        <path d="M78 108 a42 42 0 0 1 84 0 c 6 -30 -16 -52 -42 -52 c -26 0 -48 22 -42 52 Z" fill="#4a3b2f"/>
+        <path d="M78 104 c -4 14 0 26 6 30 c -10 -2 -12 -22 -6 -30 Z" fill="#4a3b2f"/>
+        <path d="M162 104 c 4 14 0 26 -6 30 c 10 -2 12 -22 6 -30 Z" fill="#4a3b2f"/>
+      </g>
+    </svg>

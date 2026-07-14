@@ -1,0 +1,288 @@
+/**
+ * Styles for the advanced Blank Base blocks: carousels/sliders, tabs,
+ * accordion, post cards and core Table style variations.
+ *
+ * @package Blank_Base
+ */
+
+/* ==================================================================
+ * Carousel (image slider, content slider, testimonial carousel, posts)
+ * ================================================================ */
+.bb-carousel {
+	position: relative;
+}
+
+/* No-JS fallback: let the track scroll horizontally until the engine wraps it. */
+.bb-carousel:not( [data-bb-init] ) {
+	overflow-x: auto;
+}
+
+.bb-carousel__viewport {
+	overflow: hidden;
+	width: 100%;
+}
+
+.bb-carousel__track {
+	display: flex;
+	transition: transform 0.4s ease;
+	will-change: transform;
+}
+
+.bb-carousel__slide,
+.bb-carousel__track > * {
+	flex: 0 0 100%;
+	min-width: 0;
+	box-sizing: border-box;
+	padding: 0 0.5rem;
+	margin: 0;
+}
+
+.bb-image-slider .bb-carousel__slide img {
+	display: block;
+	width: 100%;
+	height: auto;
+	border-radius: var( --bb-radius, 6px );
+}
+
+/* Arrows. */
+.bb-carousel__arrow {
+	position: absolute;
+	top: 50%;
+	transform: translateY( -50% );
+	z-index: 2;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 2.5rem;
+	height: 2.5rem;
+	padding: 0;
+	border: 0;
+	border-radius: 50%;
+	background: rgba( 0, 0, 0, 0.55 );
+	color: #fff;
+	font-size: 1.5rem;
+	line-height: 1;
+	cursor: pointer;
+	transition: background 0.15s ease;
+}
+
+.bb-carousel__arrow:hover,
+.bb-carousel__arrow:focus {
+	background: rgba( 0, 0, 0, 0.8 );
+}
+
+.bb-carousel__arrow--prev { left: 0.5rem; }
+.bb-carousel__arrow--next { right: 0.5rem; }
+
+/* Dots. */
+.bb-carousel__dots {
+	display: flex;
+	justify-content: center;
+	gap: 0.5rem;
+	margin-top: 1rem;
+}
+
+.bb-carousel__dot {
+	width: 0.7rem;
+	height: 0.7rem;
+	padding: 0;
+	border: 0;
+	border-radius: 50%;
+	background: var( --bb-color-border, #ccc );
+	cursor: pointer;
+	transition: background 0.15s ease, transform 0.15s ease;
+}
+
+.bb-carousel__dot.is-active {
+	background: var( --bb-color-link, #1a73e8 );
+	transform: scale( 1.25 );
+}
+
+/* Editor: show every slide stacked so each is editable. */
+.bb-carousel--editing .bb-carousel__track {
+	flex-wrap: wrap;
+	transform: none !important;
+}
+
+.bb-carousel--editing .bb-carousel__slide,
+.bb-carousel--editing .bb-carousel__track > * {
+	flex: 1 1 100% !important;
+	max-width: 100% !important;
+}
+
+.bb-image-slider-edit__grid {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.5rem;
+	margin-bottom: 0.75rem;
+}
+
+.bb-image-slider-edit__grid img {
+	width: 90px;
+	height: 90px;
+	object-fit: cover;
+	border-radius: var( --bb-radius, 6px );
+}
+
+/* ==================================================================
+ * Tabs
+ * ================================================================ */
+.bb-tabs__list {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.25rem;
+	border-bottom: 2px solid var( --bb-color-border, #e6e8eb );
+	margin-bottom: 1.25rem;
+}
+
+.bb-tabs__tab {
+	padding: 0.6rem 1.1rem;
+	border: 0;
+	border-bottom: 2px solid transparent;
+	margin-bottom: -2px;
+	background: transparent;
+	color: inherit;
+	font: inherit;
+	font-weight: 600;
+	cursor: pointer;
+}
+
+.bb-tabs__tab.is-active {
+	color: var( --bb-color-link, #1a73e8 );
+	border-bottom-color: var( --bb-color-link, #1a73e8 );
+}
+
+.bb-tab[hidden] { display: none; }
+
+/* Editor: label + stacked panels. */
+.bb-tab--editing {
+	border: 1px dashed var( --bb-color-border, #ccc );
+	border-radius: var( --bb-radius, 6px );
+	padding: 0.75rem;
+	margin-bottom: 0.75rem;
+}
+
+.bb-tab__label {
+	display: block;
+	font-weight: 700;
+	margin-bottom: 0.5rem;
+	color: var( --bb-color-link, #1a73e8 );
+}
+
+/* ==================================================================
+ * Accordion
+ * ================================================================ */
+.bb-accordion__item {
+	border: 1px solid var( --bb-color-border, #e6e8eb );
+	border-radius: var( --bb-radius, 6px );
+	margin-bottom: 0.6rem;
+	overflow: hidden;
+}
+
+.bb-accordion__header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 1rem;
+	width: 100%;
+	padding: 0.9rem 1.1rem;
+	border: 0;
+	background: var( --bb-color-surface, #f7f8fa );
+	color: inherit;
+	font: inherit;
+	font-weight: 600;
+	text-align: left;
+	cursor: pointer;
+}
+
+.bb-accordion__marker {
+	flex: 0 0 auto;
+	width: 0.7rem;
+	height: 0.7rem;
+	border-right: 2px solid currentColor;
+	border-bottom: 2px solid currentColor;
+	transform: rotate( 45deg );
+	transition: transform 0.2s ease;
+}
+
+.bb-accordion__item.is-open .bb-accordion__marker {
+	transform: rotate( -135deg );
+}
+
+.bb-accordion__panel {
+	padding: 1.1rem;
+}
+
+.bb-accordion__item:not( .is-open ) .bb-accordion__panel {
+	display: none;
+}
+
+/* ==================================================================
+ * Post cards (Post Carousel / Post Slider)
+ * ================================================================ */
+.bb-post-card {
+	display: flex;
+	flex-direction: column;
+	background: var( --bb-color-background, #fff );
+	border: 1px solid var( --bb-color-border, #e6e8eb );
+	border-radius: var( --bb-radius, 6px );
+	overflow: hidden;
+}
+
+.bb-post-card__media img {
+	display: block;
+	width: 100%;
+	height: 200px;
+	object-fit: cover;
+}
+
+.bb-post-card__body {
+	padding: 1rem 1.1rem 1.25rem;
+}
+
+.bb-post-card__title {
+	margin: 0 0 0.35rem;
+	font-size: 1.2rem;
+	line-height: 1.3;
+}
+
+.bb-post-card__title a { text-decoration: none; }
+
+.bb-post-card__meta {
+	color: var( --bb-color-muted, #667085 );
+	font-size: 0.8rem;
+	margin-bottom: 0.6rem;
+}
+
+.bb-post-card__excerpt {
+	margin: 0 0 0.75rem;
+	color: var( --bb-color-muted, #667085 );
+}
+
+.bb-post-card__more {
+	font-weight: 600;
+	text-decoration: none;
+}
+
+/* ==================================================================
+ * Core Table — striped / bordered variations
+ * ================================================================ */
+.wp-block-table.is-style-bb-striped tbody tr:nth-child( odd ) {
+	background: var( --bb-color-surface, #f7f8fa );
+}
+
+.wp-block-table.is-style-bb-striped td,
+.wp-block-table.is-style-bb-striped th {
+	border: 0;
+	padding: 0.6rem 0.9rem;
+}
+
+.wp-block-table.is-style-bb-bordered td,
+.wp-block-table.is-style-bb-bordered th {
+	border: 1px solid var( --bb-color-border, #e6e8eb );
+	padding: 0.6rem 0.9rem;
+}
+
+.wp-block-table.is-style-bb-bordered thead th {
+	background: var( --bb-color-surface, #f7f8fa );
+}

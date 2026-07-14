@@ -1,0 +1,195 @@
+/**
+ * GeneratePress-style skin for Blank Base.
+ *
+ * Makes the Blank Base front end render like a default GeneratePress 3.x
+ * install: separate boxed containers ("cards") on a light-grey page, a 1200px
+ * container, a 70/30 sidebar, system-font headings at GeneratePress sizes and
+ * GeneratePress's default colour palette, spacing and typography.
+ *
+ * Every value below is taken from GeneratePress 3.6.1 defaults
+ * (inc/defaults.php). This file is loaded after style.css and the Customizer's
+ * inline CSS, so it overrides them.
+ *
+ * @package Blank_Base
+ */
+
+/*--------------------------------------------------------------
+1.0 Design tokens
+--------------------------------------------------------------*/
+:root {
+	/* GeneratePress uses the same system stack for body and headings. */
+	--bb-font-headings: var( --bb-font-body );
+
+	/* Layout: 1200px container, no narrowed reading measure. */
+	--bb-wide-width: 1200px;
+	--bb-content-width: 1200px;
+
+	/* GeneratePress "separator" between containers. */
+	--bb-spacing: 20px;
+
+	/* GeneratePress headings are normal weight. */
+	--bb-heading-weight: 400;
+	--bb-heading-weight-sub: 400;
+
+	/* GeneratePress heading sizes (desktop) + 1.2 line-height. */
+	--bb-h1: 42px;
+	--bb-h2: 35px;
+	--bb-h3: 29px;
+	--bb-h4: 24px;
+	--bb-h5: 20px;
+	--bb-h6: 17px;
+	--bb-leading-tight: 1.2;
+
+	/* Card (boxed container) background. */
+	--gp-card-bg: #ffffff;
+
+	/* GeneratePress content padding (content_* = 40). */
+	--gp-card-padding: 40px;
+
+	/* GeneratePress global colours. */
+	--bb-color-text: #222222;        /* contrast   */
+	--bb-color-muted: #575760;       /* contrast-2 */
+	--bb-color-border: #e3e3e3;
+	--bb-color-link: #1e73be;        /* accent     */
+	--bb-color-link-hover: #222222;  /* contrast   */
+	--bb-color-background: #f7f8f9;   /* base-2: page background */
+}
+
+/*--------------------------------------------------------------
+2.0 Typography
+--------------------------------------------------------------*/
+body {
+	font-family: var( --bb-font-body );
+	font-size: 17px;
+	line-height: 1.5;
+}
+
+p {
+	margin: 0 0 1.5em;
+}
+
+h1, h2, h3, h4, h5, h6,
+.entry-title,
+.page-title,
+.widget-title {
+	font-family: var( --bb-font-body );
+	font-weight: 400;
+	line-height: 1.2;
+}
+
+h1, .entry-title { font-size: var( --bb-h1 ); }
+h2 { font-size: var( --bb-h2 ); }
+h3 { font-size: var( --bb-h3 ); }
+h4 { font-size: var( --bb-h4 ); }
+h5 { font-size: var( --bb-h5 ); }
+h6 { font-size: var( --bb-h6 ); }
+
+.widget-title {
+	font-size: 20px;
+	margin-bottom: 30px; /* GeneratePress widget_title_separator = 30 */
+}
+
+/* GeneratePress underlines in-content links by default. */
+.entry-content a,
+.entry-summary a,
+.comment-content a,
+.widget a {
+	text-decoration: underline;
+}
+
+/*--------------------------------------------------------------
+3.0 Layout: page background + 1200px container
+--------------------------------------------------------------*/
+.site-content {
+	max-width: 1200px;
+	padding: 20px;
+	gap: 0;
+}
+
+/* 70 / 30 content-to-sidebar split (right_sidebar_width = 30). The content
+   column uses a zero flex-basis so it always grows into the space left beside
+   the sidebar, independent of its own content width. A content-based basis
+   (flex-basis:auto) let a wide element — a table, an image, a long word — push
+   the column past 70%, which then wrapped below the rigid 30% sidebar. */
+.sidebar-right #primary,
+.sidebar-left #primary {
+	flex: 1 1 0;
+	min-width: 0;
+}
+
+.no-sidebar #primary {
+	flex: 1 1 100%;
+	min-width: 0;
+}
+
+.sidebar-right .widget-area,
+.sidebar-left .widget-area {
+	flex: 0 0 var( --bb-sidebar-w, 30% );
+	max-width: var( --bb-sidebar-w, 30% );
+	min-width: 0;
+}
+
+/*--------------------------------------------------------------
+4.0 Separate boxed containers ("cards")
+--------------------------------------------------------------*/
+
+/* Header keeps a solid (non-grey) background so it reads apart from the page. */
+.site-header {
+	background: var( --gp-card-bg );
+}
+
+/* Content cards: every post/page, the archive/search title block, the
+   comments area and the no-results block become a padded white box. */
+.hentry,
+.page-header,
+.comments-area,
+.no-results,
+.error-404 {
+	background: var( --gp-card-bg );
+	padding: var( --gp-card-padding );
+	margin: 0 0 20px;
+}
+
+/* Sidebar widgets become individual white cards. */
+.widget-area .widget {
+	background: var( --gp-card-bg );
+	padding: var( --gp-card-padding );
+	margin: 0 0 20px;
+}
+
+.widget-area .widget:last-child {
+	margin-bottom: 0;
+}
+
+/* Content fills the card – release Blank Base's narrowed reading measure and
+   the auto-centring on entry/page headers. */
+.entry-content > *,
+.entry-summary > *,
+.entry-header,
+.page-header,
+.page .entry-content > *,
+.page .entry-summary > * {
+	max-width: 100%;
+	margin-left: 0;
+	margin-right: 0;
+}
+
+/*--------------------------------------------------------------
+5.0 Responsive (GeneratePress mobile_content_* = 30, mobile heading sizes)
+--------------------------------------------------------------*/
+@media (max-width: 768px) {
+	:root {
+		--bb-h1: 31px;
+		--bb-h2: 27px;
+		--bb-h3: 24px;
+		--gp-card-padding: 30px;
+	}
+
+	.sidebar-right .widget-area,
+	.sidebar-left .widget-area {
+		flex: 1 1 auto;
+		max-width: 100%;
+		margin-left: 0;
+		margin-right: 0;
+	}
+}

@@ -1,0 +1,212 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/theme.json",
+	"version": 2,
+	"settings": {
+		"appearanceTools": true,
+		"layout": {
+			"contentSize": "46rem",
+			"wideSize": "75rem"
+		},
+		"color": {
+			"custom": true,
+			"customDuotone": true,
+			"customGradient": true,
+			"defaultDuotone": true,
+			"defaultGradients": true,
+			"defaultPalette": true,
+			"link": true,
+			"palette": [
+				{
+					"slug": "foreground",
+					"color": "#22293d",
+					"name": "Foreground"
+				},
+				{
+					"slug": "background",
+					"color": "#ffffff",
+					"name": "Background"
+				},
+				{
+					"slug": "primary",
+					"color": "#1b2440",
+					"name": "Primary"
+				},
+				{
+					"slug": "secondary",
+					"color": "#a9781f",
+					"name": "Secondary"
+				},
+				{
+					"slug": "accent",
+					"color": "#c8a45c",
+					"name": "Gold Accent"
+				},
+				{
+					"slug": "ink",
+					"color": "#1b2440",
+					"name": "Ink"
+				},
+				{
+					"slug": "cream",
+					"color": "#f6f1e7",
+					"name": "Cream"
+				},
+				{
+					"slug": "cream-dark",
+					"color": "#efe6d3",
+					"name": "Cream Dark"
+				},
+				{
+					"slug": "terracotta",
+					"color": "#c96a4b",
+					"name": "Terracotta"
+				},
+				{
+					"slug": "muted",
+					"color": "#6c6c6c",
+					"name": "Muted"
+				},
+				{
+					"slug": "border",
+					"color": "#e6e0d4",
+					"name": "Border"
+				}
+			],
+			"gradients": [
+				{
+					"slug": "ink-diagonal",
+					"gradient": "linear-gradient(135deg, #1b2440 0%, #2a3763 100%)",
+					"name": "Ink Diagonal"
+				},
+				{
+					"slug": "gold-warm",
+					"gradient": "linear-gradient(135deg, #c8a45c 0%, #c96a4b 100%)",
+					"name": "Gold Warm"
+				},
+				{
+					"slug": "cream-soft",
+					"gradient": "linear-gradient(180deg, #f6f1e7 0%, #efe6d3 100%)",
+					"name": "Cream Soft"
+				}
+			]
+		},
+		"typography": {
+			"customFontSize": true,
+			"lineHeight": true,
+			"dropCap": true,
+			"fontFamilies": [
+				{
+					"fontFamily": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Oxygen-Sans, Ubuntu, Cantarell, \"Helvetica Neue\", sans-serif",
+					"slug": "system",
+					"name": "System"
+				},
+				{
+					"fontFamily": "Georgia, \"Times New Roman\", serif",
+					"slug": "serif",
+					"name": "Serif"
+				},
+				{
+					"fontFamily": "SFMono-Regular, Menlo, Monaco, Consolas, \"Liberation Mono\", \"Courier New\", monospace",
+					"slug": "monospace",
+					"name": "Monospace"
+				}
+			],
+			"fontSizes": [
+				{
+					"slug": "small",
+					"size": "0.875rem",
+					"name": "Small"
+				},
+				{
+					"slug": "medium",
+					"size": "1rem",
+					"name": "Medium"
+				},
+				{
+					"slug": "large",
+					"size": "1.5rem",
+					"name": "Large"
+				},
+				{
+					"slug": "x-large",
+					"size": "2rem",
+					"name": "Extra Large"
+				},
+				{
+					"slug": "xx-large",
+					"size": "2.75rem",
+					"name": "Huge"
+				}
+			]
+		},
+		"spacing": {
+			"blockGap": true,
+			"margin": true,
+			"padding": true,
+			"units": [ "px", "em", "rem", "vh", "vw", "%" ]
+		},
+		"border": {
+			"color": true,
+			"radius": true,
+			"style": true,
+			"width": true
+		}
+	},
+	"styles": {
+		"color": {
+			"background": "var(--wp--preset--color--background)",
+			"text": "var(--wp--preset--color--foreground)"
+		},
+		"typography": {
+			"fontFamily": "var(--wp--preset--font-family--system)",
+			"fontSize": "var(--wp--preset--font-size--medium)",
+			"lineHeight": "1.6"
+		},
+		"elements": {
+			"link": {
+				"color": {
+					"text": "var(--wp--preset--color--primary)"
+				},
+				":hover": {
+					"color": {
+						"text": "var(--wp--preset--color--secondary)"
+					}
+				}
+			},
+			"heading": {
+				"typography": {
+					"fontFamily": "var(--wp--preset--font-family--serif)",
+					"lineHeight": "1.3"
+				}
+			},
+			"button": {
+				"color": {
+					"background": "var(--wp--preset--color--primary)",
+					"text": "var(--wp--preset--color--background)"
+				},
+				"border": {
+					"radius": "3px"
+				},
+				":hover": {
+					"color": {
+						"background": "var(--wp--preset--color--secondary)"
+					}
+				}
+			}
+		},
+		"blocks": {
+			"core/quote": {
+				"border": {
+					"color": "var(--wp--preset--color--border)",
+					"width": "0 0 0 4px",
+					"style": "solid"
+				},
+				"spacing": {
+					"padding": {
+						"left": "1.5rem"
+					}
+				}
+			}
+		}
+	}
+}

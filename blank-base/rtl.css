@@ -1,0 +1,119 @@
+/*
+Theme Name: Blank Base
+
+Adding support for languages written in a Right To Left (RTL) direction is easy.
+This file mirrors the horizontal layout rules used in style.css.
+
+https://codex.wordpress.org/Right-to-Left_Language_Support
+*/
+
+body {
+	direction: rtl;
+	unicode-bidi: embed;
+}
+
+.alignleft {
+	float: right;
+	margin-right: 0;
+	margin-left: var(--bb-spacing);
+}
+
+.alignright {
+	float: left;
+	margin-left: 0;
+	margin-right: var(--bb-spacing);
+}
+
+ul,
+ol {
+	margin: 0 1.5rem var(--bb-spacing) 0;
+}
+
+blockquote {
+	border-left: 0;
+	border-right: 4px solid var(--bb-color-border);
+	padding-left: 0;
+	padding-right: var(--bb-spacing);
+}
+
+.widget-area {
+	margin-left: 0;
+	margin-right: var(--bb-spacing);
+}
+
+@media (max-width: 48rem) {
+	.widget-area {
+		margin-right: 0;
+	}
+}
+
+.comment-list .children {
+	margin-left: 0;
+	margin-right: var(--bb-spacing);
+}
+
+.comment-author .avatar {
+	margin-right: 0;
+	margin-left: 0.5rem;
+}
+
+th,
+td {
+	text-align: right;
+}
+
+.main-navigation ul ul {
+	left: auto;
+	right: 0;
+}
+
+.wp-block-quote {
+	border-left: 0;
+	border-right: 4px solid var(--bb-color-border);
+	padding-left: 0;
+	padding-right: var(--bb-spacing);
+}
+
+/* Pro components. */
+.announcement-bar__close {
+	right: auto;
+	left: 0.75rem;
+}
+
+.table-of-contents .toc-level-3 {
+	padding-left: 0;
+	padding-right: 1rem;
+}
+
+.author-box__avatar {
+	margin-right: 0;
+}
+
+.bb-check-list li {
+	padding: 0.4rem 1.6rem 0.4rem 0;
+}
+
+.bb-check-list li::before {
+	left: auto;
+	right: 0;
+}
+
+.bb-slider__prev {
+	left: auto;
+	right: 0;
+}
+
+.bb-slider__next {
+	right: auto;
+	left: 0;
+}
+
+@media (max-width: 48em) {
+	.main-navigation.toggled .menu {
+		right: auto;
+		left: 0;
+		border-left: 0;
+		border-right: 1px solid var(--bb-color-border);
+		box-shadow: 8px 0 24px rgba(0, 0, 0, 0.15);
+	}
+}

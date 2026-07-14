@@ -1,0 +1,2316 @@
+/*
+Theme Name: Blank Base
+Theme URI: https://example.com/blank-base/
+Author: Blank Base
+Author URI: https://example.com/
+Description: Blank Base is a clean, lightweight and fully standards-compliant blank starter theme for WordPress. It ships with no hard-coded content — every piece of data is added dynamically through the WordPress admin, the Customizer and widgets — while still including every option, template and hook a production theme needs. Version 2.5 adds a GeneratePress-style layout engine (per-context and per-post sidebar layouts), a theme hook framework, navigation location/dropdown/off-canvas options, a footer bar with configurable widget columns, and full color & typography managers. Version 3.1 adds a one-click Demo Content importer (Appearance → Import Demo Content) that builds a complete, ready-to-use book-publishing website — pages, posts, images, menus and colours — entirely from bundled data, with no plugin or remote server. It is accessibility-ready, translation-ready, block-editor ready and built on the full WordPress template hierarchy.
+Version: 3.1.0
+Requires at least: 6.0
+Tested up to: 6.8
+Requires PHP: 8.0
+License: GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: blank-base
+Tags: blog, one-column, two-columns, right-sidebar, left-sidebar, custom-background, custom-logo, custom-menu, custom-header, featured-images, footer-widgets, sticky-post, threaded-comments, translation-ready, block-styles, wide-blocks, accessibility-ready, editor-style, full-width-template, rtl-language-support, theme-options
+
+Blank Base WordPress Theme, (C) 2024 Blank Base.
+Blank Base is distributed under the terms of the GNU GPL.
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 2 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+GNU General Public License for more details.
+
+Blank Base is based on Underscores (https://underscores.me/), (C) 2012-2024 Automattic, Inc.
+Normalizing styles have been helped along thanks to the fine work of Nicolas Gallagher and Jonathan Neal.
+*/
+
+/*--------------------------------------------------------------
+>>> TABLE OF CONTENTS:
+----------------------------------------------------------------
+1.0 - Normalize
+2.0 - Typography
+3.0 - Elements
+4.0 - Forms
+5.0 - Accessibility
+6.0 - Alignments
+7.0 - Layout
+8.0 - Site Header
+9.0 - Navigation
+10.0 - Content
+11.0 - Comments
+12.0 - Widgets
+13.0 - Site Footer
+14.0 - Infinite scroll
+15.0 - Media & Captions
+16.0 - Gutenberg / Block styles
+--------------------------------------------------------------*/
+
+/*--------------------------------------------------------------
+1.0 Normalize
+--------------------------------------------------------------*/
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+html {
+	line-height: 1.15;
+	-webkit-text-size-adjust: 100%;
+}
+
+body {
+	margin: 0;
+}
+
+main {
+	display: block;
+}
+
+hr {
+	box-sizing: content-box;
+	height: 0;
+	overflow: visible;
+}
+
+a {
+	background-color: transparent;
+}
+
+img {
+	border-style: none;
+	max-width: 100%;
+	height: auto;
+}
+
+/*--------------------------------------------------------------
+2.0 Typography
+--------------------------------------------------------------*/
+:root {
+	--bb-color-text: #1f2733;
+	--bb-color-link: #2563eb;
+	--bb-color-link-hover: #1d4ed8;
+	--bb-color-border: #e6e8eb;
+	--bb-color-muted: #667085;
+	--bb-color-background: #ffffff;
+	--bb-color-surface: #f7f8fa;
+	--bb-font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+	--bb-font-headings: Georgia, "Times New Roman", serif;
+	--bb-content-width: 46rem;
+	--bb-wide-width: 75rem;
+	--bb-spacing: 1.5rem;
+
+	/* Modular heading scale (h1 and h2 are fluid). */
+	--bb-h1: clamp(2rem, 4vw + 1rem, 2.75rem);
+	--bb-h2: clamp(1.6rem, 2.5vw + 0.5rem, 2.1rem);
+	--bb-h3: 1.5rem;
+	--bb-h4: 1.25rem;
+	--bb-h5: 1.1rem;
+	--bb-h6: 0.9rem;
+	--bb-heading-weight: var(--bb-weight-bold);
+	--bb-heading-weight-sub: var(--bb-weight-semibold);
+
+	/* Body font-size scale. */
+	--bb-text-xs: 0.75rem;
+	--bb-text-sm: 0.875rem;
+	--bb-text-base: 1rem;
+	--bb-text-md: 1.125rem;
+	--bb-text-lg: 1.25rem;
+
+	/* Font weights. */
+	--bb-weight-normal: 400;
+	--bb-weight-medium: 500;
+	--bb-weight-semibold: 600;
+	--bb-weight-bold: 700;
+
+	/* Line heights. */
+	--bb-leading-tight: 1.2;
+	--bb-leading-snug: 1.4;
+	--bb-leading-normal: 1.6;
+
+	/* Spacing scale. */
+	--bb-space-2xs: 0.25rem;
+	--bb-space-xs: 0.5rem;
+	--bb-space-sm: 0.75rem;
+	--bb-space-md: 1rem;
+	--bb-space-lg: 1.5rem;
+	--bb-space-xl: 2.5rem;
+	--bb-space-2xl: 4rem;
+
+	/* Radii. */
+	--bb-radius-sm: 3px;
+	--bb-radius: 6px;
+	--bb-radius-lg: 12px;
+	--bb-radius-pill: 999px;
+
+	/* Motion. */
+	--bb-transition: 0.15s ease;
+}
+
+body,
+button,
+input,
+select,
+optgroup,
+textarea {
+	color: var(--bb-color-text);
+	font-family: var(--bb-font-body);
+	font-size: var(--bb-text-base);
+	line-height: var(--bb-leading-normal);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-family: var(--bb-font-headings);
+	font-weight: var(--bb-heading-weight);
+	line-height: 1.2;
+	margin: 0 0 var(--bb-spacing);
+	overflow-wrap: break-word;
+	text-wrap: balance;
+}
+
+h1 {
+	font-size: var(--bb-h1);
+}
+
+h2 {
+	font-size: var(--bb-h2);
+}
+
+h3 {
+	font-size: var(--bb-h3);
+}
+
+h4 {
+	font-size: var(--bb-h4);
+	font-weight: var(--bb-heading-weight-sub);
+}
+
+h5 {
+	font-size: var(--bb-h5);
+	font-weight: var(--bb-heading-weight-sub);
+}
+
+h6 {
+	font-size: var(--bb-h6);
+	font-weight: var(--bb-heading-weight-sub);
+	letter-spacing: 0.05em;
+	text-transform: uppercase;
+}
+
+/* Give top-level prose headings breathing room above them (nested headings
+   inside patterns, groups and columns are left to their own spacing). */
+.entry-content > h2,
+.entry-content > h3,
+.entry-content > h4 {
+	margin-top: 2em;
+}
+
+.entry-content > *:first-child {
+	margin-top: 0;
+}
+
+p {
+	margin: 0 0 var(--bb-spacing);
+}
+
+strong,
+b {
+	font-weight: 700;
+}
+
+em,
+i,
+cite,
+dfn {
+	font-style: italic;
+}
+
+small {
+	font-size: 0.85em;
+}
+
+mark {
+	background: #fff3b0;
+	color: inherit;
+	padding: 0 0.2em;
+}
+
+sub,
+sup {
+	font-size: 0.72em;
+	line-height: 0;
+	position: relative;
+	vertical-align: baseline;
+}
+
+sup {
+	top: -0.5em;
+}
+
+sub {
+	bottom: -0.25em;
+}
+
+abbr[title] {
+	text-decoration: underline dotted;
+	cursor: help;
+}
+
+address {
+	font-style: normal;
+	margin: 0 0 var(--bb-spacing);
+}
+
+dl {
+	margin: 0 0 var(--bb-spacing);
+}
+
+dt {
+	font-weight: 700;
+}
+
+dd {
+	margin: 0 0 0.75rem;
+}
+
+figure {
+	margin: 0 0 var(--bb-spacing);
+}
+
+figcaption {
+	color: var(--bb-color-muted);
+	font-size: 0.85rem;
+	margin-top: 0.5rem;
+	text-align: center;
+}
+
+ins {
+	background: #e6ffed;
+	text-decoration: none;
+}
+
+del {
+	color: var(--bb-color-muted);
+}
+
+kbd {
+	background: var(--bb-color-border);
+	border-radius: 3px;
+	padding: 0.1em 0.4em;
+}
+
+/*--------------------------------------------------------------
+3.0 Elements
+--------------------------------------------------------------*/
+body {
+	background: var(--bb-color-background);
+}
+
+a {
+	color: var(--bb-color-link);
+	transition: color var(--bb-transition);
+}
+
+a:hover,
+a:focus,
+a:active {
+	color: var(--bb-color-link-hover);
+}
+
+blockquote {
+	border-left: 4px solid var(--bb-color-border);
+	margin: 0 0 var(--bb-spacing);
+	padding-left: var(--bb-spacing);
+	color: var(--bb-color-muted);
+}
+
+hr {
+	background-color: var(--bb-color-border);
+	border: 0;
+	height: 1px;
+	margin: var(--bb-spacing) 0;
+}
+
+ul,
+ol {
+	margin: 0 0 var(--bb-spacing) 1.5rem;
+	padding: 0;
+}
+
+table {
+	border-collapse: collapse;
+	margin: 0 0 var(--bb-spacing);
+	width: 100%;
+}
+
+th,
+td {
+	border: 1px solid var(--bb-color-border);
+	padding: 0.5rem;
+	text-align: left;
+}
+
+code,
+kbd,
+pre,
+samp {
+	font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+	font-size: 0.9em;
+}
+
+pre {
+	background: #f5f5f5;
+	overflow: auto;
+	padding: var(--bb-spacing);
+}
+
+/*--------------------------------------------------------------
+4.0 Forms
+--------------------------------------------------------------*/
+button,
+input[type="button"],
+input[type="reset"],
+input[type="submit"] {
+	background: var(--bb-color-link);
+	border: 1px solid var(--bb-color-link);
+	border-radius: var(--bb-radius-sm);
+	color: #ffffff;
+	cursor: pointer;
+	font-weight: var(--bb-weight-semibold);
+	line-height: 1;
+	padding: 0.7em 1.3em;
+	transition: background-color var(--bb-transition), border-color var(--bb-transition);
+}
+
+button:hover,
+input[type="button"]:hover,
+input[type="reset"]:hover,
+input[type="submit"]:hover,
+button:focus,
+input[type="button"]:focus,
+input[type="reset"]:focus,
+input[type="submit"]:focus {
+	background: var(--bb-color-link-hover);
+	border-color: var(--bb-color-link-hover);
+}
+
+input[type="text"],
+input[type="email"],
+input[type="url"],
+input[type="password"],
+input[type="search"],
+input[type="number"],
+input[type="tel"],
+input[type="date"],
+textarea,
+select {
+	background: var(--bb-color-background);
+	border: 1px solid var(--bb-color-border);
+	border-radius: var(--bb-radius-sm);
+	color: var(--bb-color-text);
+	padding: 0.6em 0.7em;
+	max-width: 100%;
+	transition: border-color var(--bb-transition), box-shadow var(--bb-transition);
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="url"]:focus,
+input[type="password"]:focus,
+input[type="search"]:focus,
+input[type="number"]:focus,
+input[type="tel"]:focus,
+input[type="date"]:focus,
+textarea:focus,
+select:focus {
+	border-color: var(--bb-color-link);
+	outline: 2px solid transparent;
+	box-shadow: 0 0 0 2px var(--bb-color-link);
+}
+
+textarea {
+	width: 100%;
+}
+
+/*--------------------------------------------------------------
+5.0 Accessibility
+--------------------------------------------------------------*/
+/* Text meant only for screen readers. */
+.screen-reader-text {
+	border: 0;
+	clip: rect(1px, 1px, 1px, 1px);
+	clip-path: inset(50%);
+	height: 1px;
+	margin: -1px;
+	overflow: hidden;
+	padding: 0;
+	position: absolute !important;
+	width: 1px;
+	word-wrap: normal !important;
+}
+
+.screen-reader-text:focus {
+	background-color: #f1f1f1;
+	border-radius: 3px;
+	box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.6);
+	clip: auto !important;
+	clip-path: none;
+	color: #21759b;
+	display: block;
+	font-size: 0.875rem;
+	font-weight: 700;
+	height: auto;
+	left: 5px;
+	line-height: normal;
+	padding: 15px 23px 14px;
+	text-decoration: none;
+	top: 5px;
+	width: auto;
+	z-index: 100000;
+}
+
+/* Skip link */
+.skip-link {
+	left: -9999rem;
+	position: absolute;
+	top: 0;
+	z-index: 999999;
+}
+
+.skip-link:focus {
+	left: 0;
+}
+
+/* Do not show the outline on the skip link target. */
+#primary[tabindex="-1"]:focus {
+	outline: 0;
+}
+
+/* Visible keyboard focus ring for interactive elements. */
+a:focus-visible,
+button:focus-visible,
+[role="button"]:focus-visible,
+.wp-block-button__link:focus-visible,
+.menu-toggle:focus-visible,
+.back-to-top:focus-visible,
+.bb-slider__nav:focus-visible,
+summary:focus-visible {
+	outline: 2px solid var(--bb-color-link);
+	outline-offset: 2px;
+	border-radius: var(--bb-radius-sm);
+}
+
+/*--------------------------------------------------------------
+6.0 Alignments
+--------------------------------------------------------------*/
+.alignleft {
+	float: left;
+	margin-right: var(--bb-spacing);
+}
+
+.alignright {
+	float: right;
+	margin-left: var(--bb-spacing);
+}
+
+.aligncenter {
+	clear: both;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.alignwide {
+	max-width: var(--bb-wide-width);
+}
+
+.alignfull {
+	max-width: 100%;
+}
+
+/*--------------------------------------------------------------
+7.0 Layout
+--------------------------------------------------------------*/
+.site {
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh;
+}
+
+.site-content {
+	display: flex;
+	flex-wrap: wrap;
+	flex: 1 0 auto;
+	margin: 0 auto;
+	max-width: var(--bb-wide-width);
+	padding: var(--bb-spacing);
+	width: 100%;
+}
+
+#primary {
+	flex: 1 1 65%;
+	min-width: 0;
+	/* Never let wide content (tables, code, embeds) push the column past its
+	   track — otherwise it forces horizontal page scroll, especially in the
+	   mobile single-column flex layout. */
+	max-width: 100%;
+}
+
+.widget-area {
+	flex: 1 1 30%;
+	margin-left: var(--bb-spacing);
+	min-width: 0;
+	max-width: 100%;
+}
+
+/* No-sidebar / full-width layouts. */
+.no-sidebar #primary,
+.site-main--full-width {
+	flex-basis: 100%;
+}
+
+/* Left sidebar layout. */
+.sidebar-left #primary {
+	order: 2;
+}
+
+.sidebar-left .widget-area {
+	order: 1;
+	margin-left: 0;
+	margin-right: var(--bb-spacing);
+}
+
+/* Dropdown caret rendered by the nav menu title filter. */
+.dropdown-caret::after {
+	content: " \25BE";
+}
+
+@media (max-width: 48rem) {
+	.site-content {
+		flex-direction: column;
+	}
+
+	.widget-area {
+		margin-left: 0;
+		margin-top: var(--bb-spacing);
+	}
+
+	.sidebar-left #primary,
+	.sidebar-left .widget-area {
+		order: initial;
+		margin-right: 0;
+	}
+}
+
+/*--------------------------------------------------------------
+8.0 Site Header
+--------------------------------------------------------------*/
+.site-header {
+	border-bottom: 1px solid var(--bb-color-border);
+	background: var(--bb-color-background);
+}
+
+.site-header-inner {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	flex-wrap: wrap;
+	gap: var(--bb-spacing);
+	margin: 0 auto;
+	max-width: var(--bb-wide-width);
+	padding: 1rem var(--bb-spacing);
+	width: 100%;
+}
+
+.site-header-actions {
+	display: flex;
+	align-items: center;
+	gap: 1rem;
+}
+
+/* Elements added via the "Inside header" location render inside the flex
+   actions row wrapped in .blank-base-element (and wpautop adds a <p>). Make
+   the wrapper a centered flex item and drop the paragraph margin so an
+   account/login button lines up with the navigation instead of sitting low. */
+.site-header-actions .blank-base-element {
+	display: flex;
+	align-items: center;
+}
+
+.site-header-actions .blank-base-element > p {
+	margin: 0;
+}
+
+.site-branding {
+	margin-bottom: 0;
+}
+
+/* Centered header layout. */
+.header--centered .site-header-inner {
+	flex-direction: column;
+	text-align: center;
+}
+
+.header--centered .main-navigation ul {
+	justify-content: center;
+}
+
+/* Minimal header layout. */
+.header--minimal .site-title {
+	font-size: 1.5rem;
+}
+
+.header--minimal .site-description {
+	display: none;
+}
+
+/* Sticky header. */
+.site-header.is-sticky {
+	position: sticky;
+	top: 0;
+	z-index: 1000;
+	box-shadow: 0 1px 0 var(--bb-color-border);
+}
+
+.site-title {
+	font-size: 2rem;
+	margin: 0;
+}
+
+.site-title a {
+	text-decoration: none;
+}
+
+.site-description {
+	color: var(--bb-color-muted);
+	margin: 0;
+}
+
+.custom-logo-link {
+	display: inline-block;
+}
+
+/*--------------------------------------------------------------
+9.0 Navigation
+--------------------------------------------------------------*/
+.main-navigation {
+	display: block;
+}
+
+.main-navigation ul {
+	display: flex;
+	flex-wrap: wrap;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.main-navigation li {
+	position: relative;
+}
+
+.main-navigation a {
+	display: block;
+	padding: 0.5em 1em;
+	text-decoration: none;
+}
+
+.main-navigation ul ul {
+	background: var(--bb-color-background);
+	border: 1px solid var(--bb-color-border);
+	display: none;
+	flex-direction: column;
+	left: 0;
+	position: absolute;
+	top: 100%;
+	z-index: 99999;
+	min-width: 12rem;
+}
+
+.main-navigation ul li:hover > ul,
+.main-navigation ul li.focus > ul {
+	display: flex;
+}
+
+/* Small menu toggle. */
+.menu-toggle {
+	display: none;
+}
+
+@media (max-width: 48rem) {
+	.menu-toggle {
+		display: block;
+	}
+
+	.main-navigation .menu {
+		display: none;
+	}
+
+	.main-navigation.toggled .menu {
+		display: block;
+	}
+
+	.main-navigation.toggled ul {
+		flex-direction: column;
+	}
+
+	.main-navigation ul ul {
+		position: static;
+		display: block;
+		border: 0;
+		padding-left: var(--bb-spacing);
+	}
+}
+
+.post-navigation,
+.posts-navigation,
+.comment-navigation {
+	margin: var(--bb-spacing) 0;
+}
+
+.nav-links {
+	display: flex;
+	justify-content: space-between;
+}
+
+/*--------------------------------------------------------------
+10.0 Content
+--------------------------------------------------------------*/
+.entry {
+	margin-bottom: calc(var(--bb-spacing) * 2);
+}
+
+.entry-title {
+	font-size: 1.75rem;
+	margin-bottom: 0.5rem;
+}
+
+.entry-title a {
+	text-decoration: none;
+}
+
+.entry-meta,
+.entry-footer {
+	color: var(--bb-color-muted);
+	font-size: 0.875rem;
+	margin-bottom: var(--bb-spacing);
+}
+
+.entry-meta > span,
+.entry-footer > span {
+	margin-right: 1em;
+}
+
+.post-thumbnail {
+	display: block;
+	margin-bottom: var(--bb-spacing);
+}
+
+.entry-content > *,
+.entry-summary > * {
+	max-width: var(--bb-content-width);
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.entry-content .alignwide {
+	max-width: var(--bb-wide-width);
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.entry-content .alignfull {
+	max-width: none;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+/* Match the page/post title column to the content column so the heading,
+   body and header all line up instead of the title sitting hard-left. */
+.entry-header,
+.page-header {
+	max-width: var(--bb-content-width);
+	margin-left: auto;
+	margin-right: auto;
+}
+
+/* On static Pages (where you build full-width layouts) let the content and
+   title fill the container so they line up with the header. Single blog posts
+   keep the narrower reading measure above for comfortable long-form reading. */
+.page .entry-content > *,
+.page .entry-summary > *,
+.page .entry-header,
+.page .page-header {
+	max-width: var(--bb-wide-width);
+}
+
+.sticky {
+	display: block;
+}
+
+.page-links {
+	clear: both;
+	margin: 0 0 var(--bb-spacing);
+}
+
+.updated:not(.published) {
+	display: none;
+}
+
+/*--------------------------------------------------------------
+11.0 Comments
+--------------------------------------------------------------*/
+.comments-area {
+	margin-top: calc(var(--bb-spacing) * 2);
+}
+
+.comment-list {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.comment-list .children {
+	list-style: none;
+	margin-left: var(--bb-spacing);
+}
+
+.comment-body {
+	border-bottom: 1px solid var(--bb-color-border);
+	padding: var(--bb-spacing) 0;
+}
+
+.comment-author .avatar {
+	border-radius: 50%;
+	margin-right: 0.5rem;
+	vertical-align: middle;
+}
+
+.comment-metadata {
+	color: var(--bb-color-muted);
+	font-size: 0.8125rem;
+}
+
+.bypostauthor > .comment-body {
+	background: #f9f9f9;
+}
+
+.comment-respond {
+	margin-top: var(--bb-spacing);
+}
+
+.comment-form label {
+	display: block;
+	font-weight: 700;
+	margin-bottom: 0.25rem;
+}
+
+.comment-form input:not([type="submit"]):not([type="checkbox"]),
+.comment-form textarea {
+	width: 100%;
+	margin-bottom: var(--bb-spacing);
+}
+
+/*--------------------------------------------------------------
+12.0 Widgets
+--------------------------------------------------------------*/
+.widget {
+	margin-bottom: calc(var(--bb-spacing) * 1.5);
+}
+
+.widget-title {
+	font-size: 1.125rem;
+	margin-bottom: 0.75rem;
+}
+
+.widget ul {
+	list-style: none;
+	margin: 0;
+}
+
+.widget ul li {
+	margin-bottom: 0.5rem;
+}
+
+/*--------------------------------------------------------------
+13.0 Site Footer
+--------------------------------------------------------------*/
+.site-footer {
+	border-top: 1px solid var(--bb-color-border);
+	margin-top: auto;
+	padding: var(--bb-spacing);
+}
+
+.footer-widgets {
+	display: flex;
+	flex-wrap: wrap;
+	gap: var(--bb-spacing);
+	margin: 0 auto var(--bb-spacing);
+	max-width: var(--bb-wide-width);
+}
+
+.footer-widgets .widget {
+	flex: 1 1 15rem;
+}
+
+.site-info {
+	color: var(--bb-color-muted);
+	font-size: 0.875rem;
+	margin: 0 auto;
+	max-width: var(--bb-wide-width);
+	text-align: center;
+}
+
+.site-info a {
+	text-decoration: none;
+}
+
+/*--------------------------------------------------------------
+15.0 Media & Captions
+--------------------------------------------------------------*/
+.wp-caption {
+	margin-bottom: var(--bb-spacing);
+	max-width: 100%;
+}
+
+.wp-caption img[class*="wp-image-"] {
+	display: block;
+	margin: 0 auto;
+}
+
+.wp-caption .wp-caption-text {
+	color: var(--bb-color-muted);
+	font-size: 0.8125rem;
+	font-style: italic;
+	margin: 0.5rem 0;
+	text-align: center;
+}
+
+.gallery {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.5rem;
+	margin-bottom: var(--bb-spacing);
+}
+
+.gallery-item {
+	flex: 1 1 auto;
+}
+
+.wp-block-image figcaption {
+	color: var(--bb-color-muted);
+	font-size: 0.8125rem;
+	text-align: center;
+}
+
+/*--------------------------------------------------------------
+16.0 Gutenberg / Block styles
+--------------------------------------------------------------*/
+.wp-block-quote {
+	border-left: 4px solid var(--bb-color-border);
+	padding-left: var(--bb-spacing);
+}
+
+.wp-block-pullquote {
+	border-top: 4px solid var(--bb-color-text);
+	border-bottom: 4px solid var(--bb-color-text);
+	padding: var(--bb-spacing) 0;
+	text-align: center;
+}
+
+.wp-block-button__link {
+	border-radius: 3px;
+}
+
+.wp-block-code {
+	background: #f5f5f5;
+	padding: var(--bb-spacing);
+}
+
+.entry-content > .alignwide {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+/*--------------------------------------------------------------
+17.0 Breadcrumbs
+--------------------------------------------------------------*/
+.breadcrumbs {
+	font-size: 0.8125rem;
+	margin-bottom: var(--bb-spacing);
+}
+
+.breadcrumbs__list {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 0.4rem;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.breadcrumbs__item {
+	color: var(--bb-color-muted);
+}
+
+.breadcrumbs__item a {
+	text-decoration: none;
+}
+
+.breadcrumbs__item.is-current {
+	color: var(--bb-color-text);
+	font-weight: 600;
+}
+
+.breadcrumbs__sep {
+	color: var(--bb-color-muted);
+	list-style: none;
+}
+
+/*--------------------------------------------------------------
+18.0 Back to top
+--------------------------------------------------------------*/
+.back-to-top {
+	position: fixed;
+	right: 1.25rem;
+	bottom: 1.25rem;
+	z-index: 1000;
+	width: 2.75rem;
+	height: 2.75rem;
+	border: 0;
+	border-radius: 50%;
+	background: var(--bb-color-link);
+	color: #ffffff;
+	font-size: 1.1rem;
+	line-height: 1;
+	cursor: pointer;
+	opacity: 0;
+	visibility: hidden;
+	transform: translateY(0.5rem);
+	transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease;
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.back-to-top.is-visible {
+	opacity: 1;
+	visibility: visible;
+	transform: translateY(0);
+}
+
+.back-to-top:hover,
+.back-to-top:focus {
+	background: var(--bb-color-link-hover);
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.back-to-top {
+		transition: none;
+	}
+}
+
+/*--------------------------------------------------------------
+20.0 Announcement bar
+--------------------------------------------------------------*/
+.announcement-bar {
+	background: var(--bb-color-link);
+	color: #ffffff;
+	font-size: 0.9rem;
+}
+
+.announcement-bar a {
+	color: #ffffff;
+}
+
+.announcement-bar__inner {
+	position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 1rem;
+	max-width: var(--bb-wide-width);
+	margin: 0 auto;
+	padding: 0.6rem 3rem;
+}
+
+.announcement-bar__text,
+.announcement-bar__text p {
+	margin: 0;
+}
+
+.announcement-bar__close {
+	position: absolute;
+	right: 0.75rem;
+	background: transparent;
+	border: 0;
+	color: #ffffff;
+	cursor: pointer;
+	font-size: 1.35rem;
+	line-height: 1;
+	padding: 0 0.25rem;
+}
+
+.announcement-bar__close:hover,
+.announcement-bar__close:focus {
+	background: transparent;
+	opacity: 0.8;
+}
+
+/*--------------------------------------------------------------
+21.0 Header & social nav
+--------------------------------------------------------------*/
+.site-header-inner {
+	position: relative;
+}
+
+.social-navigation ul {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.5rem;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	justify-content: center;
+}
+
+.social-navigation a {
+	display: inline-block;
+	padding: 0.3em 0.8em;
+	border: 1px solid var(--bb-color-border);
+	border-radius: 999px;
+	text-decoration: none;
+	font-size: 0.85rem;
+}
+
+.social-navigation a:hover,
+.social-navigation a:focus {
+	border-color: var(--bb-color-link);
+}
+
+.social-navigation--footer {
+	margin: 0 auto var(--bb-spacing);
+	max-width: var(--bb-wide-width);
+}
+
+/*--------------------------------------------------------------
+22.0 Mega menu & off-canvas mobile drawer
+--------------------------------------------------------------*/
+@media (min-width: 48.0625em) {
+	/* Add the CSS class "mega-menu" to a top-level menu item to enable. */
+	.main-navigation .menu-item.mega-menu {
+		position: static;
+	}
+
+	.main-navigation .menu-item.mega-menu > ul {
+		left: 0;
+		right: 0;
+		width: 100%;
+		display: flex;
+		flex-wrap: wrap;
+		gap: 2rem;
+		padding: 1.5rem;
+	}
+
+	.main-navigation .menu-item.mega-menu > ul > li {
+		flex: 1 1 12rem;
+	}
+}
+
+@media (max-width: 48em) {
+	.menu-toggle {
+		position: relative;
+		z-index: 1150;
+	}
+
+	/* Turn the toggled menu into a slide-in drawer. */
+	.main-navigation.toggled .menu {
+		position: fixed;
+		top: 0;
+		right: 0;
+		height: 100vh;
+		width: min(80vw, 320px);
+		z-index: 1100;
+		background: var(--bb-color-background);
+		border-left: 1px solid var(--bb-color-border);
+		padding: 4rem 1.5rem 1.5rem;
+		overflow-y: auto;
+		box-shadow: -8px 0 24px rgba(0, 0, 0, 0.15);
+	}
+
+	.main-navigation.toggled::after {
+		content: "";
+		position: fixed;
+		inset: 0;
+		z-index: 1050;
+		background: rgba(0, 0, 0, 0.4);
+	}
+}
+
+/*--------------------------------------------------------------
+23.0 Blog layouts (grid / masonry)
+--------------------------------------------------------------*/
+.blog-layout-grid .post-list {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+	gap: 2rem;
+}
+
+.blog-layout-grid .post-list .entry {
+	margin-bottom: 0;
+	border: 1px solid var(--bb-color-border);
+	border-radius: 6px;
+	padding: 1.25rem;
+}
+
+.blog-layout-masonry .post-list {
+	column-count: 2;
+	column-gap: 2rem;
+}
+
+.blog-layout-masonry .post-list .entry {
+	break-inside: avoid;
+	border: 1px solid var(--bb-color-border);
+	border-radius: 6px;
+	padding: 1.25rem;
+	margin-bottom: 2rem;
+}
+
+@media (max-width: 48em) {
+	.blog-layout-masonry .post-list {
+		column-count: 1;
+	}
+}
+
+/*--------------------------------------------------------------
+24.0 Reading progress & table of contents
+--------------------------------------------------------------*/
+.reading-progress {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 3px;
+	z-index: 1200;
+	background: transparent;
+	pointer-events: none;
+}
+
+.reading-progress__bar {
+	display: block;
+	width: 0;
+	height: 100%;
+	background: var(--bb-color-link);
+}
+
+.table-of-contents {
+	border: 1px solid var(--bb-color-border);
+	border-radius: 6px;
+	padding: 1rem 1.25rem;
+	margin: 0 0 var(--bb-spacing);
+	max-width: var(--bb-content-width);
+}
+
+.table-of-contents__title {
+	font-size: 1rem;
+	margin: 0 0 0.5rem;
+}
+
+.table-of-contents ul {
+	list-style: none;
+	margin: 0;
+}
+
+.table-of-contents li {
+	margin-bottom: 0.25rem;
+}
+
+.table-of-contents .toc-level-3 {
+	padding-left: 1rem;
+	font-size: 0.95em;
+}
+
+/*--------------------------------------------------------------
+25.0 Social share, author box, related posts
+--------------------------------------------------------------*/
+.social-share {
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+	gap: 0.75rem;
+	margin: var(--bb-spacing) 0;
+	padding: var(--bb-spacing) 0;
+	border-top: 1px solid var(--bb-color-border);
+	border-bottom: 1px solid var(--bb-color-border);
+}
+
+.social-share__label {
+	font-weight: 600;
+}
+
+.social-share__list {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.5rem;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.social-share__link {
+	display: inline-block;
+	padding: 0.35em 0.8em;
+	border: 1px solid var(--bb-color-border);
+	border-radius: 999px;
+	text-decoration: none;
+	font-size: 0.85rem;
+}
+
+.social-share__link:hover,
+.social-share__link:focus {
+	border-color: var(--bb-color-link);
+	color: var(--bb-color-link);
+}
+
+.author-box {
+	display: flex;
+	align-items: flex-start;
+	gap: 1rem;
+	border: 1px solid var(--bb-color-border);
+	border-radius: 6px;
+	padding: 1.25rem;
+	margin: var(--bb-spacing) 0;
+}
+
+.author-box__avatar img {
+	display: block;
+	border-radius: 50%;
+}
+
+.author-box__name {
+	font-size: 1.1rem;
+	margin: 0 0 0.35rem;
+}
+
+.author-box__name a {
+	text-decoration: none;
+}
+
+.author-box__bio {
+	color: var(--bb-color-muted);
+	margin: 0 0 0.5rem;
+}
+
+.author-box__more {
+	font-size: 0.875rem;
+}
+
+.related-posts {
+	margin: calc(var(--bb-spacing) * 2) 0;
+}
+
+.related-posts__title {
+	font-size: 1.3rem;
+	margin-bottom: var(--bb-spacing);
+}
+
+.related-posts__grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+	gap: 1.5rem;
+}
+
+.related-post__thumb img {
+	display: block;
+	border-radius: 4px;
+}
+
+.related-post__title {
+	font-size: 1rem;
+	margin: 0.5rem 0 0.25rem;
+}
+
+.related-post__title a {
+	text-decoration: none;
+}
+
+.related-post__date {
+	color: var(--bb-color-muted);
+	font-size: 0.8rem;
+}
+
+/*--------------------------------------------------------------
+26.0 Blank Canvas template
+--------------------------------------------------------------*/
+.site-main--canvas {
+	margin: 0;
+	max-width: none;
+	padding: 0;
+}
+
+/*--------------------------------------------------------------
+27.0 Sticky sidebar
+--------------------------------------------------------------*/
+.sticky-sidebar .widget-area {
+	position: sticky;
+	top: 1.5rem;
+	align-self: flex-start;
+}
+
+@media (max-width: 48em) {
+	.sticky-sidebar .widget-area {
+		position: static;
+	}
+}
+
+/*--------------------------------------------------------------
+28.0 Custom block styles
+--------------------------------------------------------------*/
+/* Image: Framed. */
+.is-style-blank-base-frame img {
+	border: 1px solid var(--bb-color-border);
+	padding: 0.5rem;
+	background: var(--bb-color-background);
+}
+
+/* Image: Rounded. */
+.is-style-blank-base-rounded img {
+	border-radius: 12px;
+}
+
+/* Button: Pill. */
+.wp-block-button.is-style-blank-base-pill .wp-block-button__link {
+	border-radius: 999px;
+}
+
+/* Paragraph: Lead. */
+.is-style-blank-base-lead {
+	font-size: 1.25rem;
+	line-height: 1.5;
+	color: var(--bb-color-muted);
+}
+
+/* Separator: Thick. */
+.wp-block-separator.is-style-blank-base-thick {
+	border: 0;
+	height: 4px;
+	max-width: 4rem;
+	background: var(--bb-color-link);
+	opacity: 1;
+}
+
+/*--------------------------------------------------------------
+29.0 Pattern helpers
+--------------------------------------------------------------*/
+/* Feature icon (used in the Features pattern). */
+.bb-feature-icon {
+	display: inline-flex;
+	color: var(--bb-color-link);
+	margin-bottom: 0.75rem;
+}
+
+/* Check-mark list (used in the Pricing pattern). */
+.bb-check-list {
+	list-style: none;
+	margin-left: 0;
+}
+
+.bb-check-list li {
+	position: relative;
+	padding: 0.4rem 0 0.4rem 1.6rem;
+	border-bottom: 1px solid var(--bb-color-border);
+}
+
+.bb-check-list li::before {
+	content: "\2713";
+	position: absolute;
+	left: 0;
+	color: var(--bb-color-link);
+	font-weight: 700;
+}
+
+/* Logo cloud placeholders read a touch quieter. */
+.bb-logo img {
+	opacity: 0.75;
+}
+
+/* Animated counter — an editable Heading block with the .bb-counter class.
+   Change the number/label by editing the block in the dashboard. */
+.bb-counter {
+	color: var(--bb-color-link);
+	font-variant-numeric: tabular-nums;
+	line-height: 1;
+}
+
+/* Skill / progress bars — an editable paragraph ("Design 92%") that the
+   script turns into a labelled, animated bar. */
+.bb-skill {
+	margin-bottom: 1.1rem;
+}
+
+.bb-skill__label {
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 0.35rem;
+	font-size: 0.9rem;
+}
+
+.bb-skill__track {
+	display: block;
+	height: 10px;
+	background: var(--bb-color-border);
+	border-radius: 999px;
+	overflow: hidden;
+}
+
+.bb-skill__fill {
+	display: block;
+	width: 0;
+	height: 100%;
+	background: var(--bb-color-link);
+	border-radius: 999px;
+	transition: width 1.2s ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.bb-skill__fill {
+		transition: none;
+	}
+}
+
+/* Testimonial slider. */
+.bb-slider {
+	position: relative;
+}
+
+.bb-slider__track {
+	display: flex;
+	overflow-x: auto;
+	scroll-snap-type: x mandatory;
+	scroll-behavior: smooth;
+	-webkit-overflow-scrolling: touch;
+	scrollbar-width: none;
+}
+
+.bb-slider__track::-webkit-scrollbar {
+	display: none;
+}
+
+.bb-slider__slide {
+	flex: 0 0 100%;
+	scroll-snap-align: center;
+	padding: 1.5rem 3.5rem;
+	text-align: center;
+}
+
+.bb-slider__quote {
+	border: 0;
+	margin: 0;
+	padding: 0;
+	color: inherit;
+}
+
+.bb-slider__quote p {
+	font-family: var(--bb-font-headings);
+	font-size: 1.3rem;
+}
+
+.bb-slider__quote cite {
+	color: var(--bb-color-muted);
+	font-size: 0.9rem;
+	font-style: normal;
+}
+
+.bb-slider__nav {
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	width: 2.5rem;
+	height: 2.5rem;
+	border: 1px solid var(--bb-color-border);
+	border-radius: 50%;
+	background: var(--bb-color-background);
+	color: var(--bb-color-text);
+	font-size: 1.3rem;
+	line-height: 1;
+	cursor: pointer;
+}
+
+.bb-slider__nav:hover,
+.bb-slider__nav:focus {
+	border-color: var(--bb-color-link);
+	color: var(--bb-color-link);
+}
+
+.bb-slider__prev {
+	left: 0;
+}
+
+.bb-slider__next {
+	right: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.bb-slider__track {
+		scroll-behavior: auto;
+	}
+}
+
+/*--------------------------------------------------------------
+30.0 Scroll reveal animations
+--------------------------------------------------------------
+Apply to ANY block:
+  • Pick an "Animate: …" style from the block's Styles panel, or
+  • add a class in Advanced → Additional CSS class(es), e.g.
+    "bb-animate", "bb-animate bb-from-left", "bb-animate bb-zoom bb-delay-2".
+The hidden start state is scoped to .js and to no-preference motion, so
+content is always visible without JavaScript or with reduced motion.
+--------------------------------------------------------------*/
+@media (prefers-reduced-motion: no-preference) {
+	.js .bb-animate,
+	.js [class*="is-style-animate-"] {
+		opacity: 0;
+		transform: translateY(24px);
+		transition: opacity 0.7s ease, transform 0.7s ease;
+		will-change: opacity, transform;
+	}
+
+	/* Direction modifiers (utility classes). */
+	.js .bb-animate.bb-from-top {
+		transform: translateY(-24px);
+	}
+
+	.js .bb-animate.bb-from-left {
+		transform: translateX(24px);
+	}
+
+	.js .bb-animate.bb-from-right {
+		transform: translateX(-24px);
+	}
+
+	.js .bb-animate.bb-zoom,
+	.js .is-style-animate-zoom {
+		transform: scale(0.92);
+	}
+
+	.js .is-style-animate-left {
+		transform: translateX(24px);
+	}
+
+	.js .is-style-animate-right {
+		transform: translateX(-24px);
+	}
+
+	/* Fade-only (no movement). */
+	.js .bb-animate.bb-fade,
+	.js .is-style-animate-fade {
+		transform: none;
+	}
+
+	/* Stagger delays. */
+	.js .bb-animate.bb-delay-1 {
+		transition-delay: 0.15s;
+	}
+
+	.js .bb-animate.bb-delay-2 {
+		transition-delay: 0.3s;
+	}
+
+	.js .bb-animate.bb-delay-3 {
+		transition-delay: 0.45s;
+	}
+
+	/* Revealed state. */
+	.js .bb-animate.is-visible,
+	.js [class*="is-style-animate-"].is-visible {
+		opacity: 1;
+		transform: none;
+	}
+}
+
+/*--------------------------------------------------------------
+31.0 Responsive hardening
+--------------------------------------------------------------*/
+/* Long words and URLs wrap instead of forcing horizontal scroll. */
+.entry-content,
+.entry-summary,
+.page-content,
+.comment-content {
+	overflow-wrap: break-word;
+	word-wrap: break-word;
+}
+
+/* Wide tables scroll inside their own container, never the page. */
+.wp-block-table {
+	display: block;
+	max-width: 100%;
+	overflow-x: auto;
+}
+
+/* Keep embeds and raw media within the content column on small screens. */
+.entry-content iframe,
+.entry-content embed,
+.entry-content object,
+.entry-content video {
+	max-width: 100%;
+}
+
+/* Media never exceeds its column. (overflow-x: hidden is deliberately NOT set
+   on html/body because it would break the sticky header and sticky sidebar.) */
+.wp-block-image img,
+.wp-block-cover {
+	max-width: 100%;
+}
+
+/*--------------------------------------------------------------
+20.0 Interface refinements
+   Original enhancements: sidebar search, hamburger mobile menu,
+   widget/search polish and focus states.
+--------------------------------------------------------------*/
+
+/* -- Search form (used in the sidebar and elsewhere). -------- */
+.search-form {
+	display: flex;
+	width: 100%;
+	gap: 0.5rem;
+}
+
+.search-form .search-field {
+	flex: 1 1 auto;
+	min-width: 0;
+	padding: 0.55rem 0.85rem;
+	border: 1px solid var(--bb-color-border);
+	border-radius: var(--bb-radius);
+	background: var(--bb-color-background);
+	color: var(--bb-color-text);
+}
+
+.search-form .search-field:focus {
+	outline: none;
+	border-color: var(--bb-color-link);
+	box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+
+.search-form .search-submit {
+	flex: 0 0 auto;
+	padding: 0.55rem 1.1rem;
+	border: 0;
+	border-radius: var(--bb-radius);
+	background: var(--bb-color-link);
+	color: #fff;
+	font-size: 0.9rem;
+	cursor: pointer;
+	transition: background-color var(--bb-transition);
+}
+
+.search-form .search-submit:hover,
+.search-form .search-submit:focus {
+	background: var(--bb-color-link-hover);
+}
+
+/* -- Sidebar. ------------------------------------------------ */
+.widget-area {
+	align-self: flex-start;
+}
+
+.sidebar-search {
+	padding: 1rem;
+	border: 1px solid var(--bb-color-border);
+	border-radius: var(--bb-radius-lg);
+	background: var(--bb-color-surface);
+}
+
+.widget .widget-title,
+.widget-area .widget-title,
+.widget-area h2 {
+	position: relative;
+	padding-bottom: 0.5rem;
+	margin-bottom: 1rem;
+	font-size: 1.05rem;
+	letter-spacing: 0.01em;
+}
+
+.widget-area .widget-title::after,
+.widget-area h2::after {
+	content: "";
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	width: 2.25rem;
+	height: 2px;
+	background: var(--bb-color-link);
+	border-radius: 2px;
+}
+
+.widget-area .widget ul li a {
+	text-decoration: none;
+}
+
+.widget-area .widget ul li a:hover,
+.widget-area .widget ul li a:focus {
+	text-decoration: underline;
+}
+
+/* -- Hamburger toggle + mobile menu. ------------------------- */
+.menu-toggle {
+	display: none;
+	align-items: center;
+	gap: 0.55rem;
+	padding: 0.5rem 0.85rem;
+	border: 1px solid var(--bb-color-border);
+	border-radius: var(--bb-radius);
+	background: transparent;
+	color: var(--bb-color-text);
+	font-size: 0.95rem;
+	line-height: 1;
+	cursor: pointer;
+}
+
+.menu-toggle:hover,
+.menu-toggle:focus {
+	border-color: var(--bb-color-link);
+	color: var(--bb-color-link);
+}
+
+/* Three-bar hamburger drawn with a bar and two pseudo-elements. */
+.menu-toggle__bars,
+.menu-toggle__bars::before,
+.menu-toggle__bars::after {
+	display: block;
+	width: 20px;
+	height: 2px;
+	background: currentColor;
+	border-radius: 2px;
+	transition: transform var(--bb-transition), opacity var(--bb-transition);
+}
+
+.menu-toggle__bars {
+	position: relative;
+}
+
+.menu-toggle__bars::before,
+.menu-toggle__bars::after {
+	content: "";
+	position: absolute;
+	left: 0;
+}
+
+.menu-toggle__bars::before {
+	top: -6px;
+}
+
+.menu-toggle__bars::after {
+	top: 6px;
+}
+
+/* Animate the bars into an X when the menu is open. */
+.main-navigation.toggled .menu-toggle__bars {
+	background: transparent;
+}
+
+.main-navigation.toggled .menu-toggle__bars::before {
+	transform: translateY(6px) rotate(45deg);
+}
+
+.main-navigation.toggled .menu-toggle__bars::after {
+	transform: translateY(-6px) rotate(-45deg);
+}
+
+@media (max-width: 48rem) {
+	.menu-toggle {
+		display: inline-flex;
+	}
+
+	.main-navigation {
+		position: relative;
+	}
+
+	/* The menu drops down as a panel below the header. */
+	.main-navigation .menu {
+		position: absolute;
+		right: 0;
+		top: calc(100% + 0.6rem);
+		z-index: 1000;
+		min-width: 15rem;
+		padding: 0.4rem;
+		border: 1px solid var(--bb-color-border);
+		border-radius: var(--bb-radius-lg);
+		background: var(--bb-color-background);
+		box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+	}
+
+	.main-navigation.toggled .menu {
+		display: block;
+		animation: bb-menu-in 0.16s ease;
+	}
+
+	.main-navigation .menu a {
+		padding: 0.7rem 0.85rem;
+		border-radius: var(--bb-radius);
+	}
+
+	.main-navigation .menu a:hover,
+	.main-navigation .menu a:focus {
+		background: var(--bb-color-surface);
+	}
+
+	.main-navigation ul ul {
+		box-shadow: none;
+		background: transparent;
+	}
+
+	@keyframes bb-menu-in {
+		from {
+			opacity: 0;
+			transform: translateY(-6px);
+		}
+
+		to {
+			opacity: 1;
+			transform: translateY(0);
+		}
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.main-navigation.toggled .menu {
+		animation: none;
+	}
+}
+
+/*--------------------------------------------------------------
+21.0 GeneratePress-parity Layout, Navigation & Footer
+--------------------------------------------------------------*/
+
+/* 21.1 Both-sidebars layout ---------------------------------- */
+.both-sidebars .site-content {
+	flex-wrap: nowrap;
+}
+
+.both-sidebars #primary {
+	order: 2;
+	flex: 1 1 46%;
+}
+
+.both-sidebars #tertiary {
+	order: 1;
+	margin-left: 0;
+	margin-right: var(--bb-spacing);
+}
+
+.both-sidebars #secondary {
+	order: 3;
+}
+
+.both-sidebars .widget-area {
+	flex: 1 1 24%;
+}
+
+@media (max-width: 62rem) {
+	.both-sidebars .site-content {
+		flex-wrap: wrap;
+	}
+
+	.both-sidebars #primary {
+		flex-basis: 100%;
+		order: 1;
+	}
+
+	.both-sidebars #tertiary,
+	.both-sidebars #secondary {
+		flex: 1 1 45%;
+		margin-right: 0;
+	}
+}
+
+@media (max-width: 48rem) {
+	/* Stack in reading order on phones: content first, then the two sidebars.
+	   (Resetting order to initial here previously dropped the content below both
+	   sidebars.) */
+	.both-sidebars #primary {
+		order: 1;
+	}
+
+	.both-sidebars #tertiary {
+		flex-basis: 100%;
+		order: 2;
+	}
+
+	.both-sidebars #secondary {
+		flex-basis: 100%;
+		order: 3;
+	}
+}
+
+/* 21.2 Full-width content container --------------------------- */
+.container-full-width .site-content {
+	max-width: none;
+}
+
+/* Full width (edge to edge): release the content container's max-width so the
+   main column spans the whole viewport, unlike the boxed "No sidebar" layout.
+   The container keeps its gutter padding so the breadcrumb, title, text and
+   edit link all line up and nothing is glued to the raw screen edge; full-width
+   (alignfull) blocks inside the content still break out to span the column. */
+.content-edge-to-edge .site-content {
+	max-width: none;
+}
+
+.content-edge-to-edge #primary {
+	max-width: none;
+}
+
+/* Full width means full width: remove the readable-measure / wide-width cap that
+   Pages normally apply to content, the title and the archive header, so the
+   breadcrumb, title and body all span the whole container edge to edge (they
+   still share the small gutter so text never touches the raw screen edge). */
+.content-edge-to-edge .entry-content > *,
+.content-edge-to-edge .entry-summary > *,
+.content-edge-to-edge .entry-header,
+.content-edge-to-edge .page-header,
+.content-edge-to-edge .entry-title {
+	max-width: none;
+}
+
+/* 21.3 Navigation location: inside-header variants ------------ */
+.nav-float-left .site-header-actions {
+	margin-right: auto;
+	margin-left: var(--bb-spacing);
+	order: 2;
+}
+
+.nav-nav-center .site-header-inner {
+	flex-wrap: wrap;
+	justify-content: center;
+}
+
+.nav-nav-center .site-header-actions {
+	flex-basis: 100%;
+	justify-content: center;
+	margin-top: var(--bb-space-xs);
+}
+
+.nav-align--center .menu {
+	justify-content: center;
+}
+
+.nav-align--right .menu {
+	justify-content: flex-end;
+}
+
+/* 21.4 Navigation bar (below / above header) ------------------ */
+.navigation-bar {
+	background: var(--bb-color-surface);
+	border-top: 1px solid var(--bb-color-border);
+	border-bottom: 1px solid var(--bb-color-border);
+}
+
+.navigation-bar--above-header {
+	border-top: 0;
+}
+
+.navigation-bar__inner {
+	margin: 0 auto;
+	max-width: var(--bb-wide-width);
+	padding: 0 var(--bb-spacing);
+	width: 100%;
+}
+
+.navigation-bar .main-navigation .menu {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.navigation-bar .nav-align--center .menu {
+	justify-content: center;
+}
+
+.navigation-bar .nav-align--right .menu {
+	justify-content: flex-end;
+}
+
+/* 21.5 Click-to-open sub-menus -------------------------------- */
+.main-navigation.nav-dropdown--click ul li:hover > ul,
+.main-navigation.nav-dropdown--click ul li.focus > ul {
+	display: none;
+}
+
+.main-navigation.nav-dropdown--click .menu-item-has-children.is-open > ul {
+	display: flex;
+}
+
+/* 21.6 Off-canvas mobile menu --------------------------------- */
+.menu-close {
+	display: none;
+	background: transparent;
+	border: 0;
+	color: inherit;
+	cursor: pointer;
+	font-size: 2rem;
+	line-height: 1;
+	padding: 0.25rem 0.5rem;
+}
+
+@media (max-width: 48rem) {
+	.mobile-menu--offcanvas.toggled .menu {
+		display: block;
+		position: fixed;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		width: 82%;
+		max-width: 320px;
+		height: 100%;
+		overflow-y: auto;
+		background: var(--bb-color-background);
+		box-shadow: -6px 0 24px rgba( 0, 0, 0, 0.18 );
+		padding: 3.5rem var(--bb-spacing) var(--bb-spacing);
+		z-index: 100001;
+		animation: bb-offcanvas-in 0.2s ease;
+	}
+
+	.mobile-menu--offcanvas.toggled .menu-close {
+		display: block;
+		position: fixed;
+		top: 0.5rem;
+		right: 0.75rem;
+		z-index: 100002;
+	}
+
+	body.offcanvas-open::after {
+		content: "";
+		position: fixed;
+		inset: 0;
+		background: rgba( 0, 0, 0, 0.45 );
+		z-index: 100000;
+	}
+
+	body.offcanvas-open {
+		overflow: hidden;
+	}
+
+	@keyframes bb-offcanvas-in {
+		from {
+			transform: translateX( 100% );
+		}
+
+		to {
+			transform: translateX( 0 );
+		}
+	}
+}
+
+/* 21.7 Footer widget columns (configurable count) ------------- */
+.footer-widgets {
+	display: grid;
+	grid-template-columns: repeat( 3, 1fr );
+	gap: var(--bb-spacing);
+	margin: 0 auto var(--bb-spacing);
+	max-width: var(--bb-wide-width);
+}
+
+.footer-widgets--1 {
+	grid-template-columns: 1fr;
+}
+
+.footer-widgets--2 {
+	grid-template-columns: repeat( 2, 1fr );
+}
+
+.footer-widgets--3 {
+	grid-template-columns: repeat( 3, 1fr );
+}
+
+.footer-widgets--4 {
+	grid-template-columns: repeat( 4, 1fr );
+}
+
+.footer-widgets--5 {
+	grid-template-columns: repeat( 5, 1fr );
+}
+
+@media (max-width: 62rem) {
+	.footer-widgets--3,
+	.footer-widgets--4,
+	.footer-widgets--5 {
+		grid-template-columns: repeat( 2, 1fr );
+	}
+}
+
+@media (max-width: 40rem) {
+	.footer-widgets {
+		grid-template-columns: 1fr;
+	}
+}
+
+/* 21.8 Footer bar -------------------------------------------- */
+.footer-bar {
+	border-top: 1px solid var(--bb-color-border);
+	padding-top: var(--bb-spacing);
+}
+
+.footer-bar__inner {
+	display: flex;
+	align-items: center;
+	gap: var(--bb-spacing);
+	margin: 0 auto;
+	max-width: var(--bb-wide-width);
+}
+
+.footer-bar--space-between .footer-bar__inner {
+	justify-content: space-between;
+	flex-wrap: wrap;
+}
+
+.footer-bar--left .footer-bar__inner {
+	justify-content: flex-start;
+	flex-wrap: wrap;
+}
+
+.footer-bar--center .footer-bar__inner {
+	flex-direction: column;
+	text-align: center;
+}
+
+.footer-bar .site-info {
+	margin: 0;
+	max-width: none;
+	text-align: inherit;
+}
+
+.footer-bar__secondary {
+	display: flex;
+	align-items: center;
+	gap: var(--bb-spacing);
+	flex-wrap: wrap;
+}
+
+.footer-bar .footer-navigation ul {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 1rem;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.footer-bar .footer-navigation a {
+	text-decoration: none;
+}
+
+@media (max-width: 40rem) {
+	.footer-bar__inner {
+		flex-direction: column;
+		text-align: center;
+	}
+}

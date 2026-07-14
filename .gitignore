@@ -1,0 +1,7 @@
+# Local WordPress test harness and scratch output (not part of the theme)
+/wptest/
+/extracted/
+/scratchpad/
+node_modules/
+*.log
+.DS_Store

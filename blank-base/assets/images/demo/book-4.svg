@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 680" width="480" height="680" fill="none" >
+      <defs><linearGradient id="bc4" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#7c9a80"/><stop offset="1" stop-color="#2a3763"/></linearGradient></defs>
+      <rect width="480" height="680" rx="8" fill="url(#bc4)"/>
+      <rect x="26" y="0" width="6" height="680" fill="#1b2440" opacity="0.25"/>
+      <path d="M240 260 C 160 320 160 430 240 470 C 320 430 320 320 240 260 Z" fill="#f6f1e7" opacity="0.16"/><path d="M240 270 L240 460" stroke="#e6c983" stroke-width="4" opacity="0.7"/>
+      <rect x="60" y="70" width="120" height="6" rx="3" fill="#e6c983"/>
+      <text x="60" y="150" font-family="Georgia, serif" font-size="46" font-weight="700" fill="#f6f1e7">Rooted</text>
+      <text x="60" y="205" font-family="Georgia, serif" font-size="46" font-weight="700" fill="#f6f1e7"></text>
+      <text x="60" y="600" font-family="Arial, sans-serif" font-size="20" letter-spacing="2" fill="#f6f1e7" opacity="0.85">PRIYA NAIR</text>
+      <rect x="60" y="620" width="80" height="4" fill="#e6c983"/>
+    </svg>

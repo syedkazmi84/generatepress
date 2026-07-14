@@ -1,0 +1,553 @@
+/**
+ * Blank Base custom blocks — shared styles (editor + front end).
+ *
+ * Front-end animation of .bb-counter and .bb-skill is handled by
+ * assets/js/theme.js. These rules cover layout and the editor preview.
+ *
+ * @package Blank_Base
+ */
+
+/* --------------------------------------------------------------------
+ * Counter
+ * ------------------------------------------------------------------ */
+.bb-counter-block {
+	text-align: center;
+}
+
+.bb-counter-block :where( .bb-counter ) {
+	font-family: var( --bb-font-headings, inherit );
+	font-size: 2.75rem;
+	font-weight: 700;
+	line-height: 1;
+}
+
+.bb-counter__label {
+	margin-top: 0.35rem;
+	color: var( --bb-color-muted, #6c6c6c );
+}
+
+/* --------------------------------------------------------------------
+ * Progress bar (editor preview + front-end runtime markup)
+ * ------------------------------------------------------------------ */
+.bb-skill-block,
+.bb-skill {
+	margin-bottom: 1.1rem;
+}
+
+.bb-skill__label {
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 0.35rem;
+	font-size: 0.9rem;
+}
+
+.bb-skill__track {
+	display: block;
+	height: 10px;
+	overflow: hidden;
+	background: var( --bb-color-border, #e6e6e6 );
+	border-radius: 999px;
+}
+
+.bb-skill__fill {
+	display: block;
+	width: 0;
+	height: 100%;
+	background: var( --bb-color-link, #1a73e8 );
+	border-radius: 999px;
+	transition: width 1.2s ease;
+}
+
+/* In the editor the fill is set inline and should appear immediately. */
+.bb-skill-block .bb-skill__fill {
+	transition: none;
+}
+
+@media ( prefers-reduced-motion: reduce ) {
+	.bb-skill__fill {
+		transition: none;
+	}
+}
+
+/* --------------------------------------------------------------------
+ * Icon Box
+ * ------------------------------------------------------------------ */
+.bb-iconbox {
+	text-align: center;
+}
+
+.bb-iconbox__icon.dashicons {
+	display: block;
+	width: auto;
+	height: auto;
+	margin: 0 0 1rem;
+	color: var( --bb-color-link, #1a73e8 );
+	font-size: 2.75rem;
+	line-height: 1;
+}
+
+.bb-iconbox__title {
+	margin: 0 0 0.6rem;
+	font-size: 1.25rem;
+	line-height: 1.3;
+}
+
+.bb-iconbox__text {
+	margin: 0;
+	line-height: 1.6;
+	color: var( --bb-color-muted, #6c6c6c );
+}
+
+/* --------------------------------------------------------------------
+ * Testimonial
+ * ------------------------------------------------------------------ */
+.bb-testimonial {
+	max-width: 40rem;
+	margin-inline: auto;
+	padding: 1.5rem;
+	text-align: center;
+}
+
+.bb-testimonial__avatar {
+	width: 72px;
+	height: 72px;
+	margin: 0 auto 1rem;
+	object-fit: cover;
+	border-radius: 50%;
+}
+
+.bb-testimonial__quote {
+	margin: 0 0 1rem;
+	padding: 0;
+	border: 0;
+	font-family: var( --bb-font-headings, inherit );
+	font-size: 1.3rem;
+	line-height: 1.5;
+}
+
+.bb-testimonial__cite {
+	display: flex;
+	flex-direction: column;
+	gap: 0.15rem;
+}
+
+.bb-testimonial__name {
+	font-weight: 600;
+}
+
+.bb-testimonial__role {
+	color: var( --bb-color-muted, #6c6c6c );
+	font-size: 0.9rem;
+}
+
+/* --------------------------------------------------------------------
+ * Advanced Heading
+ * ------------------------------------------------------------------ */
+.bb-heading__eyebrow {
+	margin: 0 0 0.25rem;
+	color: var( --bb-color-link, #1a73e8 );
+	font-size: 0.85rem;
+	font-weight: 600;
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
+}
+
+.bb-heading__title {
+	margin: 0;
+}
+
+.bb-heading__divider {
+	display: block;
+	width: 3rem;
+	height: 3px;
+	margin-top: 0.9rem;
+	background: var( --bb-color-link, #1a73e8 );
+	border-radius: 3px;
+}
+
+.bb-heading.has-text-align-center .bb-heading__divider {
+	margin-inline: auto;
+}
+
+.bb-heading.has-text-align-right .bb-heading__divider {
+	margin-left: auto;
+}
+
+/* --------------------------------------------------------------------
+ * Icon
+ * ------------------------------------------------------------------ */
+.bb-icon .dashicons {
+	color: var( --bb-color-link, #1a73e8 );
+	line-height: 1;
+}
+
+.bb-icon.has-text-align-center {
+	text-align: center;
+}
+
+.bb-icon.has-text-align-right {
+	text-align: right;
+}
+
+/* --------------------------------------------------------------------
+ * Image Box
+ * ------------------------------------------------------------------ */
+.bb-imagebox {
+	text-align: center;
+}
+
+.bb-imagebox__img {
+	display: block;
+	width: 100%;
+	height: auto;
+	margin-bottom: 1rem;
+	border-radius: 8px;
+}
+
+.bb-imagebox__title {
+	margin: 0 0 0.35rem;
+	font-size: 1.2rem;
+}
+
+.bb-imagebox__text {
+	margin: 0;
+	color: var( --bb-color-muted, #6c6c6c );
+}
+
+/* --------------------------------------------------------------------
+ * Pricing Box
+ * ------------------------------------------------------------------ */
+.bb-pricing {
+	padding: 2rem 1.5rem;
+	border: 1px solid var( --bb-color-border, #e6e6e6 );
+	border-radius: 12px;
+	text-align: center;
+}
+
+.bb-pricing.is-featured {
+	border-color: var( --bb-color-link, #1a73e8 );
+	box-shadow: 0 12px 30px rgba( 0, 0, 0, 0.08 );
+}
+
+.bb-pricing__plan {
+	font-weight: 600;
+	text-transform: uppercase;
+	letter-spacing: 0.05em;
+}
+
+.bb-pricing__price {
+	margin: 0.75rem 0 1rem;
+}
+
+.bb-pricing__amount {
+	font-family: var( --bb-font-headings, inherit );
+	font-size: 2.75rem;
+	font-weight: 700;
+}
+
+.bb-pricing__period {
+	color: var( --bb-color-muted, #6c6c6c );
+}
+
+.bb-pricing__features {
+	margin: 0 0 1.5rem;
+	padding: 0;
+	list-style: none;
+}
+
+.bb-pricing__features li {
+	padding: 0.4rem 0;
+	border-top: 1px solid var( --bb-color-border, #e6e6e6 );
+}
+
+.bb-pricing__button {
+	display: inline-block;
+	padding: 0.7rem 1.6rem;
+	background: var( --bb-color-link, #1a73e8 );
+	color: #fff;
+	border-radius: 6px;
+	text-decoration: none;
+}
+
+.bb-pricing.is-featured .bb-pricing__button {
+	background: var( --bb-color-link, #1a73e8 );
+}
+
+/* --------------------------------------------------------------------
+ * Team Member
+ * ------------------------------------------------------------------ */
+.bb-person {
+	text-align: center;
+}
+
+.bb-person__photo {
+	width: 120px;
+	height: 120px;
+	margin: 0 auto 0.75rem;
+	object-fit: cover;
+	border-radius: 50%;
+}
+
+.bb-person__name {
+	margin: 0 0 0.15rem;
+	font-size: 1.15rem;
+}
+
+.bb-person__role {
+	margin: 0 0 0.5rem;
+	color: var( --bb-color-link, #1a73e8 );
+	font-size: 0.9rem;
+}
+
+.bb-person__bio {
+	margin: 0;
+	color: var( --bb-color-muted, #6c6c6c );
+}
+
+/* --------------------------------------------------------------------
+ * Toggle / FAQ
+ * ------------------------------------------------------------------ */
+.bb-toggle {
+	padding: 0.4rem 0;
+	border-bottom: 1px solid var( --bb-color-border, #e6e6e6 );
+}
+
+.bb-toggle__q {
+	padding: 0.8rem 0;
+	font-weight: 600;
+	cursor: pointer;
+	list-style: none;
+}
+
+.bb-toggle__q::-webkit-details-marker {
+	display: none;
+}
+
+.bb-toggle__q::before {
+	content: "+";
+	display: inline-block;
+	width: 1.2em;
+	color: var( --bb-color-link, #1a73e8 );
+	font-weight: 700;
+}
+
+.bb-toggle[open] > .bb-toggle__q::before {
+	content: "\2013"; /* en dash */
+}
+
+.bb-toggle__a {
+	padding: 0 0 0.9rem 1.2em;
+	color: var( --bb-color-muted, #6c6c6c );
+}
+
+/* --------------------------------------------------------------------
+ * Countdown
+ * ------------------------------------------------------------------ */
+.bb-countdown {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 1.5rem;
+	justify-content: center;
+}
+
+.bb-countdown__unit {
+	min-width: 4rem;
+	text-align: center;
+}
+
+.bb-countdown__num {
+	display: block;
+	font-family: var( --bb-font-headings, inherit );
+	font-size: 2.5rem;
+	font-weight: 700;
+	font-variant-numeric: tabular-nums;
+	line-height: 1;
+}
+
+.bb-countdown__label {
+	display: block;
+	margin-top: 0.35rem;
+	color: var( --bb-color-muted, #6c6c6c );
+	font-size: 0.8rem;
+	text-transform: uppercase;
+	letter-spacing: 0.05em;
+}
+
+/* --------------------------------------------------------------------
+ * Circle Progress
+ * ------------------------------------------------------------------ */
+.bb-circle {
+	position: relative;
+	width: 160px;
+	max-width: 100%;
+	margin-inline: auto;
+	text-align: center;
+}
+
+.bb-circle__svg {
+	width: 160px;
+	height: 160px;
+	transform: rotate( -90deg );
+}
+
+.bb-circle__bg {
+	fill: none;
+	stroke: var( --bb-color-border, #e6e6e6 );
+	stroke-width: 10;
+}
+
+.bb-circle__bar {
+	fill: none;
+	stroke: var( --bb-color-link, #1a73e8 );
+	stroke-width: 10;
+	stroke-linecap: round;
+}
+
+.bb-circle__num {
+	position: absolute;
+	top: 62px;
+	left: 0;
+	width: 160px;
+	font-family: var( --bb-font-headings, inherit );
+	font-size: 1.8rem;
+	font-weight: 700;
+	font-variant-numeric: tabular-nums;
+}
+
+.bb-circle__label {
+	display: block;
+	margin-top: 0.5rem;
+	color: var( --bb-color-muted, #6c6c6c );
+}
+
+/* --------------------------------------------------------------------
+ * Template Library modal (editor only)
+ * ------------------------------------------------------------------ */
+.bb-template-library .components-modal__content {
+	width: min( 90vw, 1100px );
+}
+
+.bb-template-library__loading {
+	display: flex;
+	justify-content: center;
+	padding: 3rem 0;
+}
+
+.bb-template-library__grid {
+	display: grid;
+	grid-template-columns: repeat( auto-fill, minmax( 260px, 1fr ) );
+	gap: 1.25rem;
+	padding-bottom: 1rem;
+}
+
+.bb-template-library__item {
+	display: flex;
+	flex-direction: column;
+	overflow: hidden;
+	border: 1px solid #e0e0e0;
+	border-radius: 8px;
+	background: #fff;
+}
+
+.bb-template-library__preview {
+	height: 190px;
+	overflow: hidden;
+	border-bottom: 1px solid #e0e0e0;
+	background: #f7f7f7;
+	pointer-events: none;
+}
+
+.bb-template-library__meta {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 0.75rem;
+	padding: 0.75rem 1rem;
+}
+
+.bb-template-library__title {
+	display: block;
+	font-weight: 600;
+}
+
+.bb-template-library__cat {
+	display: block;
+	color: #757575;
+	font-size: 0.8rem;
+}
+
+/* ============================================================
+ * Shared block options (Design & Motion) + enhanced Icon Box
+ * and Testimonial. Added in v2.7.0.
+ * ========================================================== */
+
+/* Content alignment (shared across all Blank Base blocks). */
+.bb-b-align-left { text-align: left; }
+.bb-b-align-center { text-align: center; }
+.bb-b-align-right { text-align: right; }
+
+/* Hover effects (shared). */
+.bb-hover-lift,
+.bb-hover-grow,
+.bb-hover-shadow {
+	transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.bb-hover-lift:hover { transform: translateY( -5px ); box-shadow: 0 12px 28px rgba( 0, 0, 0, 0.12 ); }
+.bb-hover-grow:hover { transform: scale( 1.03 ); }
+.bb-hover-shadow:hover { box-shadow: 0 12px 28px rgba( 0, 0, 0, 0.14 ); }
+
+/* Enhanced Icon Box — icon styles. */
+.bb-iconbox--icon-circle .bb-iconbox__icon,
+.bb-iconbox--icon-square .bb-iconbox__icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 1.9em;
+	height: 1.9em;
+	background: var(--bb-color-surface, #f5f5f5);
+}
+.bb-iconbox--icon-circle .bb-iconbox__icon { border-radius: 50%; }
+.bb-iconbox--icon-square .bb-iconbox__icon { border-radius: var(--bb-radius, 6px); }
+
+/* Enhanced Icon Box — horizontal layouts. */
+.bb-iconbox--layout-left,
+.bb-iconbox--layout-right {
+	display: flex;
+	align-items: flex-start;
+	gap: 1rem;
+	text-align: left;
+}
+.bb-iconbox--layout-right {
+	flex-direction: row-reverse;
+	text-align: right;
+}
+.bb-iconbox--layout-left .bb-iconbox__icon,
+.bb-iconbox--layout-right .bb-iconbox__icon {
+	flex: 0 0 auto;
+	margin: 0;
+}
+
+/* Enhanced Testimonial — photo shapes. */
+.bb-testimonial--avatar-circle .bb-testimonial__avatar { border-radius: 50%; }
+.bb-testimonial--avatar-rounded .bb-testimonial__avatar { border-radius: var(--bb-radius-lg, 12px); }
+.bb-testimonial--avatar-square .bb-testimonial__avatar { border-radius: 0; }
+
+/* Enhanced Testimonial — horizontal layouts. */
+.bb-testimonial--layout-left,
+.bb-testimonial--layout-right {
+	display: flex;
+	align-items: center;
+	gap: 1.25rem;
+	text-align: left;
+}
+.bb-testimonial--layout-right { flex-direction: row-reverse; text-align: right; }
+.bb-testimonial--layout-left .bb-testimonial__avatar,
+.bb-testimonial--layout-right .bb-testimonial__avatar { flex: 0 0 auto; margin: 0; }
+
+/* Small label above a ColorPalette in the block inspector. */
+.bb-control-label {
+	font-size: 11px;
+	font-weight: 600;
+	text-transform: uppercase;
+	margin: 0 0 4px;
+}
