@@ -108,7 +108,52 @@ Typography → Font Manager, Typography). This is what the Customizer produces.
 
 ---
 
+---
+
+## 5. Homepage (AuthorWings)
+
+A complete, professional homepage is built with **GenerateBlocks 2.x**
+(`generateblocks/element` + `generateblocks/text`) using the palette and type
+scale above. Sections, in order:
+
+1. **Hero** (ink) — headline, sub-copy, two CTAs, four stat cards
+2. **Who We Are** (paper) — two-column editorial intro
+3. **What We Offer** (white) — 6 service cards with numbers, prices, links
+4. **Categories We Cover** (cream) — 4 genre cards, gold left-border
+5. **Free Tools** (white) — 6 tool cards
+6. **Why AuthorWings** (ink) — two promise panels
+7. **The Industry Data** (paper) — 3 source cards (Authors Guild, Bowker, EFA)
+8. **Publishing Network** (cream) — retailer pills
+9. **FAQ** (white) — 11-question native `<details>` accordion (no JS)
+10. **Final CTA** (navy) — two CTAs + reassurance line
+11. **Footer strip** (ink)
+
+Fully responsive: 3-col grids → 2 → 1; hero stats 4 → 2; type and padding scale
+down at 1024px / 767px. All backgrounds alternate ink → paper → white → cream
+for editorial rhythm.
+
+### Rebuild / apply
+```bash
+# Regenerate the block markup from source (edit copy/structure in Python):
+python3 design-system/build-homepage.py         # writes homepage.html
+
+# Import as the front page:
+PID=$(wp post create design-system/homepage.html --post_type=page \
+        --post_title="Home" --post_status=publish --porcelain)
+wp option update show_on_front page
+wp option update page_on_front "$PID"
+wp post meta update "$PID" _generate-full-width-content true
+wp post meta update "$PID" _generate-disable-headline true
+```
+
+> `homepage.html` is the exported, ready-to-import block markup.
+> `build-homepage.py` is the generator (clean helpers, easy to edit copy).
+
+---
+
 ## Files
 - `generate_settings.json` — exported GeneratePress settings (colors + fonts + typography).
 - `apply-design.php` — commented script that builds the same settings from scratch.
+- `build-homepage.py` — generator for the AuthorWings homepage GenerateBlocks markup.
+- `homepage.html` — exported block markup, ready to import as the front page.
 - `README.md` — this document.
